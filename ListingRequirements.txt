@@ -1,0 +1,31 @@
+- User
+var Name
+var Password
+SignUp(Account, Password)
+Login (Account, Password)
+PickRole()
+
+- Properties
+user Owner
+var Name
+var Address*
+var Type
+var Size
+var Individuals
+var Smoking
+var AvailableDate
+var UnavailableDate
+var Lease*
+var Price
+
+- Owner : User
+var PropertyList
+ListProperties()
+AddProperty(Name, Type, Size, Number of Individuals, Smoking, Dates, Lease, Price)
+ModifyProperty(Name, Type, Size, Number of Individuals, Smoking, Dates, Lease, Price)
+RemoveProperty(Property)
+
+- Coworker: User
+SearthProperties()
+SeePropertyDetails(Property)
+GetContactInfo(Property)
