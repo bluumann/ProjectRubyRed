@@ -1,55 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="/css/styles.css">
-</head>
-<body>
-    <!--Any design or title we want for the top can go here, perhaps we can put the signup/login here as well? Have two buttons that pulls up a hidden div to give your information?-->
-    <header>
-
-    </header>
-    
-    <!--I imagine we will need a nav bar-->
-    <nav>
-
-    </nav>
-
-    <!--Main content can go in here-->
-    <main>
-        <!--Different divs for adding to the array of objects, can have them hidden to start and make them show or hide as necessary-->
-        <section>
-            <!--Div for creating a user-->
-            <div class="information" id="userInfo">
-
-            </div>
-
-            <!--Div for creating an owner-->
-            <div class="information" id="ownerInfo">
-
-            </div>
-
-            <!--Div for creating a property-->
-            <div class="information" id="propertyInfo">
-
-            </div>
-
-            <!--Div for creating a workspace-->
-            <div class="information" id="workspaceInfo">
-
-            </div>
-        </section>
-    </main>
-
-    <!--For Copyright and any other info we want at the bottom of our page-->
-    <footer>
-
-    </footer>
-
-    <!--For our JS code-->
-    <script src="/js/script.js"></script>
-</body>
+<html>
+   <body>
+      <div>
+         <h1>Property Submission:</h1>
+            <form action = "http://localhost:8080/done" method = "POST">
+            Address: <input type = "text" name = "address" >
+            <br>
+            <br>
+            Location: <input type = "text" name = "location">
+            <br>
+            <br>
+            Size(ft²): <input type = "number" name = "size">
+            <br>
+            <br>
+            Parking? &nbsp 
+            <select name = "parking">
+               <option value ="No">No</option>
+               <option value ="Yes">Yes</option>
+            </select>
+            <br>
+            <br>
+            Reachable by Public Transport?  &nbsp 
+            <select name = "publicTransport">
+               <option value ="No">No</option>
+               <option value ="Yes">Yes</option>
+            </select>
+            <br>
+            <br>
+            Amount of Workspaces <input type = "number" name = "workspaces">
+            <br>
+            <br>
+            Photo: <input type = "text" name = "photo">
+            <br>
+            <br>
+            <input type = "submit" value = "Insert Property">
+      </div>
+   </body>
 </html>

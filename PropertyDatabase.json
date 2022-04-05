@@ -1,0 +1,13 @@
+{
+ "Property": [
+  {
+   "address": "a",
+   "location": "a",
+   "size": "1",
+   "parking": "Yes",
+   "publicTransport": "Yes",
+   "workspaces": "1",
+   "photo": "1"
+  }
+ ]
+}
