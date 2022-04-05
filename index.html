@@ -1,55 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="/css/styles.css">
-</head>
-<body>
-    <!--Any design or title we want for the top can go here, perhaps we can put the signup/login here as well? Have two buttons that pulls up a hidden div to give your information?-->
-    <header>
+<html>
+   <body>
+    <div style="margin:auto; margin-top:90px; width: 650px; border: solid 5px rgb(79, 59, 208);  padding: 30px; background-color:rgb(192, 226, 40)">
+     <h2>Owner registration form</h2>
+     <br>
+     <br>
+     <h3>Insert your data here to create your account</h3>
 
-    </header>
-    
-    <!--I imagine we will need a nav bar-->
-    <nav>
-
-    </nav>
-
-    <!--Main content can go in here-->
-    <main>
-        <!--Different divs for adding to the array of objects, can have them hidden to start and make them show or hide as necessary-->
-        <section>
-            <!--Div for creating a user-->
-            <div class="information" id="userInfo">
-
-            </div>
-
-            <!--Div for creating an owner-->
-            <div class="information" id="ownerInfo">
-
-            </div>
-
-            <!--Div for creating a property-->
-            <div class="information" id="propertyInfo">
-
-            </div>
-
-            <!--Div for creating a workspace-->
-            <div class="information" id="workspaceInfo">
-
-            </div>
-        </section>
-    </main>
-
-    <!--For Copyright and any other info we want at the bottom of our page-->
-    <footer>
-
-    </footer>
-
-    <!--For our JS code-->
-    <script src="/js/script.js"></script>
-</body>
+      <form action = "http://localhost:1007/owner" method = "POST">
+        First Name: <input type = "text" name = "firstName" >  <br> <br> <br>
+        Last Name: <input type = "text" name = "lastName"><br> <br> <br>
+        ID Number: <input type = "text" name = "idNumber"><br> <br> <br>
+        Phone Number: <input type = "text" name = "phoneNumber"><br> <br> <br>
+        Email: <input type = "text" name = "email"><br> <br> <br>
+        Password:<input type = "password" name = "password"><br> <br> <br>  
+        <input type = "submit" value = "Submit">
+      </div>
+      <script src="">
+            
+      </script>
+   </body>
 </html>

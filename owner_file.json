@@ -1,0 +1,52 @@
+{
+  "owner": [
+    {
+      "firstName": "Frank",
+      "lastName": "Berrocal",
+      "idNumber": "12345",
+      "phoneNumber": "123456789",
+      "email": "fberrocal@email.com",
+      "password": "text"
+    },
+    {
+      "firstName": "Jerrica",
+      "lastName": "Benton",
+      "idNumber": "12345",
+      "phoneNumber": "123456789",
+      "email": "fbenton@email.com",
+      "password": "surf"
+    },
+    {
+      "firstName": "Joseph",
+      "lastName": "Martin",
+      "idNumber": "12345",
+      "phoneNumber": "123456789",
+      "email": "jmatin@email.com",
+      "password": "class"
+    },
+    {
+      "firstName": "Ken",
+      "lastName": "Lopez",
+      "idNumber": "12345",
+      "phoneNumber": "123456789",
+      "email": "klopez@email.com",
+      "password": "cookie"
+    },
+    {
+      "firstName": "Pilar",
+      "lastName": "West",
+      "idNumber": "12345",
+      "phoneNumber": "123456789",
+      "email": "pwest@email.com",
+      "password": "crazy"
+    },
+    {
+      "firstName": "Pedro",
+      "lastName": "Ferreira",
+      "idNumber": "12345",
+      "phoneNumber": "123456789",
+      "email": "pferreira@email.com",
+      "password": "oko"
+    }
+  ]
+}
