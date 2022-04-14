@@ -29,7 +29,7 @@ var exists = fs.existsSync('owner_file.json');
 app.get('/', function (req, res) {
 
     res.send(
-        '<br><br><h1>Cowork Reservation Page </h1><br><br> Service Information Page: <a href="api/info">http://localhost:1007/api/info</a><br><br> Owner Registration <a href="api/register">http://localhost:1007/api/register</a> <br><br> Owner Account <a href="api/ownerAccount">http://localhost:1007/api/ownerAccount</a> <br>');
+        '<br><br><h1>Cowork Reservation Page </h1><br><br> Service Information Page: <a href="api/info">http://localhost:1007/api/info</a><br><br> Owner Registration <a href="api/register">http://localhost:1007/api/register</a> <br><br> Owner Account <a href="api/ownerAccount">http://localhost:1007/api/ownerAccount</a> <br><br>Owner Search <a href="api/ownerSearch">http://localhost:1007/api/ownerSearch</a> <br>');
     });
 
   
@@ -156,7 +156,8 @@ app.get('/api/ownerAccount', function (req, res) {
         {
                 
             email:req.query.email,
-            password:req.query.password
+            password:req.query.password,
+            firstName:req.query.firstName
         }
 
         //parse JSON to concatenate information
@@ -202,8 +203,50 @@ app.get('/api/ownerAccount', function (req, res) {
  
  }
 
- app.put();
- app.delete();
+
+ app.get('/api/ownerSearch', function (req, res) {
+    
+    res.sendFile( __dirname + "/" + "ownerSearch.html" );
+
+})
+
+//get to retrieve data
+ app.get('/ownerInfoSearch', urlencodedParser, SearchOwner);  //using the path from index.html
+ 
+ function SearchOwner(req,res)
+ {
+    console.log('Im here');
+     
+    let objectName = objectName.text(document.querySelector('#update').value);
+     response =
+     {
+        objectName:req.query.objectName.value
+     }
+ 
+     if(!response.email )
+     { 
+         reply =
+         {
+             msg:"Your login information is incomplete"
+         }
+         res.send(reply);
+         console.log(reply)
+     }   
+     else
+     { 
+        response =
+        {
+            objectName:req.query.objectName.value
+        }
+
+        //parse JSON to concatenate information
+        res.send(response);
+ 
+     }
+
+ 
+ }
+
 
  app.use("/*",function (req, res) {
     res.send("404 page not found");   
@@ -215,3 +258,11 @@ var server = app.listen(1007, function ()
    var port = server.address().port   
    console.log("Server is running at port 1007")
 })
+
+
+function getOption() 
+{
+    selectElement = document.querySelector('#update');
+    output = selectElement.value;
+    document.querySelector('.output').textContent = output;
+}

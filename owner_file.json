@@ -47,6 +47,14 @@
       "phoneNumber": "123456789",
       "email": "pferreira@email.com",
       "password": "oko"
+    },
+    {
+      "firstName": "Jerry",
+      "lastName": "Stwart",
+      "idNumber": "12345",
+      "phoneNumber": "123467890",
+      "email": "jst@email.com",
+      "password": "acb"
     }
   ]
 }
