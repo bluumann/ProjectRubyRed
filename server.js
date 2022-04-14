@@ -202,8 +202,8 @@ app.get('/api/ownerAccount', function (req, res) {
  
  }
 
- //app.put();
- //app.delete();
+ app.put();
+ app.delete();
 
  app.use("/*",function (req, res) {
     res.send("404 page not found");   
