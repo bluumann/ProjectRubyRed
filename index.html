@@ -1,55 +1,100 @@
+<!--
+Name: Final Project
+Course Code: SODV1201
+Program: Software Development Diploma
+Authors:
+Colin From
+Frank Berrocal
+Pedro Ferreira
+Peter Kosa
+-->
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="/css/styles.css">
+  <meta charset="utf-8">
+  <title>Coworking Registry</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/script.js"></script>
 </head>
 <body>
-    <!--Any design or title we want for the top can go here, perhaps we can put the signup/login here as well? Have two buttons that pulls up a hidden div to give your information?-->
-    <header>
-
-    </header>
-    
-    <!--I imagine we will need a nav bar-->
-    <nav>
-
-    </nav>
-
-    <!--Main content can go in here-->
-    <main>
-        <!--Different divs for adding to the array of objects, can have them hidden to start and make them show or hide as necessary-->
-        <section>
-            <!--Div for creating a user-->
-            <div class="information" id="userInfo">
-
-            </div>
-
-            <!--Div for creating an owner-->
-            <div class="information" id="ownerInfo">
-
-            </div>
-
-            <!--Div for creating a property-->
-            <div class="information" id="propertyInfo">
-
-            </div>
-
-            <!--Div for creating a workspace-->
-            <div class="information" id="workspaceInfo">
-
-            </div>
-        </section>
-    </main>
-
-    <!--For Copyright and any other info we want at the bottom of our page-->
-    <footer>
-
-    </footer>
-
-    <!--For our JS code-->
-    <script src="/js/script.js"></script>
+  <nav>
+    <ul class="navigation">
+      <!-- no href needed since it's working hiding/showing divs. -->
+      <li><a href="#" id="mainNav1" onclick="showLogin()">Login Page</a></li>
+      <li><a href="#" id="mainNav2" onclick="showSignUp()">Sign Up Page</a></li>
+      <li><a href="#" id="loggedNav1" onclick="signOut()">Sign Out</a></li>
+      <li><a href="#" id="loggedNav2" onclick="showLogin()">Placeholder I</a></li>
+      <li><a href="#" id="loggedNav3" onclick="showLogin()">Placeholder II</a></li>
+    </ul>
+  </nav>
+  <div class="mainPage">
+    <!-- LOGIN BEGINS -->
+    <div class="currentBody" id="LoginScreen">
+      <h1>Welcome to the Login Screen.</h1>
+      <form action='logged.html' method="post">
+        <table style="width: auto; margin: auto;">
+            <tr>
+                <td><label for="username">Username:</label></td>
+                <td><input type="text" name="username" id="username" required></td>
+            </tr>
+            <tr>
+                <td><label for="password">Password:</label></td>
+                <td><input type="password" name="password" id="password" required></td>
+            </tr>
+        </table>
+        <input type="submit" value="Login" style="display: block; margin: auto; margin-top: 1vh;">
+      </form>
+    </div>
+    <!-- SIGN UP BEGINS -->
+    <div class="currentBody" id="SignUpScreen">
+      <h1>Welcome to the Sign Up Screen.</h1>
+      <form action='/registered' method="post">
+        <table style="width: auto; margin: auto;">
+            <tr>
+                <td><label for="fName">First Name:</label></td>
+                <td><input type="text" name="fName" id="fName" required></td>
+            </tr>
+            <tr>
+                <td><label for="lName">Last Name:</label></td>
+                <td><input type="text" name="lName" id="lName" required></td>
+            </tr>
+            <tr>
+                <td><label for="phone">Phone Number:</label></td>
+                <td><input type="tel" name="phone" id="phone"></td>
+            </tr>
+            <tr>
+                <td><label for="email">Email Address:</label></td>
+                <td><input type="email" name="email" id="email" required></td>
+            </tr>
+            <tr>
+                <td><label for="username">Username:</label></td>
+                <td><input type="text" name="username" id="username" required></td>
+            </tr>
+            <tr>
+                <td><label for="password">Password:</label></td>
+                <td><input type="password" name="password" id="password" required></td>
+            </tr>
+        </table>
+        <input type="submit" value="Register" style="display: block; margin: auto; margin-top: 1vh;">
+    </form>
+    </div>     
+  <div class="bottomBar">
+    Webpage by Colin From, Frank Berrocal, Pedro Ferreira and Peter Kosa, for SODV1201 - Final Project. Copyright 2022.
+  </div>
 </body>
+
+<script>
+  function showLogin() {
+  document.getElementById("LoginScreen").style = "display: inherit";
+  document.getElementById("SignUpScreen").style = "display: none";
+}
+
+function showSignUp() {
+  document.getElementById("LoginScreen").style = "display: none";
+  document.getElementById("SignUpScreen").style = "display: inherit";
+}
+</script>
+
 </html>
