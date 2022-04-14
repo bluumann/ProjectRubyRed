@@ -15,20 +15,22 @@ Peter Kosa
 <head>
   <meta charset="utf-8">
   <title>Coworking Registry</title>
-  <link rel="stylesheet" href="styles.css">
-  <script src="script.js"></script>
+  <link rel="stylesheet" href="/css/styles.css">
+  <script src="/js/script.js"></script>
 </head>
 <body onload="SignedIn()">
   <nav>
     <ul class="navigation">
       <!-- no href needed since it's working hiding/showing divs. -->
-      <li><a href="index.html" id="loggedNav1" onclick="signOut()">Sign Out</a></li>
-      <li><a href="#" id="loggedNav2" onclick="showLogin()">Placeholder I</a></li>
-      <li><a href="#" id="loggedNav3" onclick="showLogin()">Placeholder II</a></li>
+      <li><a href="#" id="loggedNav1" onclick="">Profile</a></li>
+      <li><a href="#" id="loggedNav2" onclick="">Placeholder I</a></li>
+      <li><a href="#" id="loggedNav3" onclick="">Placeholder II</a></li>
     </ul>
   </nav>
   <div class="mainPage">
-    
+    <div id="profilePage">
+      <h1>Welcome <b><spam id="userNameDisplay">Placeholder</spam></b>.</h1>
+    </div>
   </div>     
   <div class="bottomBar">
     Webpage by Colin From, Frank Berrocal, Pedro Ferreira and Peter Kosa, for SODV1201 - Final Project. Copyright 2022.
