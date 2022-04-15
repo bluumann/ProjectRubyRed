@@ -1,0 +1,86 @@
+{
+  "owner": [
+    {
+      "firstName": "Jerrica",
+      "lastName": "Benton",
+      "idNumber": "12345",
+      "phoneNumber": "123456789",
+      "email": "jbenton@email.com",
+      "password": "1234"
+    },
+    {
+      "firstName": "Joseph",
+      "lastName": "Martin",
+      "idNumber": "12345",
+      "phoneNumber": "123456789",
+      "email": "jmatin@email.com",
+      "password": "1234"
+    },
+    {
+      "firstName": "Ken",
+      "lastName": "Lopez",
+      "idNumber": "12345",
+      "phoneNumber": "123456789",
+      "email": "klopez@email.com",
+      "password": "1234"
+    },
+    {
+      "firstName": "Pilar",
+      "lastName": "West",
+      "idNumber": "12345",
+      "phoneNumber": "123456789",
+      "email": "pwest@email.com",
+      "password": "1234"
+    },
+    {
+      "firstName": "Jerry",
+      "lastName": "Stwart",
+      "idNumber": "12345",
+      "phoneNumber": "123467890",
+      "email": "1",
+      "password": "1234"
+    }
+  ],
+  "user": [
+    {
+      "firstName": "Stephen",
+      "lastName": "London",
+      "idNumber": "12345",
+      "phoneNumber": "123456789",
+      "email": "slondon@email.com",
+      "password": "1234"
+    },
+    {
+      "firstName": "John",
+      "lastName": "Lopez",
+      "idNumber": "12345",
+      "phoneNumber": "123456789",
+      "email": "jlopez@email.com",
+      "password": "1234"
+    },
+    {
+      "firstName": "Ana",
+      "lastName": "Guerra",
+      "idNumber": "12345",
+      "phoneNumber": "123456789",
+      "email": "aguerra@email.com",
+      "password": "1234"
+    },
+    {
+      "firstName": "",
+      "lastName": "West",
+      "idNumber": "12345",
+      "phoneNumber": "123456789",
+      "email": "pwest@email.com",
+      "password": "crazy"
+    },
+    {
+      "firstName": "Jerry",
+      "lastName": "Stwart",
+      "idNumber": "12345",
+      "phoneNumber": "123467890",
+      "email": "jst@email.com",
+      "password": "acb"
+    }
+  ]
+}
