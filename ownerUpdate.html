@@ -1,13 +1,12 @@
 <html>
    <body>
-<<<<<<< Updated upstream
     <div style="margin:auto; margin-top:90px; width: 650px; border: solid 5px rgb(178, 208, 59);  padding: 30px; background-color:rgb(174, 156, 233)">
      <h2>Owner Information Update Form</h2>
      <br>
      <br>
-     <h3>This is the information update page for the Owner</h3>
+     <h3>This is the serach and update page for the Owner</h3>
 
-      <form action = "http://localhost:1007/ownerInfoSearch" method = "PUT">
+      <form action = "http://localhost:1007/ownerUpdate" method = "PUT">
 
          <label for="ownerOption">Select an option:</label>
 
@@ -50,26 +49,6 @@
             <div id="password" >
                <input type = "text" name = "oldPassword" value="Old Password:" onclick="this.value=''"><br><br>   
                <input type = "text" name = "newPassword" value="New Password:" onclick="this.value=''"><br><br>
-=======
-    <div style="margin:auto; margin-top:90px; width: 650px; border: solid 5px rgb(59, 67, 208);  padding: 30px; background-color:rgb(233, 156, 214)">
-     <h2>Owner Information Delete Form</h2>
-     <br>
-     <br>
-     <h3>Delete information page</h3>
-
-      <form action = "http://localhost:1007/ownerDelete" method = "DELETE">
-
-         <label for="ownerOption">Select an option:</label>
-         <p>
-            
-
-
-            <div id="email" >
-               <input type = "text" name = "Email" value="Email:" onclick="this.value=''"><br><br>
-            </div>
-            <div id="password" > 
-               <input type = "text" name = "Password" value="Password:" onclick="this.value=''"><br><br>
->>>>>>> Stashed changes
             </div>
             
 
@@ -77,13 +56,8 @@
             <!--Set to password with final version--> 
             <!--All divisions hidden, only affected fields to be displayed--> 
 
-<<<<<<< Updated upstream
             //<input type = "submit" value = "Enter Information" onclick= getOption()>
             <input type = "submit" value = "Update">
-=======
-            <input type = "submit" value = "Delete" onclick= getOption()>
-
->>>>>>> Stashed changes
          </p>
       </div>
       <script src="">

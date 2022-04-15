@@ -1,6 +1,7 @@
 {
   "owner": [
     {
+<<<<<<< Updated upstream
       "firstName": "Frank",
       "lastName": "Berrocal",
       "idNumber": "12345",
@@ -9,12 +10,19 @@
       "password": "text"
     },
     {
+=======
+>>>>>>> Stashed changes
       "firstName": "Jerrica",
       "lastName": "Benton",
       "idNumber": "12345",
       "phoneNumber": "123456789",
+<<<<<<< Updated upstream
       "email": "fbenton@email.com",
       "password": "surf"
+=======
+      "email": "jbenton@email.com",
+      "password": "1234"
+>>>>>>> Stashed changes
     },
     {
       "firstName": "Joseph",
@@ -22,7 +30,11 @@
       "idNumber": "12345",
       "phoneNumber": "123456789",
       "email": "jmatin@email.com",
+<<<<<<< Updated upstream
       "password": "class"
+=======
+      "password": "1234"
+>>>>>>> Stashed changes
     },
     {
       "firstName": "Ken",
@@ -30,7 +42,11 @@
       "idNumber": "12345",
       "phoneNumber": "123456789",
       "email": "klopez@email.com",
+<<<<<<< Updated upstream
       "password": "cookie"
+=======
+      "password": "1234"
+>>>>>>> Stashed changes
     },
     {
       "firstName": "Pilar",
@@ -38,6 +54,7 @@
       "idNumber": "12345",
       "phoneNumber": "123456789",
       "email": "pwest@email.com",
+<<<<<<< Updated upstream
       "password": "crazy"
     },
     {
@@ -47,6 +64,51 @@
       "phoneNumber": "123456789",
       "email": "pferreira@email.com",
       "password": "oko"
+=======
+      "password": "1234"
+    },
+    {
+      "firstName": "Jerry",
+      "lastName": "Stwart",
+      "idNumber": "12345",
+      "phoneNumber": "123467890",
+      "email": "1",
+      "password": "1234"
+    }
+  ],
+  "user": [
+    {
+      "firstName": "Stephen",
+      "lastName": "London",
+      "idNumber": "12345",
+      "phoneNumber": "123456789",
+      "email": "slondon@email.com",
+      "password": "1234"
+    },
+    {
+      "firstName": "John",
+      "lastName": "Lopez",
+      "idNumber": "12345",
+      "phoneNumber": "123456789",
+      "email": "jlopez@email.com",
+      "password": "1234"
+    },
+    {
+      "firstName": "Ana",
+      "lastName": "Guerra",
+      "idNumber": "12345",
+      "phoneNumber": "123456789",
+      "email": "aguerra@email.com",
+      "password": "1234"
+    },
+    {
+      "firstName": "",
+      "lastName": "West",
+      "idNumber": "12345",
+      "phoneNumber": "123456789",
+      "email": "pwest@email.com",
+      "password": "crazy"
+>>>>>>> Stashed changes
     },
     {
       "firstName": "Jerry",
