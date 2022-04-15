@@ -16,6 +16,10 @@ app.post('/logged', function (req, res) {
   res.sendFile(__dirname + '/logged.html');
 });
 
+app.post('/registered', function (req, res) {
+  res.sendFile(__dirname + '/registered.html');
+});
+
 /*** USER PAGE ***/
 // Route to logged in an user page
 app.get('/user', function (req, res) {
