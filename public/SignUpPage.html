@@ -28,11 +28,27 @@ Peter Kosa
     </ul>
   </nav>
   <div class="mainPage">
-    <!-- LOGIN BEGINS -->
-    <div class="currentBody" id="LoginScreen">
-      <h1>Welcome to the Login Screen.</h1>
-      <form action='logged' method="post">
+    <!-- SIGN UP BEGINS -->
+    <div class="currentBody" id="">
+      <h1>Welcome to the Sign Up Screen.</h1>
+      <form action='/registered' method="post">
         <table style="width: auto; margin: auto;">
+          <tr>
+            <td><label for="fName">First Name:</label></td>
+            <td><input type="text" name="fName" id="fName" required></td>
+          </tr>
+          <tr>
+            <td><label for="lName">Last Name:</label></td>
+            <td><input type="text" name="lName" id="lName" required></td>
+          </tr>
+          <tr>
+            <td><label for="phone">Phone Number:</label></td>
+            <td><input type="tel" name="phone" id="phone"></td>
+          </tr>
+          <tr>
+            <td><label for="email">Email Address:</label></td>
+            <td><input type="email" name="email" id="email" required></td>
+          </tr>
           <tr>
             <td><label for="username">Username:</label></td>
             <td><input type="text" name="username" id="username" required></td>
@@ -42,7 +58,7 @@ Peter Kosa
             <td><input type="password" name="password" id="password" required></td>
           </tr>
         </table>
-        <input type="submit" value="Login" style="display: block; margin: auto; margin-top: 1vh;">
+        <input type="submit" value="Register" style="display: block; margin: auto; margin-top: 1vh;">
       </form>
     </div>
     <div class="bottomBar">
