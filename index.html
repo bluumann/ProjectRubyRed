@@ -23,22 +23,22 @@ Peter Kosa
   <nav>
     <ul class="navigation">
       <!-- no href needed since it's working hiding/showing divs. -->
-      <li><a href="/" id="mainNav1" onclick="showLogin()">Login Page</a></li>
-      <li><a href="/SignUpPage.html" id="mainNav2" onclick="showSignUp()">Sign Up Page</a></li>
+      <li><a href="/" id="mainNav1">Login Page</a></li>
+      <li><a href="/signUp" id="mainNav2">Sign Up Page</a></li>
     </ul>
   </nav>
   <div class="mainPage">
     <!-- LOGIN BEGINS -->
     <div class="currentBody" id="LoginScreen">
       <h1>Welcome to the Login Screen.</h1>
-      <form action='logged' method="post">
+      <form action='login' method="post">
         <table style="width: auto; margin: auto;">
           <tr>
-            <td><label for="username">Username:</label></td>
-            <td><input type="text" name="username" id="username" required></td>
+            <td><label for="email">Email: </label></td>
+            <td><input type="text" name="email" id="email" required></td>
           </tr>
           <tr>
-            <td><label for="password">Password:</label></td>
+            <td><label for="password">Password: </label></td>
             <td><input type="password" name="password" id="password" required></td>
           </tr>
         </table>
