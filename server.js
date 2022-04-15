@@ -4,10 +4,13 @@ var bodyParser = require('body-parser');
 var fs = require('fs');
 const { resourceUsage } = require('process');
 
+app.use(express.static('public'));
+app.use('/css', express.static(__dirname + 'public/css'));
 
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 app.use(bodyParser.json());
 
+//validation of object in the database
 var obj;
 var exists = fs.existsSync('owner_file.json');
 
@@ -27,21 +30,84 @@ var exists = fs.existsSync('owner_file.json');
     }
 
 
+/*** LANDING PAGE ***/
+// Route to landing page    
+
 app.get('/', function (req, res) {
 
-    res.send(
-        '<br><br><h1>Cowork Reservation Page </h1><br><br> Service Information Page: <a href="api/info">http://localhost:1007/api/info</a><br><br> Owner Registration <a href="api/ownerRegistration">http://localhost:1007/api/ownerRegistration</a> <br><br> Owner Login <a href="api/ownerLogin">http://localhost:1007/api/ownerLogin</a> <br><br>Owner Update <a href="api/ownerUpdate">http://localhost:1007/api/ownerUpdate</a> <br><br>Owner Delete <a href="api/ownerDelete">http://localhost:1007/api/ownerDelete</a> <br>><br> Owner Registration  2<a href="api/ownerRegistration2">http://localhost:1007/api/ownerRegistration2</a>');
+    res.sendFile(__dirname + '/index.html');
     });
 
   
 
-
-//route to service information
+/*** OWNER PAGE ***/
+// Route to owner's home page (when logged in as an owner)
+//route to service information.  Accesory information for a company service page
 app.get('/api/info', function (req, res) {
 
     res.sendFile( __dirname + "/" + "info.html" );
     
   });
+
+
+//Get information after login
+//Route to login page
+app.get('/', function (req, res) {
+    
+    res.send(
+        '<br><br><h1>Cowork Reservation Page </h1><br><br> Service Information Page: <a href="api/info">http://localhost:1007/api/info</a><br><br> Owner Registration <a href="api/ownerRegistration">http://localhost:1007/api/ownerRegistration</a> <br><br> Owner Login <a href="/">http://localhost:1007/</a> <br><br>Owner Update <a href="api/ownerUpdate">http://localhost:1007/api/ownerUpdate</a> <br><br>Owner Delete <a href="api/ownerDelete">http://localhost:1007/api/ownerDelete</a> <br>><br> Owner Registration  2<a href="api/ownerRegistration2">http://localhost:1007/api/ownerRegistration2</a>');
+    });
+
+//******LOGIN */
+//get to retrieve data from login page
+ app.post('/', urlencodedParser, ExistingOwner);  //using the path from index.html
+
+ function ExistingOwner(req,res)
+ {
+     response =
+     {
+        email:req.body.email,
+        password:req.body.password
+     }
+ 
+     if(!response.email ||!response.password  )
+     { 
+         reply =
+         {
+             msg:"Your login information is incomplete"
+         }
+         res.send(reply);
+         console.log(reply)
+     }   
+     else
+     { 
+        response =
+        {
+            //testing this ===> owner:req.query.firstName
+              
+            email:req.body.email,
+            password:req.body.password
+
+
+        }
+        //parse JSON to concatenate information
+        res.send(response);
+     }
+ }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //POST new owner information
 //route to owner registration
@@ -120,60 +186,6 @@ function NewOwner(req,res)
 
 }
 
-//Get information after login
-//Route to login page
-app.get('/api/ownerLogin', function (req, res) {
-    
-    res.sendFile( __dirname + "/" + "ownerLogin.html" );
-
-})
-
-
-//get to retrieve data from login page
- app.get('/ownerLogin', urlencodedParser, ExistingOwner);  //using the path from index.html
-
- function ExistingOwner(req,res)
- {
-     
-     response =
-     {
-        
-        
-        email:req.query.email,
-        password:req.query.password,
-        firstName:req.query.firstName
-        
-     }
- 
-     if(!response.email ||!response.password  )
-     { 
-         reply =
-         {
-             msg:"Your login information is incomplete"
-         }
-         res.send(reply);
-         console.log(reply)
-     }   
-     else
-     { 
-        response =
-        {
-            owner:req.query.firstName
-            /*   
-            email:req.query.email,
-            password:req.query.password*/
-
-
-        }
-
-        //parse JSON to concatenate information
-        res.send(response);
- 
-         
-     }
-
- 
- }
 
 //Get information to update data
 //Route to update page
