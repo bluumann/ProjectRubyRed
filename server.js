@@ -221,9 +221,43 @@ app.get('/api/ownerLogin', function (req, res) {
  }
 
 
+//its working on the example.  Obj has been already uploaded with the JSON
+ //search for information from owner
+app.get("/owner/:name", function(req,res){
+    var name = req.params.name;
+    var reply;
+    for (var i = 0, l = obj.owner.length; i < l; i++) { 
+
+        var myobj = obj.owner[i].first_name; 
+        res.send(obj.owner[i].first_name);
+
+        if(name == myobj){
+            console.log("your data " + myobj + " and " + name + " are matching ")   
+            reply={
+                first_name:req.params.name,
+                last_name:obj.user[i].last_name, 
+                msg:"search found",                        
+            } //end of obj
+         }//end of if 
+    }//end of for
+    res.send(JSON.stringify(reply) + " is found , GET request, however this route is not fully implemented")
+
+})
+
+
+//Get all elements from JSON, need to figure the right paramenter on fetch
+app.get("/users", (req, res) => {
+    fetch(myData).then(
+      async (response) => {
+        const data = await response.json();
+        res.status(200).send(JSON.stringify(data.slice(0, 10)));
+      }
+    );
+});
+
 //DELETE
 
-
+//Delete data
 app.get('/api/ownerDelete', function (req, res) {
     
     res.sendFile( __dirname + "/" + "ownerDelete.html" );
@@ -233,7 +267,7 @@ app.get('/api/ownerDelete', function (req, res) {
 
 
 
-//get to retrieve data
+//get to retrieve data to be deleted
  app.delete('/ownerDelete', urlencodedParser, DeleteOwner);  //using the path from index.html
 
  function DeleteOwner(req,res)
@@ -277,11 +311,15 @@ app.get('/api/ownerDelete', function (req, res) {
 //DELETE this Code
 //POST new owner information
 //route to owner registration
+
+
 app.get('/api/ownerRegistration2', function (req, res) {
 
     res.sendFile( __dirname + "/" + "ownerRegistration2.html" );
 
 })
+
+
 
 
 
