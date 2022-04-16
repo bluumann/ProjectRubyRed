@@ -1,8 +1,15 @@
 {
+<<<<<<< Updated upstream
   "dependencies": {
     "express": "^4.17.3",
     "nodemon": "^2.0.15"
   },
+=======
+  "name": "y",
+  "version": "1.0.0",
+  "description": "",
+  "main": "nmode serverStart.js",
+>>>>>>> Stashed changes
   "scripts": {
     "start": "node serverBeta.js"
   },

@@ -1,0 +1,98 @@
+<!--
+Name: Final Project
+Course Code: SODV1201
+Program: Software Development Diploma
+Authors:
+Colin From
+Frank Berrocal
+Pedro Ferreira
+Peter Kosa
+-->
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Coworking Registry</title>
+  <!--
+  <link rel="stylesheet" href="/css/styles.css">-->
+
+  <!--PEDROOOOOOOO the css is not showing the page -->
+
+
+  <script src="/js/script.js"></script>
+</head>
+
+<body>
+  <nav>
+    
+    <ul class="navigation">
+      <!-- no href needed since it's working hiding/showing divs. -->
+      <li><a href="/" id="mainNav1" onclick="showLogin()">Login Page</a></li>
+      <li><a href="http://localhost:8050/SignUp.html" id="mainNav2" onclick="showSignUp()">Sign Up Page</a></li>
+    </ul>
+  </nav>
+  <div class="mainPage">
+    <!-- SIGN UP BEGINS -->
+    <div class="currentBody" id="SignUpScreen">
+      <h1>Welcome to the Sign Up Screen.</h1>
+
+      <!-- changed server number for validation -->
+      <form action='/SignUp' method="POST">
+        <table style="width: auto; margin: auto;">
+            <tr>
+                <!--Fri 15 (12:45pm) changed the name fName to first_Name-->
+                <td><label for="first_Name">First Name:</label></td>
+                <td><input type="text" name="firstName" id="firstName" required></td>
+            </tr>
+            <tr>
+              <!--Fri 15 (12:45pm) changed the name lName to last_Name-->
+                <td><label for="last_Name">Last Name:</label></td>
+                <td><input type="text" name="lastName" id="lastName" required></td>
+            </tr>
+            <tr>
+              <td><label for="status">Status:</label></td>
+                <td>
+                <!--Fri 15 (12:45pm) changed the name Worker to User-->
+                <select name = "status" required>
+                  <option value ="owner">Owner</option>
+                  <option value ="user">User</option>
+              </select>
+              </td>
+            </tr>
+            <tr>
+              <!--Fri 15 (08:30pm)  Id number field. -->
+              after phone id element and after all tests-->
+              <td><label for="idNumber">ID Number:</label></td>
+              <td><input type="text" name="idNumber" id="idNumber"></td>
+          </tr>
+            <tr>
+                <!--Fri 15 (12:50pm) changed the name tel and phone to phoneNumber, apply pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                after phone id element and after all tests-->
+                <td><label for="phoneNumber">Phone Number:</label></td>
+                <td><input type="phone" name="phoneNumber" id="phoneNumber"></td>
+            </tr>
+            <tr>
+                <td><label for="email">Email Address:</label></td>
+                <td><input type="email" name="email" id="email" required></td>
+            </tr>
+            <tr>
+                <td><label for="password">Password:</label></td>
+                <td><input type="password" name="password" id="password" required></td>
+            </tr>
+        </table>
+        <input type="submit" onclick="signUp()" value="Register" style="display: block; margin: auto; margin-top: 1vh;">
+    </form>
+    </div>     
+    <!-- SIGN UP REPLY -->
+    <div class="currentBody" id="SignUpScreen">
+      <h1>Thank you for signing up.</h1>
+      <p id="signUpReply">Placeholder.</p>
+    </div>
+</body>
+
+<script>
+</script>
+
+</html>

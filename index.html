@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 <!--
 Web Programming Fundamentals
 Name: Final Project
@@ -124,3 +125,67 @@ function showSignUp() {
 </script>
 
 </html>
+=======
+<!--
+Name: Final Project
+Course Code: SODV1201
+Program: Software Development Diploma
+Authors:
+Colin From
+Frank Berrocal
+Pedro Ferreira
+Peter Kosa
+-->
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Coworking Registry</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <script src="/js/script.js"></script>
+</head>
+
+<body>
+  <nav>
+    <ul class="navigation">
+      <!-- no href needed since it's working hiding/showing divs. -->
+      <li><a href="/" id="mainNav1" onclick="showLogin()">Login Page</a></li>
+      <li><a href="/SignUp" id="mainNav2" onclick="showSignUp()">Sign Up Page</a></li>
+    </ul>
+  </nav>
+  <div class="mainPage">
+    <!-- LOGIN BEGINS -->
+    <div class="currentBody" id="LoginScreen">
+      <h1>Welcome to the Login Screen.</h1>
+
+      <!--FRI 15 (10:30) Update the server number.  FRANK-->
+      <form action='http://localhost:8050/' method="POST">
+        <table style="width: auto; margin: auto;">
+            <tr>
+
+                <!--FRI 15 (11:00) Two elements changed, label and input.  Easier for the user to know the username is the email.  FRANK-->
+                <td><label for="email">Email:</label></td>
+                <td><input type="text" name="email" id="email" required></td>
+            </tr>
+            <tr>
+              <!--FRI 15 (11:06) Change the data type to text, move back to Password.  FRANK-->
+                <td><label for="password">Password:</label></td>
+                <td><input type="text" name="password" id="password" required></td>
+            </tr>
+        </table>
+        <input type="submit" value="Login" style="display: block; margin: auto; margin-top: 1vh;">
+      </form>
+    </div>
+    <div class="bottomBar">
+      Webpage by Colin From, Frank Berrocal, Pedro Ferreira and Peter Kosa, for SODV1201 - Final Project. Copyright
+      2022.
+    </div>
+</body>
+
+<script>
+</script>
+
+</html>
+>>>>>>> Stashed changes
