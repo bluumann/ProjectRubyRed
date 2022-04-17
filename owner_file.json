@@ -39,17 +39,6 @@
       "phoneNumber": "123467890",
       "email": "1",
       "password": "1234"
-<<<<<<< Updated upstream
-=======
-    },
-    {
-      "firstName": "test",
-      "lastName": "tes",
-      "idNumber": "12345",
-      "phoneNumber": "1234567890",
-      "email": "pwest@email.com",
-      "password": "1234"
->>>>>>> Stashed changes
     }
   ],
   "user": [
@@ -93,14 +82,11 @@
       "email": "jst@email.com",
       "password": "acb"
     }
-<<<<<<< Updated upstream
-=======
   ],
   "Properties": [
     {}
   ],
   "Workspaces": [
     {}
->>>>>>> Stashed changes
   ]
 }
