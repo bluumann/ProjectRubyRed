@@ -17,14 +17,15 @@ Peter Kosa
   <meta charset="utf-8">
   <title>Coworking Registry</title>
   <link rel="stylesheet" href="/css/styles.css">
-  <script src="/js/script.js"></script>
+  <!--Sunday 17th this was pointing to a class exercise.-->
+  <script src="/serverStart.js"></script>
 </head>
 <body>
   <nav>
     <ul class="navigation">
       <!-- no href needed since it's working hiding/showing divs. -->
       <li><a href="#" id="mainNav1" onclick="showLogin()">Login Page</a></li>
-      <li><a href="#" id="mainNav2" onclick="showSignUp()">Sign Up Page</a></li>
+      <li><a href="/SignUp" id="mainNav2" onclick="showSignUp()">Sign Up Page</a></li>
     </ul>
   </nav>
   <div class="mainPage">
@@ -33,7 +34,7 @@ Peter Kosa
       <h1>Welcome to the Login Screen.</h1>
 
       <!--FRI 15 (10:30) Update the server number.  FRANK-->
-      <form action='http://localhost:8080/' method="POST">
+      <form action='/' method="POST">
         <table style="width: auto; margin: auto;">
             <tr>
 
@@ -50,61 +51,9 @@ Peter Kosa
         <input type="submit" value="Login" style="display: block; margin: auto; margin-top: 1vh;">
       </form>
     </div>
-    <!-- SIGN UP BEGINS -->
-    <div class="currentBody" id="SignUpScreen">
-      <h1>Welcome to the Sign Up Screen.</h1>
-      <form action='http://localhost:8080/' method="POST">
-        <table style="width: auto; margin: auto;">
-            <tr>
-                <!--Fri 15 (12:45pm) changed the name fName to first_Name-->
-                <td><label for="first_Name">First Name:</label></td>
-                <td><input type="text" name="first_Name" id="fName" required></td>
-            </tr>
-            <tr>
-               <!--Fri 15 (12:45pm) changed the name lName to last_Name-->
-                <td><label for="last_Name">Last Name:</label></td>
-                <td><input type="text" name="last_Name" id="last_Name" required></td>
-            </tr>
-            <tr>
-              <td><label for="status">Status:</label></td>
-                <td>
-                <!--Fri 15 (12:45pm) changed the name Worker to User-->
-                <select name = "status" required>
-                  <option value ="owner">Owner</option>
-                  <option value ="user">User</option>
-               </select>
-              </td>
-            </tr>
-            <tr>
-                <!--Fri 15 (12:50pm) changed the name tel and phone to phoneNumber, apply pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-                after phone id element and after all tests-->
-                <td><label for="phoneNumber">Phone Number:</label></td>
-                <td><input type="phone" name="phoneNumber" id="phoneNumber"></td>
-            </tr>
-            <tr>
-                <td><label for="email">Email Address:</label></td>
-                <td><input type="email" name="email" id="email" required></td>
-            </tr>
-            <!--Fri 15 (12:50pm) Simplification: use the email as username-->
-            <!--
-            <tr>
-                <td><label for="username">Username:</label></td>
-                <td><input type="text" name="username" id="username" required></td>
-            </tr>
-            -->
-            <tr>
-                <td><label for="password">Password:</label></td>
-                <td><input type="password" name="password" id="password" required></td>
-            </tr>
-        </table>
-        <input type="submit" onclick="signUp()" value="Register" style="display: block; margin: auto; margin-top: 1vh;">
-    </form>
-    </div>     
-    <!-- SIGN UP REPLY -->
-    <div class="currentBody" id="SignUpScreen">
-      <h1>Thank you for signing up.</h1>
-      <p id="signUpReply">Placeholder.</p>
-    </div>     
+    <br>
+    <br>
+   
   <div class="bottomBar">
     Webpage by Colin From, Frank Berrocal, Pedro Ferreira and Peter Kosa, for SODV1201 - Final Project. Copyright 2022.
   </div>

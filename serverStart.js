@@ -83,7 +83,7 @@ app.get('/', function (req, res) {
      { 
         response =
         {
-            //testing this ===> owner:req.query.firstName
+            //testing this ===> owner:req.query.fName
               
             email:req.body.email,
             password:req.body.password
@@ -101,78 +101,80 @@ app.get('/', function (req, res) {
 /* OWNER REGISTRATION */
 //POST new owner information
 //route to owner registration
-/*app.get('/', function (req, res) {
+app.get('/SignUp', function (req, res) {
 
-    res.sendFile( __dirname + "/" );
+    res.sendFile( __dirname + "/SignUp.html" );
 
-})*/
-
-//This should be on a different page
-app.post('/', urlencodedParser, ExistingOwner); 
+})
 
 
 //This method triggered when click event happen, POST
-app.post('/', urlencodedParser, NewOwner);  //using the path from index.html
+app.post('/SignUp', urlencodedParser, NewOwner);  //using the path from index.html
+
 
 function NewOwner(req,res)
 {
-    response =
+    if (req.body.status == "owner") 
     {
-        first_Name:req.body.firstName, 
-        last_Name:req.body.lastName, 
-        idNumber:req.body.idNumber,
-        phoneNumber:req.body.phoneNumber,
-        email:req.body.email,
-        password:req.body.password
-    }
-
-    if(!response.firstName ||!response.lastName ||!response.idNumber ||!response.phoneNumber ||!response.email  ||!response.password )
-    { 
-        reply =
+        response =
         {
-            msg:"Please complete the form before you submit it"
-        }
-        res.send(reply);
-        console.log(reply)
-    }   
-    else
-    { 
-        
-
-        obj.owner.push(
-        { 
-            firstName:req.body.firstName, 
-            lastName:req.body.lastName, 
+            fName:req.body.fName, 
+            lName:req.body.lName, 
             idNumber:req.body.idNumber,
             phoneNumber:req.body.phoneNumber,
             email:req.body.email,
-            password:req.body.password      
-        });
-
-    
-
+            password:req.body.password
+        }
         
-        let data = JSON.stringify(obj, null, 2);  
 
-        fs.writeFile('owner_file.json', data, finished);
-
-        console.log('owner_file.JSON is updated')
-
-        function finished(err)
-        {         
-            reply=
+        if(!response.fName ||!response.lName ||!response.idNumber ||!response.phoneNumber ||!response.email  ||!response.password )
+        { 
+            /*
+            reply =
             {
-                firstName:req.body.firstName, 
-                lastName:req.body.lastName, 
+                msg:"Please complete the form before you submit it"
+            }*/
+           // res.send(response);
+            //console.log(response)
+        }   
+        else
+        { 
+            obj.owner.push(
+            { 
+                fName:req.body.fName, 
+                lName:req.body.lName, 
                 idNumber:req.body.idNumber,
                 phoneNumber:req.body.phoneNumber,
                 email:req.body.email,
-                password:req.body.password 
+                password:req.body.password,  
+                rate : 5   //should be defined here directly. 
+            });
 
-            }
-            res.send(reply);
-            console.log(reply);
-        }     
+        
+
+            
+            let data = JSON.stringify(obj, null, 2);  
+
+            fs.writeFile('owner_file.json', data, finished);
+
+            console.log('owner_file.JSON is updated')
+
+            function finished(err)
+            {         
+                reply=
+                {
+                    fName:req.body.fName, 
+                    lName:req.body.lName, 
+                    idNumber:req.body.idNumber,
+                    phoneNumber:req.body.phoneNumber,
+                    email:req.body.email,
+                    password:req.body.password 
+
+                }
+                res.send(reply);
+                console.log(reply);
+            }    
+        }
     }
 
 
@@ -181,7 +183,7 @@ function NewOwner(req,res)
 
 //Get information to update data
 //Route to update page
- app.get('/api/ownerUpdate', function (req, res) {
+app.get('/api/ownerUpdate', function (req, res) {
     
     res.sendFile( __dirname + "/" + "ownerUpdate.html" );
 
@@ -222,7 +224,7 @@ function NewOwner(req,res)
      }
 
  
- }
+}
 
 
 //its working on the example.  Obj has been already uploaded with the JSON
@@ -300,7 +302,7 @@ app.get('/api/ownerDelete', function (req, res) {
                 
             email:req.query.owner.email,
             password:req.query.owner.password,
-            firstName:req.query.owner.firstName
+            fName:req.query.owner.fName
         }
 
         //parse JSON to concatenate information
@@ -337,8 +339,8 @@ function NewOwner(req,res)
     {
         owner:req.body.data
         /*
-        firstName:req.body.firstName, 
-        lastName:req.body.lastName, 
+        fName:req.body.fName, 
+        lName:req.body.lName, 
         idNumber:req.body.idNumber,
         phoneNumber:req.body.phoneNumber,
         email:req.body.email,
@@ -346,7 +348,7 @@ function NewOwner(req,res)
         */
     }
 
-    if(!response.firstName ||!response.lastName ||!response.idNumber ||!response.phoneNumber ||!response.email  ||!response.password )
+    if(!response.fName ||!response.lName ||!response.idNumber ||!response.phoneNumber ||!response.email  ||!response.password )
     { 
         reply =
         {
@@ -361,8 +363,8 @@ function NewOwner(req,res)
 
         obj.owner.push(
         { 
-            firstName:req.body.firstName, 
-            lastName:req.body.lastName, 
+            fName:req.body.fName, 
+            lName:req.body.lName, 
             idNumber:req.body.idNumber,
             phoneNumber:req.body.phoneNumber,
             email:req.body.email,
@@ -382,8 +384,8 @@ function NewOwner(req,res)
         {         
             reply=
             {
-                firstName:req.body.firstName, 
-                lastName:req.body.lastName, 
+                fName:req.body.fName, 
+                lName:req.body.lName, 
                 idNumber:req.body.idNumber,
                 phoneNumber:req.body.phoneNumber,
                 email:req.body.email,
@@ -403,11 +405,11 @@ function NewOwner(req,res)
     res.send("404 page not found");   
     });  
 
-var server = app.listen(8080, function () 
+var server = app.listen(1007, function () 
 {
    var host = server.address().address
    var port = server.address().port   
-   console.log("Server is running at port 8080")
+   console.log("Server is running at port 1007")
 })
 
 
