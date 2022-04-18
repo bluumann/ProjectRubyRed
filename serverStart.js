@@ -40,23 +40,7 @@ app.get('/', function (req, res) {
 
   
 
-/*** OWNER PAGE ***/
-// Route to owner's home page (when logged in as an owner)
-//route to service information.  Accesory information for a company service page
-app.get('/api/info', function (req, res) {
 
-    res.sendFile( __dirname + "/" + "info.html" );
-    
-  });
-
-
-//Get information after login
-//Route to login page
-app.get('/', function (req, res) {
-    
-    res.send(
-        '<br><br><h1>Cowork Reservation Page </h1><br><br> Service Information Page: <a href="api/info">http://localhost:8080/api/info</a><br><br> Owner Registration <a href="api/ownerRegistration">http://localhost:8080/api/ownerRegistration</a> <br><br> Owner Login <a href="/">http://localhost:8080/</a> <br><br>Owner Update <a href="api/ownerUpdate">http://localhost:8080/api/ownerUpdate</a> <br><br>Owner Delete <a href="api/ownerDelete">http://localhost:8080/api/ownerDelete</a> <br>><br> Owner Registration  2<a href="api/ownerRegistration2">http://localhost:8080/api/ownerRegistration2</a>');
-    });
 
 //******LOGIN */
 //get to retrieve data from login page
@@ -129,13 +113,13 @@ function NewOwner(req,res)
 
         if(!response.fName ||!response.lName ||!response.idNumber ||!response.phoneNumber ||!response.email  ||!response.password )
         { 
-            /*
+            
             reply =
             {
                 msg:"Please complete the form before you submit it"
-            }*/
-           // res.send(response);
-            //console.log(response)
+            }
+            res.send(reply);
+            console.log(reply)
         }   
         else
         { 
@@ -179,7 +163,7 @@ function NewOwner(req,res)
 
 
 }
-
+/*
 
 //Get information to update data
 //Route to update page
@@ -325,7 +309,24 @@ app.get('/api/ownerRegistration2', function (req, res) {
 
 })
 
+/*** OWNER PAGE ***/
+// Route to owner's home page (when logged in as an owner)
+//route to service information.  Accesory information for a company service page
+/*
+app.get('/api/info', function (req, res) {
 
+    res.sendFile( __dirname + "/" + "info.html" );
+    
+  });
+
+
+//Get information after login
+//Route to login page
+app.get('/', function (req, res) {
+    
+    res.send(
+        '<br><br><h1>Cowork Reservation Page </h1><br><br> Service Information Page: <a href="api/info">http://localhost:8080/api/info</a><br><br> Owner Registration <a href="api/ownerRegistration">http://localhost:8080/api/ownerRegistration</a> <br><br> Owner Login <a href="/">http://localhost:8080/</a> <br><br>Owner Update <a href="api/ownerUpdate">http://localhost:8080/api/ownerUpdate</a> <br><br>Owner Delete <a href="api/ownerDelete">http://localhost:8080/api/ownerDelete</a> <br>><br> Owner Registration  2<a href="api/ownerRegistration2">http://localhost:8080/api/ownerRegistration2</a>');
+    });
 
 
 
@@ -338,14 +339,14 @@ function NewOwner(req,res)
     response =
     {
         owner:req.body.data
-        /*
+        
         fName:req.body.fName, 
         lName:req.body.lName, 
         idNumber:req.body.idNumber,
         phoneNumber:req.body.phoneNumber,
         email:req.body.email,
         password:req.body.password
-        */
+        
     }
 
     if(!response.fName ||!response.lName ||!response.idNumber ||!response.phoneNumber ||!response.email  ||!response.password )
@@ -399,13 +400,13 @@ function NewOwner(req,res)
 
 
 }
-//DELETE before this
+
 
  app.use("/*",function (req, res) {
     res.send("404 page not found");   
     });  
-
-var server = app.listen(8080, function () 
+*/
+var server = app.listen(1007, function () 
 {
    var host = server.address().address
    var port = server.address().port   
