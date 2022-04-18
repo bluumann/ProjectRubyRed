@@ -405,7 +405,7 @@ function NewOwner(req,res)
     res.send("404 page not found");   
     });  
 
-var server = app.listen(1007, function () 
+var server = app.listen(8080, function () 
 {
    var host = server.address().address
    var port = server.address().port   
