@@ -63,6 +63,9 @@ app.post('/login', function (req, res) {
         password: req.body.password
     };
 
+    //Create a variable to hold who is currently logged in
+    var currentUser;
+
     var flag = false; //Create a flag for if/when we find the user
 
     //Go through users to find matching username and password
@@ -71,6 +74,7 @@ app.post('/login', function (req, res) {
             flag = true;
             req.session.loggedin = true;
             req.session.name = obj.Users[i].fName;
+            currentUser = obj.Users[i];
             break;
         }
     }
@@ -82,6 +86,7 @@ app.post('/login', function (req, res) {
                 flag = true;
                 req.session.loggedin = true;
                 req.session.name = obj.Owners[i].fName;
+                currentUser = obj.Owners[i];
                 break;
             }
         }
