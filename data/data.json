@@ -1,0 +1,37 @@
+{
+  "Users": [
+    {
+      "fName": "Harry",
+      "lName": "Potter",
+      "idNumber": "1111",
+      "phoneNumber": "111 111 1111",
+      "email": "HP@hogwarts.ca",
+      "password": "1234",
+      "rating": 5,
+      "rented": []
+    },
+    {
+      "fName": "Hermione",
+      "lName": "Granger",
+      "idNumber": "2222",
+      "phoneNumber": "222 222 2222",
+      "email": "HG@hogwarts.ca",
+      "password": "1234",
+      "rating": 5,
+      "rented": []
+    },
+    {
+      "fName": "Ron",
+      "lName": "Weasley",
+      "idNumber": "3333",
+      "phoneNumber": "333 333 3333",
+      "email": "RW@hogwarts.ca",
+      "password": "1234",
+      "rating": 5,
+      "rented": []
+    }
+  ],
+  "Owners": [],
+  "Properties": [],
+  "Workspaces": []
+}

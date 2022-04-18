@@ -1,168 +1,178 @@
 var express = require('express');
-var app = express();
+var path = require('path');
 var bodyParser = require('body-parser');
 var fs = require('fs');
+var session = require('express-session');
+var app = express();
+var urlencodedParser = bodyParser.urlencoded({ extended: false });
 const { resourceUsage } = require('process');
 
+//Working with session
+app.use(session({
+    secret: 'qwerty',
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+        maxAge: 8 * 60 * 60 * 1000
+    }
+}));
+
+//app.use setup
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 app.use('/css', express.static(__dirname + 'public/css'));
-
-var urlencodedParser = bodyParser.urlencoded({ extended: false })
 app.use(bodyParser.json());
 
 //validation of object in the database
 var obj;
-var exists = fs.existsSync('owner_file.json');
+var exists = fs.existsSync(path.join(__dirname, 'data', 'data.json'));
 
-    if (exists) {
-        // use existing file
-        //console.log('loading course file');
-        var mydata = fs.readFileSync('owner_file.json', 'utf8');
-        //console.log(mydata);
-        // Parse it  back to object
-        obj= JSON.parse(mydata);
-    } 
-    else
-    {
-        // create a new file
-        //console.log('Created new object')
-        obj= {owner:[]};
+if (exists) {
+    //Use existing file
+    var mydata = fs.readFileSync(path.join(__dirname, 'data', 'data.json'));
+    // Parse it  back to object
+    obj = JSON.parse(mydata);
+    console.log("Successfully loaded file data.json");
+}
+else {
+    obj = {
+        Users: [],
+        Owners: [],
+        Properties: [],
+        Workspaces: []
+    };
+    fs.writeFile(path.join(__dirname, 'data', 'data.json'), JSON.stringify(obj, null, 2), fileCreated);
+    function fileCreated() {
+        console.log("Successfully created new file data.json");
     }
-
+}
 
 /*** LANDING PAGE ***/
 // Route to landing page    
-
 app.get('/', function (req, res) {
-
     res.sendFile(__dirname + '/index.html');
-    });
-
-  
-
-
+});
 
 //******LOGIN */
-//get to retrieve data from login page
- app.post('/', urlencodedParser, ExistingOwner);  //using the path from index.html
+//Obtain login info and check credentials
+app.post('/login', function (req, res) {
+    //Get login details
+    var accountInfo = {
+        email: req.body.email,
+        password: req.body.password
+    };
 
- function ExistingOwner(req,res)
- {
-     response =
-     {
-        email:req.body.email,
-        password:req.body.password
-     }
- 
-     if(!response.email ||!response.password  )
-     { 
-         reply =
-         {
-             msg:"Your login information is incomplete"
-         }
-         res.send(reply);
-         console.log(reply)
-     }   
-     else
-     { 
-        response =
-        {
-            //testing this ===> owner:req.query.fName
-              
-            email:req.body.email,
-            password:req.body.password
+    var flag = false; //Create a flag for if/when we find the user
 
-
-        }
-        //parse JSON to concatenate information
-        res.send(response);
-     }
- }
-
-
-
-
-/* OWNER REGISTRATION */
-//POST new owner information
-//route to owner registration
-app.get('/SignUp', function (req, res) {
-
-    res.sendFile( __dirname + "/SignUp.html" );
-
-})
-
-
-//This method triggered when click event happen, POST
-app.post('/SignUp', urlencodedParser, NewOwner);  //using the path from index.html
-
-
-function NewOwner(req,res)
-{
-    if (req.body.status == "owner") 
-    {
-        response =
-        {
-            fName:req.body.fName, 
-            lName:req.body.lName, 
-            idNumber:req.body.idNumber,
-            phoneNumber:req.body.phoneNumber,
-            email:req.body.email,
-            password:req.body.password
-        }
-        
-
-        if(!response.fName ||!response.lName ||!response.idNumber ||!response.phoneNumber ||!response.email  ||!response.password )
-        { 
-            
-            reply =
-            {
-                msg:"Please complete the form before you submit it"
-            }
-            res.send(reply);
-            console.log(reply)
-        }   
-        else
-        { 
-            obj.owner.push(
-            { 
-                fName:req.body.fName, 
-                lName:req.body.lName, 
-                idNumber:req.body.idNumber,
-                phoneNumber:req.body.phoneNumber,
-                email:req.body.email,
-                password:req.body.password,  
-                rate : 5   //should be defined here directly. 
-            });
-
-        
-
-            
-            let data = JSON.stringify(obj, null, 2);  
-
-            fs.writeFile('owner_file.json', data, finished);
-
-            console.log('owner_file.JSON is updated')
-
-            function finished(err)
-            {         
-                reply=
-                {
-                    fName:req.body.fName, 
-                    lName:req.body.lName, 
-                    idNumber:req.body.idNumber,
-                    phoneNumber:req.body.phoneNumber,
-                    email:req.body.email,
-                    password:req.body.password 
-
-                }
-                res.send(reply);
-                console.log(reply);
-            }    
+    //Go through users to find matching username and password
+    for (let i = 0; i < obj.Users.length; i++) {
+        if (obj.Users[i].email == accountInfo.email && obj.Users[i].password == accountInfo.password) {
+            flag = true;
+            req.session.loggedin = true;
+            req.session.name = obj.Users[i].fName;
+            break;
         }
     }
 
+    //Go through owners to find matching username and password if not found in users
+    if (!flag) {
+        for (let i = 0; i < obj.Owners.length; i++) {
+            if (obj.Owners[i].email == accountInfo.email && obj.Owners[i].password == accountInfo.password) {
+                flag = true;
+                req.session.loggedin = true;
+                req.session.name = obj.Owners[i].fName;
+                break;
+            }
+        }
+    }
 
-}
+    //If matching credentials were found login
+    if (flag) {
+        console.log("Successful login occurred of account " + req.session.name);
+        res.redirect("/logged");
+    }
+    //If not, send a response
+    else {
+        console.log("A login attempt was made.");
+        res.send("Sorry, incorrect credentials.");
+    }
+});
+
+
+/* OWNER/USER REGISTRATION */
+//POST new owner/user information
+//route to owner/user registration
+app.get('/SignUp', function (req, res) {
+    res.sendFile(__dirname + "/SignUp.html");
+})
+
+//Post API for registering the user based on information given on Signup page
+app.post('/SignUp', urlencodedParser, function (req, res) {
+    if (req.body.status == "user") { //If they are a user store them as user
+        var accountInfo = {
+            fName: req.body.fName,
+            lName: req.body.lName,
+            idNumber: req.body.idNumber,
+            phoneNumber: req.body.phoneNumber,
+            email: req.body.email,
+            password: req.body.password,
+            rating: 5,
+            rented: []
+        };
+        obj.Users.push(accountInfo);
+    } else { //Otherwise store them as owner, since there are only 2 options
+        var accountInfo = {
+            fName: req.body.fName,
+            lName: req.body.lName,
+            idNumber: req.body.idNumber,
+            phoneNumber: req.body.phoneNumber,
+            email: req.body.email,
+            password: req.body.password,
+            rating: 5,
+            properties: []
+        };
+        obj.Owners.push(accountInfo);
+    }
+
+    //Update the file with the new information
+    fs.writeFile(path.join(__dirname, 'data', 'data.json'), JSON.stringify(obj, null, 2), registered);
+    function registered() {
+        console.log("New user created.");
+        res.redirect('/registered');
+    }
+});
+
+//Post registration page
+app.get('/registered', function (req, res) {
+    res.sendFile(path.join(__dirname, "registered.html"));
+});
+
+/*** USER PAGE ***/
+// Route to logged in an user page
+app.get('/user', function (req, res) {
+    res.sendFile(__dirname + '/user.html');
+});
+
+app.get('/logged', function (req, res) {
+    res.sendFile(__dirname + '/logged.html');
+});
+
+/*** OWNER PAGE ***/
+// Route to owner's home page (when logged in as an owner)
+app.get('/owner/home', function (req, res) {
+    res.sendFile(__dirname + '/owner/home.html');
+});
+
+// Route to owner's profile page
+app.get('/owner/profile', function (req, res) {
+    res.sendFile(__dirname + '/owner/profile.html');
+});
+
+// Route to owner's properties page
+app.get('/owner/properties', function (req, res) {
+    res.sendFile(__dirname + '/owner/properties.html');
+});
 /*
 
 //Get information to update data
@@ -406,16 +416,14 @@ function NewOwner(req,res)
     res.send("404 page not found");   
     });  
 */
-var server = app.listen(1007, function () 
-{
-   var host = server.address().address
-   var port = server.address().port   
-   console.log("Server is running at port 1007")
+var server = app.listen(1007, function () {
+    var host = server.address().address
+    var port = server.address().port
+    console.log("Server is running at port 1007")
 })
 
 
-function getOption() 
-{
+function getOption() {
     selectElement = document.querySelector('#update');
     output = selectElement.value;
     document.querySelector('.output').textContent = output;
