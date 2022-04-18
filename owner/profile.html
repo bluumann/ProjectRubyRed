@@ -1,0 +1,50 @@
+<!--
+Name: Final Project
+Course Code: SODV1201
+Program: Software Development Diploma
+Authors:
+Colin From
+Frank Berrocal
+Pedro Ferreira
+Peter Kosa
+-->
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Coworking Registry</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <script src="/js/script.js"></script>
+</head>
+<body onload="SignedIn()">
+  <nav>
+    <ul class="navigation">
+      <!-- no href needed since it's working hiding/showing divs. -->
+      <li><a href="/owner/home" id="loggedNav1" onclick="">Home</a></li>
+      <li><a href="/owner/profile" id="loggedNav2" onclick="">Profile</a></li>
+      <li><a href="/owner/properties" id="loggedNav3" onclick="">My Properties</a></li>
+      <li><a href="/" id="loggedNav4" onclick="">Logout</a></li>
+    </ul>
+  </nav>
+  <div class="mainPage">
+    <div id="profilePage">
+      <h1>Owner Profile Page</h1>
+
+    </div>
+  </div>     
+  <div class="bottomBar">
+    Webpage by Colin From, Frank Berrocal, Pedro Ferreira and Peter Kosa, for SODV1201 - Final Project. Copyright 2022.
+  </div>
+</body>
+
+<script>
+function SignedIn() {
+  document.getElementById("loggedNav1").style = "display: inherit";
+  document.getElementById("loggedNav2").style = "display: inherit";
+  document.getElementById("loggedNav3").style = "display: inherit";
+}
+</script>
+
+</html>
