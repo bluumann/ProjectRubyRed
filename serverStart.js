@@ -159,6 +159,10 @@ app.get('/user', function (req, res) {
     res.sendFile(__dirname + '/user.html');
 });
 
+app.get('/property', function (req, res) {
+    res.sendFile(__dirname + '/property.html');
+});
+
 app.get('/logged', function (req, res) {
     res.sendFile(__dirname + '/logged.html');
 });
@@ -433,3 +437,18 @@ function getOption() {
     output = selectElement.value;
     document.querySelector('.output').textContent = output;
 }
+
+app.post('/PropertyIn', urlencodedParser, function (req, res) {
+        var property = {
+            propName: req.body.propName,
+            workspaces: []
+        };
+        currentUser.push(property);
+
+    //Update the file with the new information
+    fs.writeFile(path.join(__dirname, 'data', 'data.json'), JSON.stringify(obj, null, 2), propertyAdded);
+    function propertyAdded() {
+        console.log("New property added.");
+        //res.redirect('/propertyIn'); //placeholder
+    }
+});
