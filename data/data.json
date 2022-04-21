@@ -31,7 +31,41 @@
       "rented": []
     }
   ],
-  "Owners": [],
+  "Owners": [
+    {
+      "fName": "Peter",
+      "lName": "Kosa",
+      "idNumber": "8787",
+      "phoneNumber": "300 400 5050",
+      "email": "peter@email.com",
+      "password": "password",
+      "rating": 5,
+      "properties": []
+    }
+  ],
   "Properties": [],
-  "Workspaces": []
+  "Workspaces": [
+    {
+      "id": "egBYSwnsJ",
+      "name": "119",
+      "type": "open-desk",
+      "smoking": "no",
+      "seats": "3",
+      "availability": "2022-04-20",
+      "leaseterm": "day",
+      "price": "19.99",
+      "listed": "yes"
+    },
+    {
+      "id": "ftSvOkcOx",
+      "name": "222",
+      "type": "private-workspace",
+      "smoking": "yes",
+      "seats": "2",
+      "availability": "2022-04-21",
+      "leaseterm": "day",
+      "price": "9.99",
+      "listed": "no"
+    }
+  ]
 }

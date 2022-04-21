@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Create Workspace</title>
+</head>
+
+<body>
+    <div>
+        <h1>Create Workspace</h1>
+        <form action="http://localhost:1007/workspace/workspace-created" method="POST">
+            <label for="name">Name of the workspace:</label>
+            <input type="text" id="name" name="name"><br><br>
+
+            <label for="type">Select workspace type:</label>
+            <select name="type" id="type">
+                <option value="meeting-room">Meeting Room</option>
+                <option value="private-workspace">Private Office Room</option>
+                <option value="open-desk">Open Desk</option>
+            </select><br><br>
+
+            <input type="radio" id="no-smoking" name="smoking" value="no" checked="checked">
+            <label for="no-smoking">Non-smoking</label>
+            <input type="radio" id="smoking" name="smoking" value="yes">
+            <label for="smoking">Smoking</label><br><br>
+
+            <label for="seats">Number of seats:</label>
+            <input type="range" name="seats" min="1" max="10" step="1" value="1" oninput="num.value = this.value">
+            <output id="num">1</output><br><br>
+
+            <label for="availability">Available from:</label>
+            <input type="date" id="availability" name="availability"><br><br>
+
+            <label for="leaseterm">Lease term:</label>
+            <input type="radio" id="ltday" name="leaseterm" value="day" checked="checked">
+            <label for="leaseterm">Day</label>
+            <input type="radio" id="ltdweek" name="leaseterm" value="week">
+            <label for="leaseterm">Week</label>
+            <input type="radio" id="ltdmonth" name="leaseterm" value="month">
+            <label for="leaseterm">Month</label><br><br>
+
+            <label for="price">Price:</label>
+            <input type="text" id="price" name="price"><br><br>
+
+            <label for="listed">Is it listed?</label>
+            <input type="radio" id="listed" name="listed" value="yes" checked="checked">
+            <label for="listed">Yes</label>
+            <input type="radio" id="not-listed" name="listed" value="no">
+            <label for="listed">No</label><br><br>
+
+            <input type="submit" value="Create">
+        </form>
+    </div>
+
+</body>
+
+</html>
