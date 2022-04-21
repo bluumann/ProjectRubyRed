@@ -63,28 +63,41 @@ app.get('/', function (req, res) {
 /*** LOGIN ***/
 //Obtain login info and check credentials
 app.post('/login', function (req, res) {
-  //Get login details
-  var accountInfo = {
-    email: req.body.email,
-    password: req.body.password,
-  };
+    //Get login details
+    var accountInfo = {
+        email: req.body.email,
+        password: req.body.password
+    };
 
-  //Create a variable to hold who is currently logged in
-  var currentUser;
+    //Create a variable to hold who is currently logged in
+    global.currentUser;
 
-  var flag = false; //Create a flag for if/when we find the user
+    var flag = false; //Create a flag for if/when we find the user
 
-  //Go through users to find matching username and password
-  for (let i = 0; i < obj.Users.length; i++) {
-    if (
-      obj.Users[i].email == accountInfo.email &&
-      obj.Users[i].password == accountInfo.password
-    ) {
-      flag = true;
-      req.session.loggedin = true;
-      req.session.name = obj.Users[i].fName;
-      currentUser = obj.Users[i];
-      break;
+    //Go through users to find matching username and password
+    for (let i = 0; i < obj.Users.length; i++) {
+        if (obj.Users[i].email == accountInfo.email && obj.Users[i].password == accountInfo.password) {
+            flag = true;
+            req.session.loggedin = true;
+            req.session.name = obj.Users[i].fName;
+            currentUser = obj.Users[i];
+            console.log(currentUser);
+            break;
+        }
+    }
+
+    //Go through owners to find matching username and password if not found in users
+    if (!flag) {
+        for (let i = 0; i < obj.Owners.length; i++) {
+            if (obj.Owners[i].email == accountInfo.email && obj.Owners[i].password == accountInfo.password) {
+                flag = true;
+                req.session.loggedin = true;
+                req.session.name = obj.Owners[i].fName;
+                currentUser = obj.Owners[i];
+                console.log(currentUser);
+                break;
+            }
+        }
     }
   }
 
@@ -572,20 +585,19 @@ function getOption() {
 }
 
 app.post('/PropertyIn', urlencodedParser, function (req, res) {
-  var property = {
-    propName: req.body.propName,
-    workspaces: [],
-  };
-  currentUser.push(property);
 
-  //Update the file with the new information
-  fs.writeFile(
-    path.join(__dirname, 'data', 'data.json'),
-    JSON.stringify(obj, null, 2),
-    propertyAdded
-  );
-  function propertyAdded() {
-    console.log('New property added.');
-    //res.redirect('/propertyIn'); //placeholder
-  }
+            var property = {
+            propName: req.body.propName,
+            workspaces: []
+        };
+        //console.log("Test"); //debug
+        currentUser.properties.push(property);
+        console.log(currentUser); //debug
+
+    //Update the file with the new information
+    fs.writeFile(path.join(__dirname, 'data', 'data.json'), JSON.stringify(obj, null, 2), propertyAdded);
+    function propertyAdded() {
+        console.log("New property added.");
+        //res.redirect('/propertyIn'); //placeholder
+    }
 });
