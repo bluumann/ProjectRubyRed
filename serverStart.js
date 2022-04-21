@@ -445,9 +445,9 @@ app.post('/PropertyIn', urlencodedParser, function (req, res) {
             propName: req.body.propName,
             workspaces: []
         };
-        //console.log(currentUser); //debug
         //console.log("Test"); //debug
         currentUser.properties.push(property);
+        console.log(currentUser); //debug
 
     //Update the file with the new information
     fs.writeFile(path.join(__dirname, 'data', 'data.json'), JSON.stringify(obj, null, 2), propertyAdded);
