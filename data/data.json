@@ -31,7 +31,127 @@
       "rented": []
     }
   ],
-  "Owners": [],
+  "Owners": [
+    {
+      "fName": "Pedro",
+      "lName": "Ferreira",
+      "idNumber": "111",
+      "phoneNumber": "555 555 5555",
+      "email": "pedro@here.com",
+      "password": "1234",
+      "rating": 5,
+      "properties": [
+        {
+          "propName": "A",
+          "workspaces": []
+        },
+        {
+          "propName": "A",
+          "workspaces": []
+        },
+        {
+          "propName": "A",
+          "workspaces": []
+        },
+        {
+          "propName": "A",
+          "workspaces": []
+        },
+        {
+          "propName": "A",
+          "workspaces": []
+        },
+        {
+          "propName": "A",
+          "workspaces": []
+        },
+        {
+          "propName": "A",
+          "workspaces": []
+        },
+        {
+          "propName": "A",
+          "workspaces": []
+        },
+        {
+          "propName": "A",
+          "workspaces": []
+        },
+        {
+          "propName": "A",
+          "workspaces": []
+        },
+        {
+          "propName": "A",
+          "workspaces": []
+        },
+        {
+          "propName": "A",
+          "workspaces": []
+        },
+        {
+          "propName": "A",
+          "workspaces": []
+        },
+        {
+          "propName": "A",
+          "workspaces": []
+        },
+        {
+          "propName": "A",
+          "workspaces": []
+        },
+        {
+          "propName": "A",
+          "workspaces": []
+        },
+        {
+          "propName": "A",
+          "workspaces": []
+        },
+        {
+          "propName": "A",
+          "workspaces": []
+        },
+        {
+          "propName": "A",
+          "workspaces": []
+        },
+        {
+          "propName": "A",
+          "workspaces": []
+        },
+        {
+          "propName": "A",
+          "workspaces": []
+        },
+        {
+          "propName": "A",
+          "workspaces": []
+        },
+        {
+          "propName": "A",
+          "workspaces": []
+        },
+        {
+          "propName": "A",
+          "workspaces": []
+        },
+        {
+          "propName": "A",
+          "workspaces": []
+        },
+        {
+          "propName": "A",
+          "workspaces": []
+        },
+        {
+          "propName": "A",
+          "workspaces": []
+        }
+      ]
+    }
+  ],
   "Properties": [],
   "Workspaces": []
 }
