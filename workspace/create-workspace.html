@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Create Workspace</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body onload="SignedIn()">
+    <nav>
+        <ul class="navigation">
+            <!-- no href needed since it's working hiding/showing divs. -->
+            <li><a href="/workspace/create" id="loggedNav1" onclick="">Create</a></li>
+            <li><a href="/workspace/update" id="loggedNav2" onclick="">Update</a></li>
+            <li><a href="/workspace/delete" id="loggedNav3" onclick="">Delete</a></li>
+            <li><a href="/workspace/api" id="loggedNav4" onclick="">List All</a></li>
+        </ul>
+    </nav>
+
+    <div class="mainPage">
+        <div id="profilePage">
+
+            <h1>Create Workspace</h1>
+            <form action="http://localhost:1007/workspace/workspace-created" method="POST">
+                <label for="name">Name of the workspace:</label>
+                <input type="text" id="name" name="name"><br><br>
+
+                <label for="type">Select workspace type:</label>
+                <select name="type" id="type">
+                    <option value="meeting-room">Meeting Room</option>
+                    <option value="private-workspace">Private Office Room</option>
+                    <option value="open-desk">Open Desk</option>
+                </select><br><br>
+
+                <input type="radio" id="no-smoking" name="smoking" value="no" checked="checked">
+                <label for="no-smoking">Non-smoking</label>
+                <input type="radio" id="smoking" name="smoking" value="yes">
+                <label for="smoking">Smoking</label><br><br>
+
+                <label for="seats">Number of seats:</label>
+                <input type="range" name="seats" min="1" max="10" step="1" value="1" oninput="num.value = this.value">
+                <output id="num">1</output><br><br>
+
+                <label for="availability">Available from:</label>
+                <input type="date" id="availability" name="availability"><br><br>
+
+                <label for="leaseterm">Lease term:</label>
+                <input type="radio" id="ltday" name="leaseterm" value="day" checked="checked">
+                <label for="leaseterm">Day</label>
+                <input type="radio" id="ltdweek" name="leaseterm" value="week">
+                <label for="leaseterm">Week</label>
+                <input type="radio" id="ltdmonth" name="leaseterm" value="month">
+                <label for="leaseterm">Month</label><br><br>
+
+                <label for="price">Price:</label>
+                <input type="text" id="price" name="price"><br><br>
+
+                <label for="listed">Is it listed?</label>
+                <input type="radio" id="listed" name="listed" value="yes" checked="checked">
+                <label for="listed">Yes</label>
+                <input type="radio" id="not-listed" name="listed" value="no">
+                <label for="listed">No</label><br><br>
+
+                <input type="submit" value="Create">
+            </form>
+
+
+        </div>
+    </div>
+
+    <div class="bottomBar">
+        Webpage by Colin From, Frank Berrocal, Pedro Ferreira and Peter Kosa, for SODV1201 - Final Project. Copyright
+        2022.
+    </div>
+
+    <script>
+        function SignedIn() {
+            document.getElementById("loggedNav1").style = "display: inherit";
+            document.getElementById("loggedNav2").style = "display: inherit";
+            document.getElementById("loggedNav3").style = "display: inherit";
+            document.getElementById("loggedNav4").style = "display: inherit";
+        }
+    </script>
+</body>
+
+</html>

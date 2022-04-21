@@ -2,7 +2,8 @@
   "dependencies": {
     "express": "^4.17.3",
     "express-session": "^1.17.2",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "shortid": "^2.2.16"
   },
   "nodemonConfig": {
     "ignore": "data.json"
