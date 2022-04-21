@@ -12,9 +12,10 @@
     <nav>
         <ul class="navigation">
             <!-- no href needed since it's working hiding/showing divs. -->
-            <li><a href="#" id="loggedNav1" onclick="">Profile</a></li>
-            <li><a href="#" id="loggedNav2" onclick="">Placeholder I</a></li>
-            <li><a href="#" id="loggedNav3" onclick="">Placeholder II</a></li>
+            <li><a href="/workspace/create" id="loggedNav1" onclick="">Create</a></li>
+            <li><a href="/workspace/update" id="loggedNav2" onclick="">Update</a></li>
+            <li><a href="/workspace/delete" id="loggedNav3" onclick="">Delete</a></li>
+            <li><a href="/workspace/api" id="loggedNav4" onclick="">List All</a></li>
         </ul>
     </nav>
 
@@ -87,6 +88,7 @@
             document.getElementById("loggedNav1").style = "display: inherit";
             document.getElementById("loggedNav2").style = "display: inherit";
             document.getElementById("loggedNav3").style = "display: inherit";
+            document.getElementById("loggedNav4").style = "display: inherit";
         }
 
         const select = document.getElementById('types');
