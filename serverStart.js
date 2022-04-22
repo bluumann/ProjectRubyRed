@@ -226,6 +226,13 @@ app.get('/owner/properties', function (req, res) {
   res.sendFile(__dirname + '/owner/properties.html');
 });
 
+//CURRENT USER API
+app.get('/currentUser', urlencodedParser, function(req, res){
+  res.send(global.currentUser)
+  console.log(global.currentUser)
+  console.log("API called! Delivering info about " + global.currentUser.fName)
+})
+
 /*** PROPERTY PAGES ***/
 
 // ROUTE TO "CREATE PROPERTY" PAGE
@@ -240,10 +247,12 @@ app.post('/property/property-created', urlencodedParser, function (req, res) {
   name: req.body.name,
   address: req.body.address,
   type: req.body.type,
+  park: req.body.park,
+  transport: req.body.transport,
   smoking: req.body.smoking,
   seats: req.body.individuals,
-  availability: req.body.availabilityFrom,
-  availability: req.body.availabilityTo,
+  availabilityFrom: req.body.availabilityFrom,
+  availabilityTo: req.body.availabilityTo,
   leaseterm: req.body.leaseterm,
   price: req.body.price,
   workspaces: []
@@ -258,6 +267,11 @@ function propertyAdded() {
 console.log("New property added.");
 //res.redirect('/propertyIn'); //placeholder
 }
+});
+
+// ROUTE TO "UPDATE PROPERTY" PAGE
+app.get('/property/update', function (req, res) {
+  res.sendFile(__dirname + '/property/update-property.html');
 });
 
 

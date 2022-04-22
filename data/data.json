@@ -62,24 +62,17 @@
       "rating": 5,
       "properties": [
         {
-          "propName": "Astronomy Tower",
-          "workspaces": []
-        },
-        {
-          "workspaces": []
-        },
-        {
-          "workspaces": []
-        },
-        {
-          "name": "",
-          "address": "",
+          "name": "Hogwarts",
+          "address": "There",
           "type": "????",
-          "smoking": "no",
-          "seats": "1",
-          "availability": "",
-          "leaseterm": "day",
-          "price": "",
+          "park": "yes",
+          "transport": "yes",
+          "smoking": "yes",
+          "seats": "16",
+          "availabilityFrom": "0002-02-02",
+          "availabilityTo": "0001-01-01",
+          "leaseterm": "week",
+          "price": "111",
           "workspaces": []
         }
       ]
@@ -92,16 +85,7 @@
       "email": "minerva@hogwarts.com",
       "password": "1234",
       "rating": 5,
-      "properties": [
-        {
-          "propName": "Class One",
-          "workspaces": []
-        },
-        {
-          "propName": "Mahbub Murshed",
-          "workspaces": []
-        }
-      ]
+      "properties": []
     }
   ]
 }

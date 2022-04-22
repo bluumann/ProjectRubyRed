@@ -3,19 +3,19 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Update Workspace</title>
+    <title>Update Property</title>
     <link rel="stylesheet" href="/css/styles.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 
-<body onload="SignedIn()">
+<body onload="checkProperties()">
     <nav>
         <ul class="navigation">
             <!-- no href needed since it's working hiding/showing divs. -->
-            <li><a href="/workspace/create" id="loggedNav1" onclick="">Create</a></li>
-            <li><a href="/workspace/update" id="loggedNav2" onclick="">Update</a></li>
-            <li><a href="/workspace/delete" id="loggedNav3" onclick="">Delete</a></li>
-            <li><a href="/workspace/api" id="loggedNav4" onclick="">List All</a></li>
+            <li><a href="/property/create" id="" onclick="">Create</a></li>
+            <li><a href="/property/update" id="" onclick="">Update</a></li>
+            <li><a href="/property/delete" id="" onclick="">Delete</a></li>
+            <li><a href="/property/api" id="" onclick="">List All</a></li>
         </ul>
     </nav>
 
@@ -23,37 +23,48 @@
         <div id="profilePage">
 
             <h1>Update Workspace</h1>
-            <form action="http://localhost:1007/workspace/workspace-updated" method="POST">
-
-                <label for="types">Select workspace:</label>
-                <select name="types" id="types" onchange="updateFee()">
-                    <option>Choose a workspace</option>
+            <form action="http://localhost:1007/property/property-updated" method="POST">
+                <label for="name">Select Property:</label>
+                <select name="name" id="name" onchange="UpdateFields()">
+                    <option>Choose a Property</option>
                 </select><br><br>
 
-                <input type="text" id="id" name="id"><br><br>
+                <label for="adress">Address:</label>
+                <input type="text" id="address" name="address"><br><br>
 
-                <label for="name">Name of the workspace:</label>
-                <input type="text" id="name" name="name"><br><br>
-
-                <label for="type">Select workspace type:</label>
+                <label for="type">Select Property type:</label>
                 <select name="type" id="type">
-                    <option value="meeting-room">Meeting Room</option>
-                    <option value="private-workspace">Private Office Room</option>
-                    <option value="open-desk">Open Desk</option>
+                    <option value="????">????</option>
+                    <option value="????">????</option>
+                    <option value="???">????</option>
                 </select><br><br>
+
+
+                <input type="radio" id="no-parking" name="park" value="no" checked="checked">
+                <label for="no-parking">No Parking</label>
+                <input type="radio" id="parking" name="park" value="yes">
+                <label for="parking">Parking Available</label><br><br>
+
+                
+                <input type="radio" id="no-public" name="transport" value="no" checked="checked">
+                <label for="no-public">No Public Transportation</label>
+                <input type="radio" id="public" name="transport" value="yes">
+                <label for="public">Public Transportation</label><br><br>
 
                 <input type="radio" id="no-smoking" name="smoking" value="no" checked="checked">
                 <label for="no-smoking">Non-smoking</label>
                 <input type="radio" id="smoking" name="smoking" value="yes">
                 <label for="smoking">Smoking</label><br><br>
 
-                <label for="seats">Number of seats:</label>
-                <input type="range" name="seats" id="seats" min="1" max="10" step="1" value="1"
-                    oninput="num.value = this.value">
+                <label for="seats">Number of Individuals:</label>
+                <input type="range" name="individuals" min="1" max="100" step="1" value="1" oninput="num.value = this.value">
                 <output id="num">1</output><br><br>
 
                 <label for="availability">Available from:</label>
-                <input type="date" id="availability" name="availability"><br><br>
+                <input type="date" id="availabilityFrom" name="availabilityFrom"><br><br>
+
+                <label for="availability">Available To:</label>
+                <input type="date" id="availabilityTo" name="availabilityTo"><br><br>
 
                 <label for="leaseterm">Lease term:</label>
                 <input type="radio" id="ltday" name="leaseterm" value="day" checked="checked">
@@ -66,13 +77,7 @@
                 <label for="price">Price:</label>
                 <input type="text" id="price" name="price"><br><br>
 
-                <label for="listed">Is it listed?</label>
-                <input type="radio" id="listed" name="listed" value="yes" checked="checked">
-                <label for="listed">Yes</label>
-                <input type="radio" id="not-listed" name="listed" value="no">
-                <label for="listed">No</label><br><br>
-
-                <input type="submit" value="Update">
+                <input type="submit" value="Create">
             </form>
         </div>
     </div>
@@ -84,92 +89,94 @@
     </div>
 
     <script>
-        function SignedIn() {
-            document.getElementById("loggedNav1").style = "display: inherit";
-            document.getElementById("loggedNav2").style = "display: inherit";
-            document.getElementById("loggedNav3").style = "display: inherit";
-            document.getElementById("loggedNav4").style = "display: inherit";
-        }
+        const select = document.getElementById('name');
 
-        const select = document.getElementById('types');
-
-        $("#types").change(function () {
-            var selectWorkspace = $("#types option:selected");
-            //console.log(selectWorkspace.text());
-        })
-
-        $.getJSON("/data/data.json", function (json) {
-            //console.log(json);
-            json.Workspaces.forEach(element => {
+        function checkProperties(){
+            alert("I am running.")
+            fetch('/currentUser')
+            .then(res => res.json())
+            .then(function(data){
+                alert(data.fName)
+                data.properties.forEach(element => {
                 var option = document.createElement('option');
                 option.value = element.name;
                 option.textContent = element.name;
                 select.appendChild(option);
-            });
-        })
+            })}
+            )
+            .catch(err => alert("I got an error on the API."))
+          }
+        
+        
+        function UpdateFields(){
+            fetch('/currentUser')
+            .then(res => res.json())
+            .then(function(data){
+                data.properties.forEach(element =>{
+                    if (element.name == document.getElementById("name").value){
+                        
+                        document.getElementById('address').value = element.address;
+                        document.getElementById('type').value = element.type;
+                        document.getElementById('price').value = element.price;
+                        document.getElementById('num').value = element.seats;
+
+                        if (element.park == 'no'){
+                            document.getElementById('smoking').checked = false;    
+                            document.getElementById('no-smoking').checked = true;    
+                        }
+                        if (element.park == 'yes'){
+                            document.getElementById('parking').checked = true;    
+                            document.getElementById('no-parking').checked = false;    
+                        }
+
+                        if (element.transport == 'no'){
+                            document.getElementById('public').checked = false;    
+                            document.getElementById('no-public').checked = true;    
+                        }
+                        if (element.transport == 'yes'){
+                            document.getElementById('public').checked = true;    
+                            document.getElementById('no-public').checked = false;    
+                        }
 
 
-        function updateFee() {
+                        if (element.smoking == 'no'){
+                            document.getElementById('smoking').checked = false;    
+                            document.getElementById('no-smoking').checked = true;    
+                        }
+                        if (element.smoking == 'yes'){
+                            document.getElementById('smoking').checked = true;    
+                            document.getElementById('no-smoking').checked = false;    
+                        }
 
-            const selectWorkspaceElement = document.getElementById('types');
-            const idElement = document.getElementById('id');
-            const nameElement = document.getElementById('name');
-            const typeElement = document.getElementById('type');
-            const priceElement = document.getElementById('price');
-            const seatsElement = document.getElementById('seats');
-            const seatsOutputElement = document.getElementById('num');
-            const availabilityElement = document.getElementById('availability');
-            const smokingNoElement = document.getElementById('no-smoking');
-            const smokingYesElement = document.getElementById('smoking');
-            const leasetermDayElement = document.getElementById('ltday');
-            const leasetermWeekElement = document.getElementById('ltdweek');
-            const leasetermMonthElement = document.getElementById('ltdmonth');
-            const listedYesElement = document.getElementById('listed');
-            const listedNoElement = document.getElementById('not-listed');
+                        document.getElementById('availabilityFrom').value = element.availabilityFrom;
+                        document.getElementById('availabilityTo').value = element.availabilityTo;
 
-            var name = selectWorkspaceElement.value;
+                        if (element.leaseterm == 'day'){
+                            document.getElementById('ltday').checked = true;    
+                            document.getElementById('ltdweek').checked = false;    
+                            document.getElementById('ltdmonth').checked = false;    
+                        }
+                        if (element.leaseterm == 'week'){
+                            document.getElementById('ltday').checked = false;    
+                            document.getElementById('ltdweek').checked = true;    
+                            document.getElementById('ltdmonth').checked = false;    
+                        }
+                        if (element.leaseterm == 'month'){
+                            document.getElementById('ltday').checked = false;    
+                            document.getElementById('ltdweek').checked = false;    
+                            document.getElementById('ltdmonth').checked = true;    
+                        }
+                    }
+                })
 
-            $.getJSON("/data/data.json", function (json) {
-                var selectedWorkspace = json.Workspaces.find(workspace => workspace.name === name);
-
-                idElement.value = selectedWorkspace.id;
-                nameElement.value = selectedWorkspace.name;
-                typeElement.value = selectedWorkspace.type;
-                seatsElement.value = selectedWorkspace.seats;
-                seatsOutputElement.value = selectedWorkspace.seats;
-                priceElement.value = selectedWorkspace.price;
-                availabilityElement.value = selectedWorkspace.availability;
-
-                // Smoking radio buttons
-                if (selectedWorkspace.smoking == 'no') {
-                    smokingNoElement.checked = true;
-                }
-                else if (selectedWorkspace.smoking == 'yes') {
-                    smokingYesElement.checked = true;
-                }
-
-                // Lease term radio buttons
-                if (selectedWorkspace.leaseterm == 'day') {
-                    leasetermDayElement.checked = true;
-                }
-                else if (selectedWorkspace.leaseterm == 'week') {
-                    leasetermWeekElement.checked = true;
-                }
-                else if (selectedWorkspace.leaseterm == 'month') {
-                    leasetermMonthElement.checked = true;
-                }
-
-                // Listed radio buttons
-                if (selectedWorkspace.listed == 'yes') {
-                    listedYesElement.checked = true;
-                }
-                else if (selectedWorkspace.listed == 'no') {
-                    listedNoElement.checked = true;
-                }
-            })
+            }
+            )
+            .catch(err => alert("I got an error on the API."))
         }
+
 
     </script>
 </body>
 
 </html>
+

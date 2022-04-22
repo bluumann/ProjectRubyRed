@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Create Workspace</title>
+    <title>Create Property</title>
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 
@@ -26,7 +26,7 @@
                 <label for="name">Name of the Property:</label>
                 <input type="text" id="name" name="name"><br><br>
 
-                <label for="name">Address:</label>
+                <label for="address">Address:</label>
                 <input type="text" id="address" name="address"><br><br>
 
                 <label for="type">Select Property type:</label>
@@ -35,6 +35,18 @@
                     <option value="????">????</option>
                     <option value="???">????</option>
                 </select><br><br>
+
+
+                <input type="radio" id="no-parking" name="park" value="no" checked="checked">
+                <label for="no-parking">No Parking</label>
+                <input type="radio" id="parking" name="park" value="yes">
+                <label for="parking">Parking Available</label><br><br>
+
+                
+                <input type="radio" id="no-public" name="transport" value="no" checked="checked">
+                <label for="no-public">No Public Transportation</label>
+                <input type="radio" id="public" name="transport" value="yes">
+                <label for="public">Public Transportation</label><br><br>
 
                 <input type="radio" id="no-smoking" name="smoking" value="no" checked="checked">
                 <label for="no-smoking">Non-smoking</label>
@@ -75,17 +87,7 @@
     </div>
 
     <script>
-        function OnEnter() {
-            fetch('https://localhost:1007/data/data.json')  //just for the sake of modularity.
-                .then(response => response.json())
-                .then(function (data) {
-                    //console.log(data) //remnant of testing.
-                    alert(data); //debug
-                    //document.getElementById('API').innerHTML = ""; //removing the initial info.
-
-        });
-
-        }
+        
     </script>
 </body>
 
