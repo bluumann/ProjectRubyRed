@@ -227,6 +227,56 @@ app.get('/owner/properties', function (req, res) {
   res.sendFile(__dirname + '/owner/properties.html');
 });
 
+//CURRENT USER API
+app.get('/currentUser', urlencodedParser, function(req, res){
+  res.send(global.currentUser)
+  console.log(global.currentUser)
+  console.log("API called! Delivering info about " + global.currentUser.fName)
+})
+
+/*** PROPERTY PAGES ***/
+
+// ROUTE TO "CREATE PROPERTY" PAGE
+app.get('/property/create', function (req, res) {
+  res.sendFile(__dirname + '/property/create-property.html');
+});
+
+// ROUTE TO "PROPERTY CREATED" PAGE
+app.post('/property/property-created', urlencodedParser, function (req, res) {
+
+  var property = {
+  name: req.body.name,
+  address: req.body.address,
+  type: req.body.type,
+  park: req.body.park,
+  transport: req.body.transport,
+  smoking: req.body.smoking,
+  seats: req.body.individuals,
+  availabilityFrom: req.body.availabilityFrom,
+  availabilityTo: req.body.availabilityTo,
+  leaseterm: req.body.leaseterm,
+  price: req.body.price,
+  workspaces: []
+};
+//console.log("Test"); //debug
+currentUser.properties.push(property);
+console.log(currentUser); //debug
+
+//Update the file with the new information
+fs.writeFile(path.join(__dirname, 'data', 'data.json'), JSON.stringify(obj, null, 2), propertyAdded);
+function propertyAdded() {
+console.log("New property added.");
+//res.redirect('/propertyIn'); //placeholder
+}
+});
+
+// ROUTE TO "UPDATE PROPERTY" PAGE
+app.get('/property/update', function (req, res) {
+  res.sendFile(__dirname + '/property/update-property.html');
+});
+
+
+
 /*** WORKSPACE PAGES ***/
 
 // ROUTE TO "CREATE WORKSPACE" PAGE
@@ -357,21 +407,3 @@ function getOption() {
   output = selectElement.value;
   document.querySelector('.output').textContent = output;
 }
-
-app.post('/PropertyIn', urlencodedParser, function (req, res) {
-
-            var property = {
-            propName: req.body.propName,
-            workspaces: []
-        };
-        //console.log("Test"); //debug
-        currentUser.properties.push(property);
-        //console.log(currentUser); //debug
-
-    //Update the file with the new information
-    fs.writeFile(path.join(__dirname, 'data', 'data.json'), JSON.stringify(obj, null, 2), propertyAdded);
-    function propertyAdded() {
-        console.log("New property added.");
-        //res.redirect('/propertyIn'); //placeholder
-    }
-});

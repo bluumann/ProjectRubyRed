@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Delete Property</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+
+<body onload="SignedIn()">
+    <nav>
+        <ul class="navigation">
+            <!-- no href needed since it's working hiding/showing divs. -->
+            <li><a href="/property/create" id="" onclick="">Create</a></li>
+            <li><a href="/property/update" id="" onclick="">Update</a></li>
+            <li><a href="/property/delete" id="" onclick="">Delete</a></li>
+            <li><a href="/property/api" id="" onclick="">List All</a></li>
+        </ul>
+    </nav>
+
+    <div class="mainPage">
+        <div id="profilePage">
+
+            <h1>Delete Workspace</h1>
+            <form action="http://localhost:1007/property/property-deleted" method="POST">
+                <label for="types">Select property:</label>
+                <select name="types" id="types">
+                </select><br><br>
+
+                <label for="deletecheck">Are you sure you want to delete this property?</label>
+                <input type="checkbox" id="deletecheck" name="deletecheck" value="positive" required><br><br>
+
+                <input type="submit" value="Delete">
+            </form>
+
+        </div>
+    </div>
+
+    <div class="bottomBar">
+        Webpage by Colin From, Frank Berrocal, Pedro Ferreira and Peter Kosa, for SODV1201 - Final Project.
+        Copyright
+        2022.
+    </div>
+
+    <script>
+        const select = document.getElementById('types');
+
+        $("#types").change(function () {
+            var selectProperty = $("#types option:selected");
+            //console.log(selectWorkspace.text());
+        })
+
+        $.getJSON("/data/data.json", function (json) {
+            //console.log(json);
+            json.Workspaces.forEach(element => {
+                var option = document.createElement('option');
+                option.value = element.name;
+                option.textContent = element.name;
+                select.appendChild(option);
+            });
+        })
+    </script>
+</body>
+
+</html>
