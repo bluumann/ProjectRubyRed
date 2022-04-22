@@ -62,6 +62,7 @@
       "rating": 5,
       "properties": [
         {
+<<<<<<< HEAD
           "propName": "Astronomy Tower",
           "workspaces": [
             {
@@ -76,6 +77,20 @@
               "listed": "yes"
             }
           ]
+=======
+          "name": "Hogwarts",
+          "address": "There",
+          "type": "????",
+          "park": "yes",
+          "transport": "yes",
+          "smoking": "yes",
+          "seats": "16",
+          "availabilityFrom": "0002-02-02",
+          "availabilityTo": "0001-01-01",
+          "leaseterm": "week",
+          "price": "111",
+          "workspaces": []
+>>>>>>> 6277eaf356a3d6e34f6e420171a18e05f1d6da8f
         }
       ]
     },
@@ -87,6 +102,7 @@
       "email": "minerva@hogwarts.com",
       "password": "1234",
       "rating": 5,
+<<<<<<< HEAD
       "properties": [
         {
           "propName": "Class One",
@@ -124,6 +140,9 @@
           ]
         }
       ]
+=======
+      "properties": []
+>>>>>>> 6277eaf356a3d6e34f6e420171a18e05f1d6da8f
     }
   ]
 }
