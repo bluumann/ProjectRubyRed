@@ -62,6 +62,8 @@
       "rating": 5,
       "properties": [
         {
+          
+
           "name": "Hogwarts",
           "address": "There",
           "type": "????",
@@ -74,6 +76,7 @@
           "leaseterm": "week",
           "price": "111",
           "workspaces": []
+
         }
       ]
     },
@@ -85,7 +88,9 @@
       "email": "minerva@hogwarts.com",
       "password": "1234",
       "rating": 5,
+
       "properties": []
+
     }
   ]
 }

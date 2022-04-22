@@ -81,7 +81,7 @@ app.post('/login', function (req, res) {
             req.session.loggedin = true;
             req.session.name = obj.Users[i].fName;
             currentUser = obj.Users[i];
-            console.log(currentUser);
+            //console.log(currentUser);
             break;
         }
     }
@@ -94,7 +94,7 @@ app.post('/login', function (req, res) {
                 req.session.loggedin = true;
                 req.session.name = obj.Owners[i].fName;
                 currentUser = obj.Owners[i];
-                console.log(currentUser);
+                //console.log(currentUser);
                 break;
             }
         }
@@ -120,6 +120,7 @@ app.post('/login', function (req, res) {
   //If matching credentials were found login
   if (flag) {
     console.log('Successful login occurred of account ' + req.session.name);
+    //console.log(currentUser.properties[0]);
     res.redirect('/logged');
   }
   //If not, send a response
@@ -296,7 +297,11 @@ app.post('/workspace/workspace-created', urlencodedParser, function (req, res) {
         price: req.body.price,
         listed: req.body.listed,
     };
-    obj.Workspaces.push(workspace);
+
+    ownerIndex = obj.Owners.indexOf(currentUser, 0); // Index of currentUser within Owners[]
+
+
+    obj.Owners[ownerIndex].properties[0].workspaces.push(workspace);
 
 
     //Update data.json with the new information
