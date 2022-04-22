@@ -45,7 +45,7 @@
                 <input type="radio" id="parking" name="park" value="yes">
                 <label for="parking">Parking Available</label><br><br>
 
-                
+
                 <input type="radio" id="no-public" name="transport" value="no" checked="checked">
                 <label for="no-public">No Public Transportation</label>
                 <input type="radio" id="public" name="transport" value="yes">
@@ -57,7 +57,8 @@
                 <label for="smoking">Smoking</label><br><br>
 
                 <label for="seats">Number of Individuals:</label>
-                <input type="range" name="individuals" min="1" max="100" step="1" value="1" oninput="num.value = this.value">
+                <input type="range" name="individuals" min="1" max="100" step="1" value="1"
+                    oninput="num.value = this.value">
                 <output id="num">1</output><br><br>
 
                 <label for="availability">Available from:</label>
@@ -91,87 +92,88 @@
     <script>
         const select = document.getElementById('name');
 
-        function checkProperties(){
+        function checkProperties() {
             alert("I am running.")
             fetch('/currentUser')
-            .then(res => res.json())
-            .then(function(data){
-                alert(data.fName)
-                data.properties.forEach(element => {
-                var option = document.createElement('option');
-                option.value = element.name;
-                option.textContent = element.name;
-                select.appendChild(option);
-            })}
-            )
-            .catch(err => alert("I got an error on the API."))
-          }
-        
-        
-        function UpdateFields(){
+                .then(res => res.json())
+                .then(function (data) {
+                    alert(data.fName)
+                    data.properties.forEach(element => {
+                        var option = document.createElement('option');
+                        option.value = element.name;
+                        option.textContent = element.name;
+                        select.appendChild(option);
+                    })
+                }
+                )
+                .catch(err => alert("I got an error on the API."))
+        }
+
+
+        function UpdateFields() {
             fetch('/currentUser')
-            .then(res => res.json())
-            .then(function(data){
-                data.properties.forEach(element =>{
-                    if (element.name == document.getElementById("name").value){
-                        
-                        document.getElementById('address').value = element.address;
-                        document.getElementById('type').value = element.type;
-                        document.getElementById('price').value = element.price;
-                        document.getElementById('num').value = element.seats;
+                .then(res => res.json())
+                .then(function (data) {
+                    data.properties.forEach(element => {
+                        if (element.name == document.getElementById("name").value) {
 
-                        if (element.park == 'no'){
-                            document.getElementById('smoking').checked = false;    
-                            document.getElementById('no-smoking').checked = true;    
-                        }
-                        if (element.park == 'yes'){
-                            document.getElementById('parking').checked = true;    
-                            document.getElementById('no-parking').checked = false;    
-                        }
+                            document.getElementById('address').value = element.address;
+                            document.getElementById('type').value = element.type;
+                            document.getElementById('price').value = element.price;
+                            document.getElementById('num').value = element.seats;
 
-                        if (element.transport == 'no'){
-                            document.getElementById('public').checked = false;    
-                            document.getElementById('no-public').checked = true;    
-                        }
-                        if (element.transport == 'yes'){
-                            document.getElementById('public').checked = true;    
-                            document.getElementById('no-public').checked = false;    
-                        }
+                            if (element.park == 'no') {
+                                document.getElementById('smoking').checked = false;
+                                document.getElementById('no-smoking').checked = true;
+                            }
+                            if (element.park == 'yes') {
+                                document.getElementById('parking').checked = true;
+                                document.getElementById('no-parking').checked = false;
+                            }
+
+                            if (element.transport == 'no') {
+                                document.getElementById('public').checked = false;
+                                document.getElementById('no-public').checked = true;
+                            }
+                            if (element.transport == 'yes') {
+                                document.getElementById('public').checked = true;
+                                document.getElementById('no-public').checked = false;
+                            }
 
 
-                        if (element.smoking == 'no'){
-                            document.getElementById('smoking').checked = false;    
-                            document.getElementById('no-smoking').checked = true;    
-                        }
-                        if (element.smoking == 'yes'){
-                            document.getElementById('smoking').checked = true;    
-                            document.getElementById('no-smoking').checked = false;    
-                        }
+                            if (element.smoking == 'no') {
+                                document.getElementById('smoking').checked = false;
+                                document.getElementById('no-smoking').checked = true;
+                            }
+                            if (element.smoking == 'yes') {
+                                document.getElementById('smoking').checked = true;
+                                document.getElementById('no-smoking').checked = false;
+                            }
 
-                        document.getElementById('availabilityFrom').value = element.availabilityFrom;
-                        document.getElementById('availabilityTo').value = element.availabilityTo;
+                            document.getElementById('availabilityFrom').value = element.availabilityFrom;
+                            document.getElementById('availabilityTo').value = element.availabilityTo;
 
-                        if (element.leaseterm == 'day'){
-                            document.getElementById('ltday').checked = true;    
-                            document.getElementById('ltdweek').checked = false;    
-                            document.getElementById('ltdmonth').checked = false;    
+                            if (element.leaseterm == 'day') {
+                                document.getElementById('ltday').checked = true;
+                                document.getElementById('ltdweek').checked = false;
+                                document.getElementById('ltdmonth').checked = false;
+                            }
+                            if (element.leaseterm == 'week') {
+                                document.getElementById('ltday').checked = false;
+                                document.getElementById('ltdweek').checked = true;
+                                document.getElementById('ltdmonth').checked = false;
+                            }
+                            if (element.leaseterm == 'month') {
+                                document.getElementById('ltday').checked = false;
+                                document.getElementById('ltdweek').checked = false;
+                                document.getElementById('ltdmonth').checked = true;
+                            }
                         }
-                        if (element.leaseterm == 'week'){
-                            document.getElementById('ltday').checked = false;    
-                            document.getElementById('ltdweek').checked = true;    
-                            document.getElementById('ltdmonth').checked = false;    
-                        }
-                        if (element.leaseterm == 'month'){
-                            document.getElementById('ltday').checked = false;    
-                            document.getElementById('ltdweek').checked = false;    
-                            document.getElementById('ltdmonth').checked = true;    
-                        }
-                    }
-                })
+                    })
 
-            }
-            )
-            .catch(err => alert("I got an error on the API."))
+                }
+                )
+                .catch(err => alert("I got an error on the API."))
         }
 
 
@@ -179,4 +181,3 @@
 </body>
 
 </html>
-

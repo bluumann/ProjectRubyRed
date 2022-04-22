@@ -8,14 +8,14 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 
-<body onload="SignedIn()">
+<body onload="checkProperties()">
     <nav>
         <ul class="navigation">
             <!-- no href needed since it's working hiding/showing divs. -->
-            <li><a href="/workspace/create" id="loggedNav1" onclick="">Create</a></li>
-            <li><a href="/workspace/update" id="loggedNav2" onclick="">Update</a></li>
-            <li><a href="/workspace/delete" id="loggedNav3" onclick="">Delete</a></li>
-            <li><a href="/workspace/api" id="loggedNav4" onclick="">List All</a></li>
+            <li><a href="/workspace/create" id="" onclick="">Create</a></li>
+            <li><a href="/workspace/update" id="" onclick="">Update</a></li>
+            <li><a href="/workspace/delete" id="" onclick="">Delete</a></li>
+            <li><a href="/workspace/api" id="" onclick="">List All</a></li>
         </ul>
     </nav>
 
@@ -24,6 +24,10 @@
 
             <h1>Update Workspace</h1>
             <form action="http://localhost:1007/workspace/workspace-updated" method="POST">
+                <label for="property">Select Property:</label>
+                <select name="property" id="property">
+                    <option>Choose a Property</option>
+                </select><br><br>
 
                 <label for="types">Select workspace:</label>
                 <select name="types" id="types" onchange="updateFee()">
@@ -84,29 +88,52 @@
     </div>
 
     <script>
-        function SignedIn() {
-            document.getElementById("loggedNav1").style = "display: inherit";
-            document.getElementById("loggedNav2").style = "display: inherit";
-            document.getElementById("loggedNav3").style = "display: inherit";
-            document.getElementById("loggedNav4").style = "display: inherit";
+        const propertySelect = document.getElementById('property');
+        const workspaceSelect = document.getElementById('types');
+
+        $("#property").change(function () {
+            var propertyName = $("#property option:selected");
+            console.log(propertyName.text);
+        })
+
+
+        function checkProperties() {
+            fetch('/currentUser')
+                .then(res => res.json())
+                .then(function (data) {
+                    data.properties.forEach(element => {
+                        var option = document.createElement('option');
+                        option.value = element.name;
+                        option.textContent = element.name;
+                        propertySelect.appendChild(option);
+                    })
+
+
+
+                    // const currentProperty = data.properties.find( // Find property that matches propertyName
+                    //     property => property.name === propertyName
+                    // );
+
+                })
+                .catch(err => alert("I got an error on the API."))
         }
 
-        const select = document.getElementById('types');
 
-        $("#types").change(function () {
-            var selectWorkspace = $("#types option:selected");
-            //console.log(selectWorkspace.text());
-        })
 
-        $.getJSON("/data/data.json", function (json) {
-            //console.log(json);
-            json.Workspaces.forEach(element => {
-                var option = document.createElement('option');
-                option.value = element.name;
-                option.textContent = element.name;
-                select.appendChild(option);
-            });
-        })
+        // $("#types").change(function () {
+        //     var selectWorkspace = $("#types option:selected");
+        //     //console.log(selectWorkspace.text());
+        // })
+
+        // $.getJSON("/data/data.json", function (json) {
+        //     //console.log(json);
+        //     json.Workspaces.forEach(element => {
+        //         var option = document.createElement('option');
+        //         option.value = element.name;
+        //         option.textContent = element.name;
+        //         select.appendChild(option);
+        //     });
+        // })
 
 
         function updateFee() {

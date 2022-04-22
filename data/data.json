@@ -62,8 +62,6 @@
       "rating": 5,
       "properties": [
         {
-          
-
           "name": "Hogwarts",
           "address": "There",
           "type": "????",
@@ -76,7 +74,6 @@
           "leaseterm": "week",
           "price": "111",
           "workspaces": []
-
         }
       ]
     },
@@ -88,9 +85,70 @@
       "email": "minerva@hogwarts.com",
       "password": "1234",
       "rating": 5,
-
       "properties": []
-
+    },
+    {
+      "fName": "Elon",
+      "lName": "Musk",
+      "idNumber": "9001",
+      "phoneNumber": "555 555 5555",
+      "email": "elon@tesla.com",
+      "password": "musk",
+      "rating": 5,
+      "properties": [
+        {
+          "name": "Tesla HQ California",
+          "address": "CA, USA",
+          "type": "????",
+          "park": "yes",
+          "transport": "yes",
+          "smoking": "no",
+          "seats": "15",
+          "availabilityFrom": "2022-04-22",
+          "availabilityTo": "",
+          "leaseterm": "day",
+          "price": "500",
+          "workspaces": [
+            {
+              "id": "3vL6-81-a",
+              "name": "Los Angeles",
+              "type": "open-desk",
+              "smoking": "no",
+              "seats": "1",
+              "availability": "",
+              "leaseterm": "day",
+              "price": "",
+              "listed": "yes"
+            }
+          ]
+        },
+        {
+          "name": "Tesla HQ Texas",
+          "address": "CA, USA",
+          "type": "????",
+          "park": "yes",
+          "transport": "yes",
+          "smoking": "no",
+          "seats": "15",
+          "availabilityFrom": "2022-04-22",
+          "availabilityTo": "",
+          "leaseterm": "day",
+          "price": "500",
+          "workspaces": [
+            {
+              "id": "BySr3EDbh",
+              "name": "Dallas",
+              "type": "private-workspace",
+              "smoking": "no",
+              "seats": "1",
+              "availability": "",
+              "leaseterm": "day",
+              "price": "",
+              "listed": "yes"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
