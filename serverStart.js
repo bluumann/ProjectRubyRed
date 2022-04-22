@@ -408,6 +408,7 @@ function getOption() {
   document.querySelector('.output').textContent = output;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 app.post('/PropertyIn', urlencodedParser, function (req, res) {
 
@@ -428,3 +429,5 @@ app.post('/PropertyIn', urlencodedParser, function (req, res) {
 });
 =======
 >>>>>>> 6277eaf356a3d6e34f6e420171a18e05f1d6da8f
+=======
+>>>>>>> bb57db5dbd632d754591294fa88661d319711895

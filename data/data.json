@@ -63,6 +63,7 @@
       "properties": [
         {
 <<<<<<< HEAD
+<<<<<<< HEAD
           "propName": "Astronomy Tower",
           "workspaces": [
             {
@@ -78,6 +79,10 @@
             }
           ]
 =======
+=======
+          
+
+>>>>>>> bb57db5dbd632d754591294fa88661d319711895
           "name": "Hogwarts",
           "address": "There",
           "type": "????",
@@ -90,7 +95,11 @@
           "leaseterm": "week",
           "price": "111",
           "workspaces": []
+<<<<<<< HEAD
 >>>>>>> 6277eaf356a3d6e34f6e420171a18e05f1d6da8f
+=======
+
+>>>>>>> bb57db5dbd632d754591294fa88661d319711895
         }
       ]
     },
@@ -102,6 +111,7 @@
       "email": "minerva@hogwarts.com",
       "password": "1234",
       "rating": 5,
+<<<<<<< HEAD
 <<<<<<< HEAD
       "properties": [
         {
@@ -143,6 +153,11 @@
 =======
       "properties": []
 >>>>>>> 6277eaf356a3d6e34f6e420171a18e05f1d6da8f
+=======
+
+      "properties": []
+
+>>>>>>> bb57db5dbd632d754591294fa88661d319711895
     }
   ]
 }
