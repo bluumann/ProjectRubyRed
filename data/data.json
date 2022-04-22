@@ -64,6 +64,23 @@
         {
           "propName": "Astronomy Tower",
           "workspaces": []
+        },
+        {
+          "workspaces": []
+        },
+        {
+          "workspaces": []
+        },
+        {
+          "name": "",
+          "address": "",
+          "type": "????",
+          "smoking": "no",
+          "seats": "1",
+          "availability": "",
+          "leaseterm": "day",
+          "price": "",
+          "workspaces": []
         }
       ]
     },
