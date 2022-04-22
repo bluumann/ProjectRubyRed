@@ -24,7 +24,7 @@ Peter Kosa
       <!-- no href needed since it's working hiding/showing divs. -->
       <li><a href="#" id="loggedNav1" onclick="">Profile</a></li>
       <li><a href="/property" id="loggedNav2" onclick="">Properties</a></li>
-      <li><a href="#" id="loggedNav3" onclick="">Placeholder II</a></li>
+      <li><a href="/workspace/create" id="loggedNav3" onclick="">Create Workspace</a></li>
     </ul>
   </nav>
 
@@ -34,7 +34,7 @@ Peter Kosa
       <a href="/user">Logged in as a user page</a><br>
       <a href="/owner/home">Logged in as an owner page</a>
     </div>
-  </div>   
+  </div>
 
   <div class="bottomBar">
     Webpage by Colin From, Frank Berrocal, Pedro Ferreira and Peter Kosa, for SODV1201 - Final Project. Copyright 2022.
@@ -42,10 +42,11 @@ Peter Kosa
 </body>
 
 <script>
-function SignedIn() {
-  document.getElementById("loggedNav1").style = "display: inherit";
-  document.getElementById("loggedNav2").style = "display: inherit";
-  document.getElementById("loggedNav3").style = "display: inherit";
-}
+  function SignedIn() {
+    document.getElementById("loggedNav1").style = "display: inherit";
+    document.getElementById("loggedNav2").style = "display: inherit";
+    document.getElementById("loggedNav3").style = "display: inherit";
+  }
 </script>
+
 </html>

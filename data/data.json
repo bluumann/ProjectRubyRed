@@ -63,7 +63,19 @@
       "properties": [
         {
           "propName": "Astronomy Tower",
-          "workspaces": []
+          "workspaces": [
+            {
+              "id": "G7W11hBSO",
+              "name": "Voldo",
+              "type": "private-workspace",
+              "smoking": "no",
+              "seats": "3",
+              "availability": "2022-04-21",
+              "leaseterm": "day",
+              "price": "700",
+              "listed": "yes"
+            }
+          ]
         }
       ]
     },
@@ -83,6 +95,33 @@
         {
           "propName": "Mahbub Murshed",
           "workspaces": []
+        }
+      ]
+    },
+    {
+      "fName": "Elon",
+      "lName": "Musk",
+      "idNumber": "9001",
+      "phoneNumber": "555 555 5555",
+      "email": "elon@tesla.com",
+      "password": "musk",
+      "rating": 5,
+      "properties": [
+        {
+          "propName": "Tesla",
+          "workspaces": [
+            {
+              "id": "t10IvYOWg",
+              "name": "Cyber-Desk",
+              "type": "open-desk",
+              "smoking": "no",
+              "seats": "3",
+              "availability": "2022-04-22",
+              "leaseterm": "week",
+              "price": "29.99",
+              "listed": "yes"
+            }
+          ]
         }
       ]
     }
