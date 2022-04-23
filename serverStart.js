@@ -54,6 +54,9 @@ if (exists) {
   }
 }
 
+//Create a variable to hold who is currently logged in
+currentUser = null;
+
 /*** LANDING PAGE ***/
 // Route to landing page
 app.get('/', function (req, res) {
@@ -66,25 +69,21 @@ app.post('/login', function (req, res) {
   //Get login details
   var accountInfo = {
     email: req.body.email,
-    password: req.body.password,
+    password: req.body.password
   };
-
-  //Create a variable to hold who is currently logged in
-  global.currentUser;
 
   var flag = false; //Create a flag for if/when we find the user
 
   //Go through users to find matching username and password
   for (let i = 0; i < obj.Users.length; i++) {
-    if (
-      obj.Users[i].email == accountInfo.email &&
-      obj.Users[i].password == accountInfo.password
-    ) {
+    if (obj.Users[i].email == accountInfo.email && obj.Users[i].password == accountInfo.password) {
       flag = true;
       req.session.loggedin = true;
       req.session.name = obj.Users[i].fName;
       currentUser = obj.Users[i];
-      //console.log(currentUser);
+      console.log(currentUser);
+      console.log('Successful user login occurred of account ' + req.session.name);
+      res.redirect('/user/home');
       break;
     }
   }
@@ -92,44 +91,21 @@ app.post('/login', function (req, res) {
   //Go through owners to find matching username and password if not found in users
   if (!flag) {
     for (let i = 0; i < obj.Owners.length; i++) {
-      if (
-        obj.Owners[i].email == accountInfo.email &&
-        obj.Owners[i].password == accountInfo.password
-      ) {
+      if (obj.Owners[i].email == accountInfo.email && obj.Owners[i].password == accountInfo.password) {
         flag = true;
         req.session.loggedin = true;
         req.session.name = obj.Owners[i].fName;
         currentUser = obj.Owners[i];
-        //console.log(currentUser);
+        console.log(currentUser);
+        console.log('Successful owner login occurred of account ' + req.session.name);
+        res.redirect('/owner/home');
         break;
       }
     }
   }
 
-  //Go through owners to find matching username and password if not found in users
+  //If matching credentials were not found login
   if (!flag) {
-    for (let i = 0; i < obj.Owners.length; i++) {
-      if (
-        obj.Owners[i].email == accountInfo.email &&
-        obj.Owners[i].password == accountInfo.password
-      ) {
-        flag = true;
-        req.session.loggedin = true;
-        req.session.name = obj.Owners[i].fName;
-        currentUser = obj.Owners[i];
-        break;
-      }
-    }
-  }
-
-  //If matching credentials were found login
-  if (flag) {
-    console.log('Successful login occurred of account ' + req.session.name);
-    //console.log(currentUser.properties[0]);
-    res.redirect('/logged');
-  }
-  //If not, send a response
-  else {
     console.log('A login attempt was made.');
     res.send('Sorry, incorrect credentials.');
   }
@@ -171,18 +147,10 @@ app.post('/SignUp', urlencodedParser, function (req, res) {
     };
     obj.Owners.push(accountInfo);
   }
-  for (let i = 0; i < obj.Owners.length; i++) {
-    if (
-      obj.Owners[i].email == accountInfo.email &&
-      obj.Owners[i].password == accountInfo.password
-    ) {
-      flag = true;
-      req.session.loggedin = true;
-      req.session.name = obj.Owners[i].fName;
-      currentUser = obj.Owners[i];
-      break;
-    }
-  }
+
+  req.session.loggedin = true;
+  req.session.name = accountInfo.fName;
+  currentUser = accountInfo;
 
   //Update the file with the new information
   fs.writeFile(
@@ -191,68 +159,150 @@ app.post('/SignUp', urlencodedParser, function (req, res) {
     registered
   );
   function registered() {
-    console.log('New user created.');
-    res.redirect('/registered');
+    if (req.body.status == 'user') {
+      console.log('New user created.');
+      res.redirect('/user/home');
+    } else {
+      console.log('New owner created.');
+      res.redirect('/owner/home');
+    }
   }
 });
 
-//Post registration page
-app.get('/registered', function (req, res) {
-  res.sendFile(path.join(__dirname, 'registered.html'));
+/*** LOGOUT ***/
+app.get('/logout', function (req, res) {
+  currentUser = null;
+  res.redirect('/')
 });
+
 
 /*** USER PAGE ***/
-// Route to logged in an user page
-app.get('/user', function (req, res) {
-  res.sendFile(__dirname + '/user.html');
+// Route to user's home page (when logged in as a user)
+app.get('/user/home', function (req, res) {
+  if (currentUser === null) {
+    res.send("Sorry, you need to login <a href='/'>here</a> first!")
+  } else {
+    res.sendFile(path.join(__dirname, '/user/home.html'))
+  }
 });
 
-app.get('/property', function (req, res) {
-  res.sendFile(__dirname + '/property.html');
+app.get('/user/profile', function (req, res) {
+  if (currentUser === null) { 
+    res.send("Sorry, you need to login <a href='/'>here</a> first!")
+  } else {
+    res.sendFile(path.join(__dirname, '/user/profile.html'))
+  }
+  console.log(currentUser)
 });
 
-app.get('/logged', function (req, res) {
-  res.sendFile(__dirname + '/logged.html');
+// Route to user's rentals page (when logged in as a user)
+app.get('/user/rentals', function (req, res) {
+  if (currentUser === null) {
+    res.send("Sorry, you need to login <a href='/'>here</a> first!")
+  } else {
+    res.sendFile(path.join(__dirname, '/user/rentals.html'))
+  }
 });
 
 /*** OWNER PAGE ***/
 // Route to owner's home page (when logged in as an owner)
 app.get('/owner/home', function (req, res) {
-  res.sendFile(__dirname + '/owner/home.html');
+  if (currentUser === null) {
+    res.send("Sorry, you need to login <a href='/'>here</a> first!")
+  } else {
+    res.sendFile(path.join(__dirname, '/owner/home.html'))
+  }
 });
 
-// Route to owner's profile page
+// Route to owner's profile page (when logged in as an owner)
 app.get('/owner/profile', function (req, res) {
-  res.sendFile(__dirname + '/owner/profile.html');
+  if (currentUser === null) {
+    res.send("Sorry, you need to login <a href='/'>here</a> first!")
+  } else {
+    res.sendFile(path.join(__dirname, '/owner/profile.html'))
+  }
 });
 
-// Route to owner's properties page
+// Route to owner's properties page (when logged in as an owner)
 app.get('/owner/properties', function (req, res) {
-  res.sendFile(__dirname + '/owner/properties.html');
+  if (currentUser === null) {
+    res.send("Sorry, you need to login <a href='/'>here</a> first!")
+  } else {
+    res.sendFile(path.join(__dirname, '/owner/properties.html'))
+  }
 });
+
+// Route to owner's workspaces page (when logged in as an owner)
+app.get('/owner/workspaces', function (req, res) {
+  if (currentUser === null) {
+    res.send("Sorry, you need to login <a href='/'>here</a> first!")
+  } else {
+    res.sendFile(path.join(__dirname, '/owner/workspaces.html'))
+  }
+});
+
+/*** UPDATE AND DELETE USER ***/
+//Update user info
+app.post('/updateUser', urlencodedParser, function (req, res) {
+  for (let i = 0; i < obj.Users.length; i++) {
+    if (obj.Users[i].email == currentUser.email) {
+      obj.Users[i].fName = req.body.fName
+      obj.Users[i].lName = req.body.lName
+      obj.Users[i].idNumber = req.body.idNumber
+      obj.Users[i].phoneNumber = req.body.phoneNumber
+      obj.Users[i].email = req.body.email
+      obj.Users[i].password = req.body.password
+      break;
+    }
+  }
+
+  //Update the file with the new information
+  fs.writeFile(path.join(__dirname, 'data', 'data.json'), JSON.stringify(obj, null, 2), userUpdated);
+  function userUpdated() {
+    console.log('User updated.');
+    res.redirect('/user/profile');
+  }
+});
+
+//Delete user info
+app.post('/deleteUser', function (req, res) {
+  for (let i = 0; i < obj.Users.length; i++) {
+    if (obj.Users[i].email == currentUser.email) {
+      obj.Users.splice(i, 1);
+      break;
+    }
+  }
+
+  fs.writeFile(path.join(__dirname, 'data', 'data.json'), JSON.stringify(obj, null, 2), userDeleted);
+  function userDeleted() {
+    console.log('User deleted.');
+    res.redirect('/logout');
+  }
+})
+
 
 //CURRENT USER API
-app.get('/currentUser', urlencodedParser, function (req, res) {
-  res.send(global.currentUser);
-  console.log(global.currentUser);
-  console.log('API called! Delivering info about ' + global.currentUser.fName);
+app.get('/currentUser', function (req, res) {
+  res.send(currentUser);
+  console.log(currentUser);
+  console.log('API called! Delivering info about ' + currentUser.fName);
 });
 
 app.get('/currentproperty', urlencodedParser, function (req, res) {
-  res.send(global.currentUser.properties);
-  console.log(global.currentUser);
-  //console.log('API called! Delivering info about ' + global.currentUser.fName);
+  res.send(currentUser.properties);
+  console.log(currentUser);
+  //console.log('API called! Delivering info about ' + currentUser.fName);
 });
 
 /*** PROPERTY PAGES ***/
 
 // ROUTE TO "CREATE PROPERTY" PAGE
-app.get('/property/create', function (req, res) {
-  res.sendFile(__dirname + '/property/create-property.html');
+app.get('/owner/properties/create', function (req, res) {
+  res.sendFile(__dirname + '/owner/properties/create-property.html');
 });
 
 // ROUTE TO "PROPERTY CREATED" PAGE
-app.post('/property/property-created', urlencodedParser, function (req, res) {
+app.post('/owner/properties/property-created', urlencodedParser, function (req, res) {
   var property = {
     name: req.body.name,
     address: req.body.address,
@@ -280,23 +330,24 @@ app.post('/property/property-created', urlencodedParser, function (req, res) {
   function propertyAdded() {
     console.log('New property added.');
     //res.redirect('/propertyIn'); //placeholder
+    res.send('A new workspace has been created.<br>To return home, click <a href="/owner/properties/create">here</a>.');
   }
 });
 
 // ROUTE TO "UPDATE PROPERTY" PAGE
-app.get('/property/update', function (req, res) {
-  res.sendFile(__dirname + '/property/update-property.html');
+app.get('/owner/properties/update', function (req, res) {
+  res.sendFile(__dirname + '/owner/properties/update-property.html');
 });
 
 /*** WORKSPACE PAGES ***/
 
 // ROUTE TO "CREATE WORKSPACE" PAGE
-app.get('/workspace/create', function (req, res) {
-  res.sendFile(__dirname + '/workspace/create-workspace.html');
+app.get('/owner/workspaces/create', function (req, res) {
+  res.sendFile(__dirname + '/owner/workspaces/create-workspace.html');
 });
 
 // ROUTE TO "WORKSPACE CREATED" PAGE
-app.post('/workspace/workspace-created', urlencodedParser, function (req, res) {
+app.post('/owner/workspaces/workspace-created', urlencodedParser, function (req, res) {
   var propertyName = req.body.property;
   var workspace = {
     id: shortid.generate(), // Auto-generate ID
@@ -328,13 +379,13 @@ app.post('/workspace/workspace-created', urlencodedParser, function (req, res) {
   );
   function workspaceCreated() {
     console.log('New workspace created.');
-    res.send('A new workspace has been created.');
+    res.send('A new workspace has been created.<br>To return home, click <a href="/owner/workspaces">here</a>.');
   }
 });
 
 // ROUTE TO "UPDATE WORKSPACE" PAGE
-app.get('/workspace/update', function (req, res) {
-  res.sendFile(__dirname + '/workspace/update-workspace.html');
+app.get('/owner/workspaces/update', function (req, res) {
+  res.sendFile(__dirname + '/owner/workspaces/update-workspace.html');
 
   // Return data.json to be used in HTML
   app.get('/data/data.json', function (req, res) {
@@ -342,7 +393,7 @@ app.get('/workspace/update', function (req, res) {
   });
 
   // ROUTE TO "WORKSPACE UPDATED" PAGE
-  app.post('/workspace/workspace-updated', urlencodedParser, UpdateWorkspace);
+  app.post('/owner/workspaces/workspace-updated', urlencodedParser, UpdateWorkspace);
 
   // Get data from "Update Workspace" form and add it to "obj"
   function UpdateWorkspace(req, res) {
@@ -379,12 +430,12 @@ app.get('/workspace/update', function (req, res) {
 });
 
 // ROUTE TO "DELETE WORKSPACE" PAGE
-app.get('/workspace/delete', function (req, res) {
-  res.sendFile(__dirname + '/workspace/delete-workspace.html');
+app.get('/owner/workspaces/delete', function (req, res) {
+  res.sendFile(__dirname + '/owner/workspaces/delete-workspace.html');
 });
 
 // ROUTE TO "WORKSPACE DELETED" PAGE
-app.post('/workspace/workspace-deleted', urlencodedParser, DeleteWorkspace);
+app.post('/owner/workspaces/workspace-deleted', urlencodedParser, DeleteWorkspace);
 
 // Delete workspace from json logic
 function DeleteWorkspace(req, res) {
@@ -406,7 +457,7 @@ function DeleteWorkspace(req, res) {
 }
 
 // API - retrieve all workspaces
-app.get('/workspace/api', function (req, res) {
+app.get('/owner/workspaces/api', function (req, res) {
   let allWorkspaces = obj.Workspaces;
   res.send(allWorkspaces);
 });

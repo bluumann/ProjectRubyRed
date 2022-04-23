@@ -31,23 +31,20 @@ Peter Kosa
 
   <div class="mainPage">
     <div id="profilePage">
-      <h1>Home Page</h1>
-      <p>Welcome <span id="userName"></span>! We hope you are enjoying our services and hope you have a wonderful day!</p>
+      <h1>Owner Properties Page</h1>
+      <ul>
+          <li>Workspace 1</li>
+          <li>Workspace 2</li>
+          <li>Workspace 3</li>
+      </ul>
+      <a href="workspaces/create">Create New Workspace</a><br>
+      <a href="workspaces/update">Edit Workspace</a><br>
+      <a href="workspaces/delete">Delete Workspace</a>
     </div>
-  </div>
+  </div>    
 
   <div class="bottomBar">
     Webpage by Colin From, Frank Berrocal, Pedro Ferreira and Peter Kosa, for SODV1201 - Final Project. Copyright 2022.
   </div>
-
-  <script>
-    //Fetch the current user info
-    fetch('/currentUser')
-        .then(res => res.json()) //Get json format of the body
-        .then(function(data){ //Update the dom elements with the proper info obtained from the fetch
-            document.getElementById('userName').innerHTML = data.fName;
-        })
-        .catch(err => console.error(err)); //For errors
-  </script>
 </body>
 </html>

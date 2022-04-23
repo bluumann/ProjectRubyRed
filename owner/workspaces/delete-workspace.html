@@ -12,10 +12,10 @@
     <nav>
         <ul class="navigation">
             <!-- no href needed since it's working hiding/showing divs. -->
-            <li><a href="/workspace/create" id="loggedNav1" onclick="">Create</a></li>
-            <li><a href="/workspace/update" id="loggedNav2" onclick="">Update</a></li>
-            <li><a href="/workspace/delete" id="loggedNav3" onclick="">Delete</a></li>
-            <li><a href="/workspace/api" id="loggedNav4" onclick="">List All</a></li>
+            <li><a href="create" id="loggedNav1" onclick="">Create</a></li>
+            <li><a href="update" id="loggedNav2" onclick="">Update</a></li>
+            <li><a href="delete" id="loggedNav3" onclick="">Delete</a></li>
+            <li><a href="api" id="loggedNav4" onclick="">List All</a></li>
         </ul>
     </nav>
 
@@ -23,7 +23,7 @@
         <div id="profilePage">
 
             <h1>Delete Workspace</h1>
-            <form action="http://localhost:1007/workspace/workspace-deleted" method="POST">
+            <form action="http://localhost:1007/owner/workspaces/workspace-deleted" method="POST">
                 <label for="types">Select workspace:</label>
                 <select name="types" id="types">
                 </select><br><br>

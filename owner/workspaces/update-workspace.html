@@ -12,10 +12,10 @@
     <nav>
         <ul class="navigation">
             <!-- no href needed since it's working hiding/showing divs. -->
-            <li><a href="/workspace/create" id="" onclick="">Create</a></li>
-            <li><a href="/workspace/update" id="" onclick="">Update</a></li>
-            <li><a href="/workspace/delete" id="" onclick="">Delete</a></li>
-            <li><a href="/workspace/api" id="" onclick="">List All</a></li>
+            <li><a href="create" id="" onclick="">Create</a></li>
+            <li><a href="update" id="" onclick="">Update</a></li>
+            <li><a href="delete" id="" onclick="">Delete</a></li>
+            <li><a href="api" id="" onclick="">List All</a></li>
         </ul>
     </nav>
 
@@ -23,9 +23,9 @@
         <div id="profilePage">
 
             <h1>Update Workspace</h1>
-            <form action="http://localhost:1007/workspace/workspace-updated" method="POST">
+            <form action="http://localhost:1007/owner/workspaces/workspace-updated" method="POST">
                 <label for="property">Select Property:</label>
-                <select name="property" id="property">
+                <select name="property" id="property" onchange="updateWorkspaces()">
                     <option>Choose a Property</option>
                 </select><br><br>
 
@@ -194,6 +194,28 @@
                     listedNoElement.checked = true;
                 }
             })
+        }
+
+        function updateWorkspaces() {
+            fetch('/currentUser')
+                .then(res => res.json())
+                .then(function (data) {
+                    var selectList = document.getElementById('types')
+                    for (let i = selectList.options.length; i > 0; i--) {
+                        selectList.remove(i);
+                    }
+                    for (let i = 0; i < data.properties.length; i++) {
+                        if (data.properties[i].name == propertySelect.value) {
+                            data.properties[i].workspaces.forEach(element => {
+                                var option = document.createElement('option');
+                                option.value = element.name;
+                                option.textContent = element.name;
+                                workspaceSelect.appendChild(option);
+                            })
+                        }
+                    }
+                })
+                .catch(err => alert("I got an error on the API."))
         }
 
     </script>

@@ -12,10 +12,10 @@
     <nav>
         <ul class="navigation">
             <!-- no href needed since it's working hiding/showing divs. -->
-            <li><a href="/property/create" id="" onclick="">Create</a></li>
-            <li><a href="/property/update" id="" onclick="">Update</a></li>
-            <li><a href="/property/delete" id="" onclick="">Delete</a></li>
-            <li><a href="/property/api" id="" onclick="">List All</a></li>
+            <li><a href="create" id="" onclick="">Create</a></li>
+            <li><a href="update" id="" onclick="">Update</a></li>
+            <li><a href="delete" id="" onclick="">Delete</a></li>
+            <li><a href="api" id="" onclick="">List All</a></li>
         </ul>
     </nav>
 
@@ -23,7 +23,7 @@
         <div id="profilePage">
 
             <h1>Update Workspace</h1>
-            <form action="http://localhost:1007/property/property-updated" method="POST">
+            <form action="http://localhost:1007/owner/property/property-updated" method="POST">
                 <label for="name">Select Property:</label>
                 <select name="name" id="name" onchange="UpdateFields()">
                     <option>Choose a Property</option>
@@ -78,7 +78,7 @@
                 <label for="price">Price:</label>
                 <input type="text" id="price" name="price"><br><br>
 
-                <input type="submit" value="Create">
+                <input type="submit" value="Update">
             </form>
         </div>
     </div>

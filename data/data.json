@@ -149,6 +149,133 @@
           ]
         }
       ]
+    },
+    {
+      "fName": "Severus",
+      "lName": "Snape",
+      "idNumber": "2222",
+      "phoneNumber": "222 222 2222",
+      "email": "SS@hogwarts.ca",
+      "password": "1234",
+      "rating": 5,
+      "properties": [
+        {
+          "name": "This is a test",
+          "address": "123 Fake Ave",
+          "type": "????",
+          "park": "yes",
+          "transport": "yes",
+          "smoking": "no",
+          "seats": "20",
+          "availabilityFrom": "2022-04-23",
+          "availabilityTo": "2022-04-30",
+          "leaseterm": "week",
+          "price": "300",
+          "workspaces": [
+            {
+              "id": "ShL7prSrS",
+              "name": "Yet another test",
+              "type": "meeting-room",
+              "smoking": "no",
+              "seats": "4",
+              "availability": "2022-04-23",
+              "leaseterm": "week",
+              "price": "800",
+              "listed": "yes"
+            },
+            {
+              "id": "ILs4UBRAH",
+              "name": "Blah blah",
+              "type": "meeting-room",
+              "smoking": "yes",
+              "seats": "8",
+              "availability": "2022-04-02",
+              "leaseterm": "month",
+              "price": "900",
+              "listed": "yes"
+            }
+          ]
+        },
+        {
+          "name": "Another test",
+          "address": "123 Fake Ave",
+          "type": "????",
+          "park": "no",
+          "transport": "no",
+          "smoking": "no",
+          "seats": "32",
+          "availabilityFrom": "2022-04-09",
+          "availabilityTo": "2022-04-30",
+          "leaseterm": "month",
+          "price": "600",
+          "workspaces": []
+        },
+        {
+          "name": "Another test",
+          "address": "123 Fake Ave",
+          "type": "????",
+          "park": "no",
+          "transport": "no",
+          "smoking": "no",
+          "seats": "39",
+          "availabilityFrom": "2022-04-02",
+          "availabilityTo": "2022-04-30",
+          "leaseterm": "month",
+          "price": "321",
+          "workspaces": []
+        },
+        {
+          "name": "final test",
+          "address": "123 Fake Ave",
+          "type": "????",
+          "park": "no",
+          "transport": "no",
+          "smoking": "no",
+          "seats": "1",
+          "availabilityFrom": "",
+          "availabilityTo": "",
+          "leaseterm": "day",
+          "price": "322",
+          "workspaces": []
+        }
+      ]
+    },
+    {
+      "fName": "Jane",
+      "lName": "Doe",
+      "idNumber": "8888",
+      "phoneNumber": "888 888 8888",
+      "email": "JDoe@email.com",
+      "password": "1234",
+      "rating": 5,
+      "properties": [
+        {
+          "name": "This is a test",
+          "address": "123 Fake Ave",
+          "type": "????",
+          "park": "no",
+          "transport": "no",
+          "smoking": "no",
+          "seats": "1",
+          "availabilityFrom": "",
+          "availabilityTo": "",
+          "leaseterm": "day",
+          "price": "600",
+          "workspaces": [
+            {
+              "id": "TbBBwd4AQ",
+              "name": "Yet another test",
+              "type": "meeting-room",
+              "smoking": "no",
+              "seats": "1",
+              "availability": "",
+              "leaseterm": "day",
+              "price": "900",
+              "listed": "yes"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
