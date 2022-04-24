@@ -4,7 +4,6 @@ Course Code: SODV1201
 Program: Software Development Diploma
 Authors:
 Colin From
-Frank Berrocal
 Pedro Ferreira
 Peter Kosa
 */
@@ -108,4 +107,50 @@ a {
 /* used for all links and pertinent hovering */
 .sendButton:hover, a:hover {
   opacity: 0.7;
+}
+
+/*FOR USER WORKSPACES PAGE*/
+/*For the table used to display workspaces to users*/
+#workspaceDisplay {
+  font-size: .85em;
+  text-align: center;
+  width: 60vw;
+}
+
+#workspaceDisplay th {
+  padding-bottom: 2vh;
+}
+
+#workspaceDisplay td {
+  padding: 1vh 1vw;
+}
+
+/*Keep more info hidden at first and do some styling*/
+#moreInfo {
+  background: white;
+  display: none;
+  position: fixed;
+  top: 10vh;
+  left: 20vw;
+  width: 60vw;
+  height: 80vh;
+  text-align: center;
+  overflow: auto;
+  z-index: 1;
+}
+
+#moreInfo td {
+  padding: 0 1vw;
+  text-align: left;
+}
+
+/*To darken background when more info is shown*/
+#pageMask {
+  display: none;
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
 }
