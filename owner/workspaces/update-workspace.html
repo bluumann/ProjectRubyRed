@@ -100,6 +100,22 @@ Peter Kosa
         const propertySelect = document.getElementById('property');
         const workspaceSelect = document.getElementById('types');
 
+        const selectWorkspaceElement = document.getElementById('types');
+        const idElement = document.getElementById('id');
+        const nameElement = document.getElementById('name');
+        const typeElement = document.getElementById('type');
+        const priceElement = document.getElementById('price');
+        const seatsElement = document.getElementById('seats');
+        const seatsOutputElement = document.getElementById('num');
+        const availabilityElement = document.getElementById('availability');
+        const smokingNoElement = document.getElementById('no-smoking');
+        const smokingYesElement = document.getElementById('smoking');
+        const leasetermDayElement = document.getElementById('ltday');
+        const leasetermWeekElement = document.getElementById('ltdweek');
+        const leasetermMonthElement = document.getElementById('ltdmonth');
+        const listedYesElement = document.getElementById('listed');
+        const listedNoElement = document.getElementById('not-listed');
+
         $("#property").change(function () {
             var propertyName = $("#property option:selected");
             console.log(propertyName.text);
@@ -123,22 +139,21 @@ Peter Kosa
 
         function displayWorkspaceInfo() {
 
-            const selectWorkspaceElement = document.getElementById('types');
-            const idElement = document.getElementById('id');
-            const nameElement = document.getElementById('name');
-            const typeElement = document.getElementById('type');
-            const priceElement = document.getElementById('price');
-            const seatsElement = document.getElementById('seats');
-            const seatsOutputElement = document.getElementById('num');
-            const availabilityElement = document.getElementById('availability');
-            const smokingNoElement = document.getElementById('no-smoking');
-            const smokingYesElement = document.getElementById('smoking');
-            const leasetermDayElement = document.getElementById('ltday');
-            const leasetermWeekElement = document.getElementById('ltdweek');
-            const leasetermMonthElement = document.getElementById('ltdmonth');
-            const listedYesElement = document.getElementById('listed');
-            const listedNoElement = document.getElementById('not-listed');
-
+            // Reset fields to default value upon changing dropdown selection
+            nameElement.value = "";
+            typeElement.value = "meeting-room";
+            smokingNoElement.checked = true;
+            smokingYesElement.checked = false;
+            seatsElement.value = 1;
+            seatsOutputElement.value = 1;
+            availabilityElement.value = "";
+            leasetermDayElement.checked = true;
+            leasetermWeekElement.checked = false;
+            leasetermMonthElement.checked = false;
+            priceElement.value = "";
+            listedYesElement.checked = true;
+            listedNoElement.checked = false;
+            
 
             fetch('/currentUser')
                 .then(res => res.json())
@@ -193,6 +208,22 @@ Peter Kosa
         }
 
         function updateWorkspaces() {
+
+            // Reset fields to default value upon changing dropdown selection
+            nameElement.value = "";
+            typeElement.value = "meeting-room";
+            smokingNoElement.checked = true;
+            smokingYesElement.checked = false;
+            seatsElement.value = 1;
+            seatsOutputElement.value = 1;
+            availabilityElement.value = "";
+            leasetermDayElement.checked = true;
+            leasetermWeekElement.checked = false;
+            leasetermMonthElement.checked = false;
+            priceElement.value = "";
+            listedYesElement.checked = true;
+            listedNoElement.checked = false;
+
             fetch('/currentUser')
                 .then(res => res.json())
                 .then(function (data) {

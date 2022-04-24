@@ -381,10 +381,7 @@ app.get('/owner/properties/create', function (req, res) {
 });
 
 // ROUTE TO "PROPERTY CREATED" PAGE
-app.post(
-  '/owner/properties/property-created',
-  urlencodedParser,
-  function (req, res) {
+app.post('/owner/properties/property-created', urlencodedParser, function (req, res) {
     var check = false;
     currentUser.properties.forEach(element => {
       if (req.body.name == element.name) check = true;
@@ -423,7 +420,6 @@ app.post(
         );
       }
     }
-
   }
 );
 
@@ -538,42 +534,59 @@ app.get('/owner/workspaces/create', function (req, res) {
 
 // ROUTE TO "WORKSPACE CREATED" PAGE
 app.post('/owner/workspaces/workspace-created', urlencodedParser, function (req, res) {
-  var propertyName = req.body.property;
-  var workspace = {
-    id: shortid.generate(), // Auto-generate ID
-    name: req.body.name,
-    type: req.body.type,
-    smoking: req.body.smoking,
-    seats: req.body.seats,
-    availability: req.body.availability,
-    leaseterm: req.body.leaseterm,
-    price: req.body.price,
-    listed: req.body.listed,
-  };
-
-  const currentProperty = currentUser.properties.find(
-    // Find property that matches propertyName
-    property => property.name === propertyName
-  );
-
-  propertyIndex = currentUser.properties.indexOf(currentProperty, 0); // Index of currentProperty within currentUser's properties
-
-  ownerIndex = obj.Owners.indexOf(currentUser, 0); // Index of currentUser within Owners[]
-
-  obj.Owners[ownerIndex].properties[propertyIndex].workspaces.push(workspace);
-
-  //Update data.json with the new information
-  fs.writeFile(
-    path.join(__dirname, 'data', 'data.json'),
-    JSON.stringify(obj, null, 2),
-    workspaceCreated
-  );
-  function workspaceCreated() {
-    console.log('New workspace created.');
-    res.send('A new workspace has been created.<br>To return home, click <a href="/owner/workspaces">here</a>.');
+  var check = false;
+  for (let i = 0; i < currentUser.properties.length; i++) {
+    if (currentUser.properties[i].name == req.body.property) {
+      currentUser.properties[i].workspaces.forEach(element => {
+        if (req.body.name == element.name) {
+          check = true;
+        }
+    })}
   }
-}
-);
+
+  if (check) {
+    //console.log("A workspace with this name exists already."); //debug
+    res.send('A workspace with this name already exists.<br>To return, click <a href="/owner/workspaces/create">here</a>.')
+  }
+  else {
+  
+    var propertyName = req.body.property;
+    var workspace = {
+      id: shortid.generate(), // Auto-generate ID
+      name: req.body.name,
+      type: req.body.type,
+      smoking: req.body.smoking,
+      seats: req.body.seats,
+      availability: req.body.availability,
+      leaseterm: req.body.leaseterm,
+      price: req.body.price,
+      listed: req.body.listed,
+      rating: 0
+    };
+
+    const currentProperty = currentUser.properties.find(
+      // Find property that matches propertyName
+      property => property.name === propertyName
+    );
+
+    propertyIndex = currentUser.properties.indexOf(currentProperty, 0); // Index of currentProperty within currentUser's properties
+
+    ownerIndex = obj.Owners.indexOf(currentUser, 0); // Index of currentUser within Owners[]
+
+    obj.Owners[ownerIndex].properties[propertyIndex].workspaces.push(workspace);
+
+    //Update data.json with the new information
+    fs.writeFile(
+      path.join(__dirname, 'data', 'data.json'),
+      JSON.stringify(obj, null, 2),
+      workspaceCreated
+    );
+    function workspaceCreated() {
+      console.log('New workspace created.');
+      res.send('A new workspace has been created.<br>To return home, click <a href="/owner/workspaces">here</a>.');
+    }
+  }
+});
 
 // ROUTE TO "UPDATE WORKSPACE" PAGE
 app.get('/owner/workspaces/update', function (req, res) {
@@ -594,6 +607,22 @@ app.post('/owner/workspaces/workspace-updated', urlencodedParser, UpdateWorkspac
 
 // Get data from "Update Workspace" form and add it to "obj"
 function UpdateWorkspace(req, res) {
+
+  var check = false;
+  for (let i = 0; i < currentUser.properties.length; i++) {
+    if (currentUser.properties[i].name == req.body.property) {
+      currentUser.properties[i].workspaces.forEach(element => {
+        if (req.body.name == element.name) {
+          check = true;
+        }
+    })}
+  }
+
+  if (check) {
+    // console.log("A workspace with this name exists already."); //debug
+    res.send('A workspace with this name already exists.<br>To return, click <a href="/owner/workspaces/create">here</a>.')
+  }
+  else {
   var propertyName = req.body.property;
   var id = req.body.id;
 
@@ -631,7 +660,7 @@ function UpdateWorkspace(req, res) {
   function Updated() {
     console.log('Workspace updated.');
     res.send('Workspace has been updated.<br>To return home, click <a href="/owner/workspaces">here</a>.');
-  }
+  }}
 }
 
 // ROUTE TO "DELETE WORKSPACE" PAGE

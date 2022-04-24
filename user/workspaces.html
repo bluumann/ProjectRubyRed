@@ -15,6 +15,7 @@ Peter Kosa
     <meta charset="utf-8">
     <title>Coworking Registry</title>
     <link rel="stylesheet" href="/css/styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 
 <body>
@@ -103,6 +104,32 @@ Peter Kosa
                 <td>Price: </td>
                 <td id="price"></td>
             </tr>
+            <tr>
+                <td>Average Rating: </td>
+                <td id="rating"></td>
+            </tr>
+            <tr>
+                <th colspan="2">My Rating</th>
+            </tr>
+            <tr>
+                <td>
+                    <div class="rate">
+                        <input type="radio" id="star5" name="rate" value="5" />
+                        <label for="star5" title="text">5 stars</label>
+                        <input type="radio" id="star4" name="rate" value="4" />
+                        <label for="star4" title="text">4 stars</label>
+                        <input type="radio" id="star3" name="rate" value="3" />
+                        <label for="star3" title="text">3 stars</label>
+                        <input type="radio" id="star2" name="rate" value="2" />
+                        <label for="star2" title="text">2 stars</label>
+                        <input type="radio" id="star1" name="rate" value="1" />
+                        <label for="star1" title="text">1 star</label>
+                      </div>
+                </td>
+                <td>
+                    <button id="rate-button" onclick="saveRating()">Rate</button>
+                </td>
+            </tr>
         </table>
 
         <!--Contact info for owner of the workplace-->
@@ -180,7 +207,8 @@ Peter Kosa
                                 smoking: workspace.smoking,
                                 availability: workspace.availability,
                                 leaseTerm: workspace.leaseterm,
-                                price: workspace.price
+                                price: workspace.price,
+                                rating: workspace.rating
                             }
                             workspaces.push(workspaceInfo) //Push the object into the array
                         }
@@ -230,6 +258,7 @@ Peter Kosa
             availability = document.getElementById("availability");
             leaseTerm = document.getElementById("leaseTerm");
             price = document.getElementById("price");
+            rating = document.getElementById("rating");
 
             //For owner contact info
             owner = document.getElementById("owner");
@@ -251,6 +280,7 @@ Peter Kosa
                     availability.innerHTML = e.availability;
                     leaseTerm.innerHTML = e.leaseTerm;
                     price.innerHTML = e.price;
+                    rating.innerHTML = e.rating;
                 }
             });
 
@@ -276,6 +306,21 @@ Peter Kosa
         function hideInfo() {
             document.getElementById("moreInfo").style.display = "none";
             document.getElementById("pageMask").style.display = "none";
+        }
+
+
+        // User workspaces page - rating logic
+        function saveRating() {
+            var currentRating = parseInt(rating.innerHTML);
+            var ratingValue = parseInt($("input[name='rate']:checked").val());
+            var updatedRating = 0;
+
+            console.log('current rating: ' + currentRating);
+            console.log('rating value: ' + ratingValue);
+            updatedRating = (currentRating + ratingValue) / 2;
+            console.log('updated: ' + updatedRating);
+            
+            
         }
     </script>
 </body>

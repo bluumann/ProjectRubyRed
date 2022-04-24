@@ -84,7 +84,7 @@
     {
       "fName": "Elon",
       "lName": "Musk",
-      "idNumber": "9001",
+      "idNumber": "9002",
       "phoneNumber": "555 555 5555",
       "email": "elon@tesla.com",
       "password": "musk",
@@ -112,7 +112,20 @@
               "availability": "2022-04-24",
               "leaseterm": "month",
               "price": "66.9",
-              "listed": "yes"
+              "listed": "yes",
+              "rating": 1
+            },
+            {
+              "id": "d3xDbdt7v",
+              "name": "Santa Monica",
+              "type": "private-workspace",
+              "smoking": "no",
+              "seats": "3",
+              "availability": "2022-04-24",
+              "leaseterm": "day",
+              "price": "777",
+              "listed": "yes",
+              "rating": 3
             }
           ]
         },
@@ -134,11 +147,24 @@
               "name": "Dallas",
               "type": "private-workspace",
               "smoking": "no",
+              "seats": "5",
+              "availability": "2022-04-30",
+              "leaseterm": "month",
+              "price": "1003",
+              "listed": "no",
+              "rating": 0
+            },
+            {
+              "id": "1JxgN99TR",
+              "name": "Houston",
+              "type": "open-desk",
+              "smoking": "yes",
               "seats": "7",
               "availability": "2022-04-30",
               "leaseterm": "week",
-              "price": "1003",
-              "listed": "no"
+              "price": "741",
+              "listed": "yes",
+              "rating": 0
             }
           ]
         }
