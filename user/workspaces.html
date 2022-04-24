@@ -37,15 +37,29 @@ Peter Kosa
 
             <!--Create table with headers to later populate with data-->
             <table id="workspaceDisplay">
-                <tr>
+                <thead>
+                    <tr>
+                        <td><button onclick="workplaceNameSort()">Sort</button></td>
+                        <td><button onclick="workplaceTypeSort()">Sort</button></td>
+                        <td><button onclick="workplaceNeighbourhoodSort()">Sort</button></td>
+                        <td><button onclick="workplaceAvailabilitySort()">Sort</button></td>
+                        <td><button onclick="workplaceLeaseTermSort()">Sort</button></td>
+                        <td><button onclick="workplacePriceSort()">Sort</button></td>
+                        <td><button onclick="workplaceRatingSort()">Sort</button></td>
+                        <td></td>
+                    </tr>
                     <th>Workspace</th>
                     <th>Type</th>
                     <th>Neighbourhood</th>
                     <th>Availability</th>
                     <th>Lease Term</th>
                     <th>Price</th>
+                    <th>Rating</th>
                     <th></th>
-                </tr>
+                </thead>
+                <tbody id="workspaceDisplayBody">
+                    <!--To be filled by functions-->
+                </tbody>
             </table>
         </div>
     </div>
@@ -124,7 +138,7 @@ Peter Kosa
                         <label for="star2" title="text">2 stars</label>
                         <input type="radio" id="star1" name="rate" value="1" />
                         <label for="star1" title="text">1 star</label>
-                      </div>
+                    </div>
                 </td>
                 <td>
                     <button id="rate-button" onclick="saveRating()">Rate</button>
@@ -160,6 +174,7 @@ Peter Kosa
     </div>
 
     <script>
+        /*WORKING WITH FETCH AND DATA MANIPULATION*/
         //Create a variable to store our data
         var data;
 
@@ -215,19 +230,16 @@ Peter Kosa
                     }
                 }
             }
-
-            //Sort the array based on the names of the workspaces
-            workspaces.sort(function (a, b) {
-                var spaceA = a.workspace.toLowerCase();
-                var spaceB = b.workspace.toLowerCase();
-
-                return spaceA.localeCompare(spaceB)
-            })
+            //Call the name sort function for workspaces
+            workplaceNameSort()
         }
 
         //Add the information to the page
         function displayWorkplaces() {
-            var table = document.getElementById('workspaceDisplay');
+            var table = document.getElementById('workspaceDisplayBody');
+
+            //Clear the table before adding the elements that need to be added
+            $("#workspaceDisplayBody tr").remove()
 
             //Create rows and tables and insert all our values
             workspaces.forEach(e => {
@@ -238,11 +250,125 @@ Peter Kosa
                 row.insertCell(-1).innerHTML = e.availability;
                 row.insertCell(-1).innerHTML = e.leaseTerm;
                 row.insertCell(-1).innerHTML = e.price;
+                row.insertCell(-1).innerHTML = e.rating;
                 //This adds a function with name argument to obtain more info and populate our div based on argument passed
                 row.insertCell(-1).innerHTML = "<a onclick=\"moreInfo(\'" + e.workspace + "\')\">More...</a>";
             })
         }
 
+        /*ARRAY SORTING FUNCTIONS*/
+        //Click counter for sorting regular or reverse
+        var clickWorkspace = 0;
+        var clickType = 0;
+        var clickNeighbourhood = 0;
+        var clickAvailability = 0;
+        var clickLeaseTerm = 0;
+        var clickPrice = 0;
+        var clickRating = 0;
+
+        //Sort the array based on the names of the workspaces
+        function workplaceNameSort() {
+            if (clickWorkspace == 0) {
+                workspaces.sort((a, b) => a.workspace.toLowerCase().localeCompare(b.workspace.toLowerCase()));
+                clickWorkspace = 1;
+            } else {
+                workspaces.sort((a, b) => b.workspace.toLowerCase().localeCompare(a.workspace.toLowerCase()));
+                clickWorkspace = 0;
+            }
+            displayWorkplaces();
+        }
+
+        //Sort the array based on the type of workspace followed by name
+        function workplaceTypeSort() {
+            clickWorkspace = 0;
+            workplaceNameSort();
+            if (clickType == 0) {
+                workspaces.sort((a, b) => a.type.localeCompare(b.type));
+                clickType = 1;
+            } else {
+                workspaces.sort((a, b) => b.type.localeCompare(a.type));
+                clickType = 0;
+            }
+            displayWorkplaces();
+        }
+
+        //Sort the array based on the neighbourhood of workspace followed by name
+        function workplaceNeighbourhoodSort() {
+            clickWorkspace = 0;
+            workplaceNameSort();
+            if (clickNeighbourhood == 0) {
+                workspaces.sort((a, b) => a.neighbourhood.localeCompare(b.neighbourhood));
+                clickNeighbourhood = 1;
+            } else {
+                workspaces.sort((a, b) => b.neighbourhood.localeCompare(a.neighbourhood));
+                clickNeighbourhood = 0;
+            }
+            displayWorkplaces();
+        }
+
+        //Sort the array based on the neighbourhood of workspace followed by name
+        function workplaceAvailabilitySort() {
+            clickWorkspace = 0;
+            workplaceNameSort();
+            if (clickAvailability == 0) {
+                workspaces.sort((a, b) => a.availability.replaceAll('-', '') - b.availability.replaceAll('-', ''));
+                clickAvailability = 1;
+            } else {
+                workspaces.sort((a, b) => b.availability.replaceAll('-', '') - a.availability.replaceAll('-', ''));
+                clickAvailability = 0;
+            }
+            displayWorkplaces();
+        }
+
+        //Sort the array based on the neighbourhood of workspace followed by name
+        function workplaceLeaseTermSort() {
+            clickWorkspace = 0;
+            var length = {
+                day: 1,
+                week: 2,
+                month: 3
+            }
+            workplaceNameSort();
+            if (clickLeaseTerm == 0) {
+                workspaces.sort((a, b) => length[a.leaseTerm] - length[b.leaseTerm]);
+                clickLeaseTerm = 1;
+            } else {
+                workspaces.sort((a, b) => length[b.leaseTerm] - length[a.leaseTerm]);
+                clickLeaseTerm = 0;
+            }
+            displayWorkplaces();
+        }
+
+        //Sort the array based on the neighbourhood of workspace followed by name
+        function workplacePriceSort() {
+            clickWorkspace = 0;
+            workplaceNameSort();
+            if (clickPrice == 0) {
+                workspaces.sort((a, b) => a.price.replaceAll(',', '').replaceAll(' ', '').replaceAll('$', '') - b.price.replaceAll(',', '').replaceAll(' ', '').replaceAll('$', ''));
+                clickPrice = 1;
+            } else {
+                workspaces.sort((a, b) => b.price.replaceAll(',', '').replaceAll(' ', '').replaceAll('$', '') - a.price.replaceAll(',', '').replaceAll(' ', '').replaceAll('$', ''));
+                clickPrice = 0;
+            }
+            displayWorkplaces();
+        }
+
+        //Sort the array based on the neighbourhood of workspace followed by name
+        function workplaceRatingSort() {
+            clickWorkspace = 0;
+            workplaceNameSort();
+            if (clickRating == 0) {
+                workspaces.sort((a, b) => a.rating - b.rating);
+                clickRating = 1;
+            } else {
+                workspaces.sort((a, b) => b.rating - a.rating);
+                clickRating = 0;
+            }
+            displayWorkplaces();
+        }
+
+
+        /*FOR DIV CONTROL*/
         //Show further info upon request
         function moreInfo(workspaceName) {
             //For workspace info
@@ -319,8 +445,6 @@ Peter Kosa
             console.log('rating value: ' + ratingValue);
             updatedRating = (currentRating + ratingValue) / 2;
             console.log('updated: ' + updatedRating);
-            
-            
         }
     </script>
 </body>
