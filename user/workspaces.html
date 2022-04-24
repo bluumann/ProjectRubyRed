@@ -35,6 +35,10 @@ Peter Kosa
         <div id="profilePage">
             <h1>Available Workspaces</h1>
 
+            <div id="search">
+
+            </div>
+
             <!--Create table with headers to later populate with data-->
             <table id="workspaceDisplay">
                 <thead>
@@ -66,6 +70,9 @@ Peter Kosa
 
     <!--For displaying more information on a workplace-->
     <div id="moreInfo">
+        <!--To hide more info when done viewing-->
+        <button onclick="hideInfo()" style="margin-bottom: 2.5vh; display: block; position: inherit; top: 12.5vh; right: 22.5vw;">Exit</button>
+
         <table style="margin: 5vh auto;">
             <tr>
                 <th colspan="2">Workspace Info</th>
@@ -122,6 +129,41 @@ Peter Kosa
                 <td>Average Rating: </td>
                 <td id="rating"></td>
             </tr>
+        </table>
+
+        <!--Contact info for owner of the workplace-->
+        <table style="margin: 5vh auto;">
+            <tr>
+                <th colspan="2">Contact Info</th>
+            </tr>
+            <tr>
+                <td>Name: </td>
+                <td id="owner"></td>
+            </tr>
+            <tr>
+                <td>Phone: </td>
+                <td id="phone"></td>
+            </tr>
+            <tr>
+                <td>Email: </td>
+                <td id="email"></td>
+            </tr>
+        </table>
+
+        <table style="margin: 5vh auto;">
+            <thead>
+                <th>Leave a review</th>
+            </thead>
+            <tbody>
+                <tr><td>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quae accusamus natus nihil tenetur excepturi mollitia quis, adipisci dolorem aliquid quisquam facere laboriosam necessitatibus voluptatibus eaque earum nobis fugiat dolores maxime?</td></tr>
+                <tr><td>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quae accusamus natus nihil tenetur excepturi mollitia quis, adipisci dolorem aliquid quisquam facere laboriosam necessitatibus voluptatibus eaque earum nobis fugiat dolores maxime?</td></tr>
+                <tr><td>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quae accusamus natus nihil tenetur excepturi mollitia quis, adipisci dolorem aliquid quisquam facere laboriosam necessitatibus voluptatibus eaque earum nobis fugiat dolores maxime?</td></tr>
+                <tr><td>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quae accusamus natus nihil tenetur excepturi mollitia quis, adipisci dolorem aliquid quisquam facere laboriosam necessitatibus voluptatibus eaque earum nobis fugiat dolores maxime?</td></tr>
+                <tr><td>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quae accusamus natus nihil tenetur excepturi mollitia quis, adipisci dolorem aliquid quisquam facere laboriosam necessitatibus voluptatibus eaque earum nobis fugiat dolores maxime?</td></tr>
+            </tbody>
+        </table>
+
+        <table style="margin: 5vh auto;">
             <tr>
                 <th colspan="2">My Rating</th>
             </tr>
@@ -145,28 +187,6 @@ Peter Kosa
                 </td>
             </tr>
         </table>
-
-        <!--Contact info for owner of the workplace-->
-        <table style="margin: 5vh auto;">
-            <tr>
-                <th colspan="2">Contact Info</th>
-            </tr>
-            <tr>
-                <td>Name: </td>
-                <td id="owner"></td>
-            </tr>
-            <tr>
-                <td>Phone: </td>
-                <td id="phone"></td>
-            </tr>
-            <tr>
-                <td>Email: </td>
-                <td id="email"></td>
-            </tr>
-        </table>
-
-        <!--To hide more info when done viewing-->
-        <button onclick="hideInfo()" style="margin-bottom: 2.5vh;">Done</button>
     </div>
 
     <div class="bottomBar">
