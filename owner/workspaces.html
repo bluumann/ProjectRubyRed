@@ -52,16 +52,19 @@ Peter Kosa
         .then(function (data) {
 
           for (let i = 0; i < data.properties.length; i++) {
-
+            
+            // List properties
             var li = document.createElement('li');
             li.value = data.properties[i].name;
             li.textContent = data.properties[i].name;
             list.appendChild(li);
 
+            // List workspaces under each property
             data.properties[i].workspaces.forEach(element => {
               var ul = document.createElement('ul');
               var li = document.createElement('li');
               list.appendChild(ul);
+
               li.value = element.name;
               li.textContent = element.name;
               ul.appendChild(li);
