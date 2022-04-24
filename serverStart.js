@@ -1,3 +1,4 @@
+//Global variable declarations
 var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');
@@ -7,6 +8,9 @@ var app = express();
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 const shortid = require('shortid');
 const { resourceUsage } = require('process');
+
+//Create a variable to hold who is currently logged in
+currentUser = null;
 
 //Working with session
 app.use(
@@ -27,23 +31,25 @@ app.use(express.static('public'));
 app.use('/css', express.static(__dirname + 'public/css'));
 app.use(bodyParser.json());
 
+/*SETTING UP AND ACCESSING data.json FILE*/ 
 //validation of object in the database
 var obj;
 var exists = fs.existsSync(path.join(__dirname, 'data', 'data.json'));
 
 if (exists) {
-  //Use existing file
-  var mydata = fs.readFileSync(path.join(__dirname, 'data', 'data.json'));
-  // Parse it  back to object
-  obj = JSON.parse(mydata);
+  var mydata = fs.readFileSync(path.join(__dirname, 'data', 'data.json')); //Use existing file
+  obj = JSON.parse(mydata); //Parse it  back to object
+
   console.log('Successfully loaded file data.json');
 } else {
-  obj = {
+  obj = { //Fill the obj with appropriate keys and empty arrays
     Users: [],
     Owners: [],
     Properties: [],
     Workspaces: [],
   };
+
+  //Write data to the file and notify via console
   fs.writeFile(
     path.join(__dirname, 'data', 'data.json'),
     JSON.stringify(obj, null, 2),
@@ -54,14 +60,18 @@ if (exists) {
   }
 }
 
-//Create a variable to hold who is currently logged in
-currentUser = null;
+// Return data.json to be used in HTML with fetch request
+app.get('/data', function (req, res) {
+  res.sendFile(__dirname + '/data/data.json');
+});
+
 
 /*** LANDING PAGE ***/
 // Route to landing page
 app.get('/', function (req, res) {
   res.sendFile(__dirname + '/index.html');
 });
+
 
 /*** LOGIN ***/
 //Obtain login info and check credentials
@@ -72,15 +82,15 @@ app.post('/login', function (req, res) {
     password: req.body.password,
   };
 
-  var flag = false; //Create a flag for if/when we find the user
+  var check = false; //Create a check for if/when we find the user
 
-  //Go through users to find matching username and password
+  //Go through users to find matching username and password and if found store them in currentUser variable
   for (let i = 0; i < obj.Users.length; i++) {
     if (
       obj.Users[i].email == accountInfo.email &&
       obj.Users[i].password == accountInfo.password
     ) {
-      flag = true;
+      check = true;
       req.session.loggedin = true;
       req.session.name = obj.Users[i].fName;
       currentUser = obj.Users[i];
@@ -94,13 +104,13 @@ app.post('/login', function (req, res) {
   }
 
   //Go through owners to find matching username and password if not found in users
-  if (!flag) {
+  if (!check) {
     for (let i = 0; i < obj.Owners.length; i++) {
       if (
         obj.Owners[i].email == accountInfo.email &&
         obj.Owners[i].password == accountInfo.password
       ) {
-        flag = true;
+        check = true;
         req.session.loggedin = true;
         req.session.name = obj.Owners[i].fName;
         currentUser = obj.Owners[i];
@@ -115,11 +125,12 @@ app.post('/login', function (req, res) {
   }
 
   //If matching credentials were not found login
-  if (!flag) {
+  if (!check) {
     console.log('A login attempt was made.');
     res.send('Sorry, incorrect credentials.');
   }
 });
+
 
 /*** OWNER/USER REGISTRATION ***/
 //POST new owner/user information
@@ -130,8 +141,22 @@ app.get('/SignUp', function (req, res) {
 
 //Post API for registering the user based on information given on Signup page
 app.post('/SignUp', urlencodedParser, function (req, res) {
-  if (req.body.status == 'user') {
-    //If they are a user store them as user
+  check = false; //Create a check for ensuring no duplicate emails
+
+  //Go through both users and owners emails
+  obj.Users.forEach(user => {
+    if (user.email == req.body.email) {
+      check = true;
+    }
+  });
+  obj.Owners.forEach(owner => {
+    if (owner.email == req.body.email) {
+      check = true;
+    }
+  });
+
+  //If it is a user account and the email is not already in use get account info
+  if (req.body.status == 'user' && !check) {
     var accountInfo = {
       fName: req.body.fName,
       lName: req.body.lName,
@@ -141,9 +166,16 @@ app.post('/SignUp', urlencodedParser, function (req, res) {
       password: req.body.password,
       rented: [],
     };
+
+    //Push it as an object to Users array
     obj.Users.push(accountInfo);
-  } else {
-    //Otherwise store them as owner, since there are only 2 options
+    
+    req.session.loggedin = true;
+    req.session.name = accountInfo.fName;
+    currentUser = accountInfo; //Store the account info as the currentUser object for later manipulation with the webpage
+  }
+  //If it is an owner account and the email is not already in use get account info
+  else if(req.body.status == 'owner' && !check) {
     var accountInfo = {
       fName: req.body.fName,
       lName: req.body.lName,
@@ -154,12 +186,14 @@ app.post('/SignUp', urlencodedParser, function (req, res) {
       ratings: [],
       properties: [],
     };
+    
+    //Push it as an object to Owners array
     obj.Owners.push(accountInfo);
+    
+    req.session.loggedin = true;
+    req.session.name = accountInfo.fName;
+    currentUser = accountInfo; //Store the account info as the currentUser object for later manipulation with the webpage
   }
-
-  req.session.loggedin = true;
-  req.session.name = accountInfo.fName;
-  currentUser = accountInfo;
 
   //Update the file with the new information
   fs.writeFile(
@@ -167,22 +201,34 @@ app.post('/SignUp', urlencodedParser, function (req, res) {
     JSON.stringify(obj, null, 2),
     registered
   );
+  
   function registered() {
-    if (req.body.status == 'user') {
+    //If the email was found notify user and have them try again with a different email
+    if (check) {
+      console.log("User tried to make account with in use email.")
+      res.send("Sorry that email is already in use, please try something else.")
+    }
+    //Otherwise if they are a user send them to the user home page
+    else if (req.body.status == 'user') {
       console.log('New user created.');
       res.redirect('/user/home');
-    } else {
+    }
+    
+    //Otherwise if they are an owner send them to the owner home page
+    else {
       console.log('New owner created.');
       res.redirect('/owner/home');
     }
   }
 });
 
+
 /*** LOGOUT ***/
 app.get('/logout', function (req, res) {
   currentUser = null;
   res.redirect('/');
 });
+
 
 /*** USER PAGE ***/
 // Route to user's home page (when logged in as a user)
@@ -194,13 +240,13 @@ app.get('/user/home', function (req, res) {
   }
 });
 
+// Route to user's profile page (when logged in as a user)
 app.get('/user/profile', function (req, res) {
   if (currentUser === null) {
     res.send("Sorry, you need to login <a href='/'>here</a> first!");
   } else {
     res.sendFile(path.join(__dirname, '/user/profile.html'));
   }
-  console.log(currentUser);
 });
 
 // Route to available workspaces page (when logged in as a user)
@@ -224,6 +270,7 @@ app.get('/user/rentals', function (req, res) {
 });
 
 */
+
 
 /*** OWNER PAGE ***/
 // Route to owner's home page (when logged in as an owner)
@@ -262,18 +309,36 @@ app.get('/owner/workspaces', function (req, res) {
   }
 });
 
+
 /*** UPDATE AND DELETE USER ***/
 //Update user info
 app.post('/updateUser', urlencodedParser, function (req, res) {
-  for (let i = 0; i < obj.Users.length; i++) {
-    if (obj.Users[i].email == currentUser.email) {
-      obj.Users[i].fName = req.body.fName;
-      obj.Users[i].lName = req.body.lName;
-      obj.Users[i].idNumber = req.body.idNumber;
-      obj.Users[i].phoneNumber = req.body.phoneNumber;
-      obj.Users[i].email = req.body.email;
-      obj.Users[i].password = req.body.password;
-      break;
+  check = false;//Create a check for ensuring no duplicate emails
+
+  //Go through both users and owners emails and check that the user email does not exist and is not in use unless by the currentUser
+  obj.Users.forEach(user => {
+    if (user.email == req.body.email && currentUser.email!= req.body.email) {
+      check = true;
+    }
+  });
+  obj.Owners.forEach(owner => {
+    if (owner.email == req.body.email && currentUser.email!= req.body.email) {
+      check = true;
+    }
+  });
+
+  //If the email is not already in use by anyone other then current user
+  if (!check) {
+    for (let i = 0; i < obj.Users.length; i++) {
+      if (obj.Users[i].email == currentUser.email) {
+        obj.Users[i].fName = req.body.fName;
+        obj.Users[i].lName = req.body.lName;
+        obj.Users[i].idNumber = req.body.idNumber;
+        obj.Users[i].phoneNumber = req.body.phoneNumber;
+        obj.Users[i].email = req.body.email;
+        obj.Users[i].password = req.body.password;
+        break;
+      }
     }
   }
 
@@ -283,14 +348,24 @@ app.post('/updateUser', urlencodedParser, function (req, res) {
     JSON.stringify(obj, null, 2),
     userUpdated
   );
+
   function userUpdated() {
-    console.log('User updated.');
-    res.redirect('/user/profile');
+    if (check) {
+      //If the email was found notify user and have them try again with a different email
+      console.log("User tried to update account with in use email.")
+      res.send("Sorry that email is already in use, please try something else.")
+    } 
+    //Otherwise send them back to their profile
+    else {
+      console.log('User updated.');
+      res.redirect('/user/profile');
+    }
   }
 });
 
 //Delete user info
 app.post('/deleteUser', function (req, res) {
+  //Go through the users array find the current user and remove them from the users array
   for (let i = 0; i < obj.Users.length; i++) {
     if (obj.Users[i].email == currentUser.email) {
       obj.Users.splice(i, 1);
@@ -298,11 +373,14 @@ app.post('/deleteUser', function (req, res) {
     }
   }
 
+  //Update file
   fs.writeFile(
     path.join(__dirname, 'data', 'data.json'),
     JSON.stringify(obj, null, 2),
     userDeleted
   );
+
+  //Inform via the console and run the logout get request to send them to home page and set current user to null
   function userDeleted() {
     console.log('User deleted.');
     res.redirect('/logout');
@@ -312,15 +390,30 @@ app.post('/deleteUser', function (req, res) {
 /*** UPDATE AND DELETE OWNER ***/
 //Update owner info
 app.post('/updateOwner', urlencodedParser, function (req, res) {
-  for (let i = 0; i < obj.Owners.length; i++) {
-    if (obj.Owners[i].email == currentUser.email) {
-      obj.Owners[i].fName = req.body.fName;
-      obj.Owners[i].lName = req.body.lName;
-      obj.Owners[i].idNumber = req.body.idNumber;
-      obj.Owners[i].phoneNumber = req.body.phoneNumber;
-      obj.Owners[i].email = req.body.email;
-      obj.Owners[i].password = req.body.password;
-      break;
+  check = false;//Create a check for ensuring no duplicate emails
+
+  //Go through both users and owners emails
+  obj.Users.forEach(user => {
+    if (user.email == req.body.email && currentUser.email!= req.body.email) {
+      check = true;
+    }
+  });
+  obj.Owners.forEach(owner => {
+    if (owner.email == req.body.email && currentUser.email!= req.body.email) {
+      check = true;
+    }
+  });
+  if (!check) {
+    for (let i = 0; i < obj.Owners.length; i++) {
+      if (obj.Owners[i].email == currentUser.email) {
+        obj.Owners[i].fName = req.body.fName;
+        obj.Owners[i].lName = req.body.lName;
+        obj.Owners[i].idNumber = req.body.idNumber;
+        obj.Owners[i].phoneNumber = req.body.phoneNumber;
+        obj.Owners[i].email = req.body.email;
+        obj.Owners[i].password = req.body.password;
+        break;
+      }
     }
   }
 
@@ -331,8 +424,13 @@ app.post('/updateOwner', urlencodedParser, function (req, res) {
     ownerUpdated
   );
   function ownerUpdated() {
-    console.log('Owner updated.');
-    res.redirect('/owner/profile');
+    if (check) {
+      console.log("User tried to update account with in use email.")
+      res.send("Sorry that email is already in use, please try something else.")
+    } else {
+      console.log('Owner updated.');
+      res.redirect('/owner/profile');
+    }
   }
 });
 
@@ -582,11 +680,6 @@ app.get('/owner/workspaces/update', function (req, res) {
   } else {
     res.sendFile(__dirname + '/owner/workspaces/update-workspace.html');
   }
-});
-
-// Return data.json to be used in HTML
-app.get('/data', function (req, res) {
-  res.sendFile(__dirname + '/data/data.json');
 });
 
 // ROUTE TO "WORKSPACE UPDATED" PAGE
