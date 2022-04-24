@@ -29,6 +29,15 @@
       "password": "1234",
       "rating": 5,
       "rented": []
+    },
+    {
+      "fName": "C",
+      "lName": "B",
+      "idNumber": "11",
+      "phoneNumber": "123 456 7890",
+      "email": "CB@email.com",
+      "password": "1234",
+      "rented": []
     }
   ],
   "Owners": [

@@ -139,7 +139,6 @@ app.post('/SignUp', urlencodedParser, function (req, res) {
       phoneNumber: req.body.phoneNumber,
       email: req.body.email,
       password: req.body.password,
-      rating: 5,
       rented: [],
     };
     obj.Users.push(accountInfo);
@@ -152,7 +151,7 @@ app.post('/SignUp', urlencodedParser, function (req, res) {
       phoneNumber: req.body.phoneNumber,
       email: req.body.email,
       password: req.body.password,
-      rating: 5,
+      ratings: [],
       properties: [],
     };
     obj.Owners.push(accountInfo);
@@ -204,6 +203,17 @@ app.get('/user/profile', function (req, res) {
   console.log(currentUser);
 });
 
+// Route to available workspaces page (when logged in as a user)
+app.get('/user/workspaces', function (req, res) {
+  if (currentUser === null) {
+    res.send("Sorry, you need to login <a href='/'>here</a> first!");
+  } else {
+    res.sendFile(path.join(__dirname, '/user/workspaces.html'));
+  }
+});
+
+/*Currently not in use!!
+
 // Route to user's rentals page (when logged in as a user)
 app.get('/user/rentals', function (req, res) {
   if (currentUser === null) {
@@ -212,6 +222,8 @@ app.get('/user/rentals', function (req, res) {
     res.sendFile(path.join(__dirname, '/user/rentals.html'));
   }
 });
+
+*/
 
 /*** OWNER PAGE ***/
 // Route to owner's home page (when logged in as an owner)
@@ -323,24 +335,24 @@ app.post(
   urlencodedParser,
   function (req, res) {
     var check = false;
-    currentUser.properties.forEach (element => {
+    currentUser.properties.forEach(element => {
       if (req.body.name == element.name) check = true;
     })
-    if (check){
+    if (check) {
       console.log("Property with this name exists already."); //debug
       res.send(
         'A property this name already exists.<br>To return, click <a href="/owner/properties/create">here</a>.'
       )
     }
-    else{ //if check is false, it means property name is unique.
+    else { //if check is false, it means property name is unique.
       var property = {
-      name: req.body.name,
-      address: req.body.address,
-      park: req.body.park,
-      transport: req.body.transport,
-      neigh: req.body.neigh,
-      size: req.body.size,
-      workspaces: [],
+        name: req.body.name,
+        address: req.body.address,
+        park: req.body.park,
+        transport: req.body.transport,
+        neigh: req.body.neigh,
+        size: req.body.size,
+        workspaces: [],
       };
       //console.log("Test"); //debug
       currentUser.properties.push(property);
@@ -360,7 +372,7 @@ app.post(
         );
       }
     }
-    
+
   }
 );
 
@@ -375,17 +387,17 @@ app.post(
   urlencodedParser,
   function (req, res) {
     var check = false;
-    currentUser.properties.forEach (element => {
+    currentUser.properties.forEach(element => {
       if (req.body.name == element.name) check = true;
     })
-    if (!check){ //if for any reason the user manages to change the name (which should be impossible).
+    if (!check) { //if for any reason the user manages to change the name (which should be impossible).
       console.log("Property with this name doesn't exist."); //debug
       res.send(
         'A property with this name does not exists.<br>To return, click <a href="/owner/properties/update">here</a>.'
       )
     }
-    else{ //if check is false, it means property name is unique.
-      currentUser.properties.forEach (element => {
+    else { //if check is false, it means property name is unique.
+      currentUser.properties.forEach(element => {
         if (req.body.name == element.name) {
           element.address = req.body.address;
           element.park = req.body.park;
@@ -402,7 +414,7 @@ app.post(
           function propertyUpdated() {
             console.log('Updated property.');
             res.send(
-             'The property was updated.<br>To return, click <a href="/owner/properties/update">here</a>.'
+              'The property was updated.<br>To return, click <a href="/owner/properties/update">here</a>.'
             )
           }
 
@@ -423,16 +435,16 @@ app.post(
   urlencodedParser,
   function (req, res) {
     var check = false;
-    currentUser.properties.forEach (element => {
+    currentUser.properties.forEach(element => {
       if (req.body.name == element.name) check = true;
     })
-    if (!check){ //if for any reason the user manages to change the name (which should be impossible).
+    if (!check) { //if for any reason the user manages to change the name (which should be impossible).
       console.log("Property with this name doesn't exist."); //debug
       res.send(
         'A property with this name does not exists.<br>To return, click <a href="/owner/properties/delete">here</a>.'
       )
     }
-    else{ //if check is false, it means property name is unique.
+    else { //if check is false, it means property name is unique.
       for (var i = 0; i < currentUser.properties.length; i++) {
         if (req.body.name == currentUser.properties[i].name) {
           currentUser.properties.splice(i, 1);
@@ -444,7 +456,7 @@ app.post(
           function propertyDeleted() {
             console.log('Deleted property.');
             res.send(
-             'The property was deleted.<br>To return, click <a href="/owner/properties/update">here</a>.'
+              'The property was deleted.<br>To return, click <a href="/owner/properties/update">here</a>.'
             )
           }
         };
@@ -465,95 +477,95 @@ app.get('/owner/workspaces/create', function (req, res) {
 app.post('/owner/workspaces/workspace-created', urlencodedParser, function (req, res) {
   var propertyName = req.body.property;
   var workspace = {
-  id: shortid.generate(), // Auto-generate ID
-  name: req.body.name,
-  type: req.body.type,
-  smoking: req.body.smoking,
-  seats: req.body.seats,
-  availability: req.body.availability,
-  leaseterm: req.body.leaseterm,
-  price: req.body.price,
-  listed: req.body.listed,
+    id: shortid.generate(), // Auto-generate ID
+    name: req.body.name,
+    type: req.body.type,
+    smoking: req.body.smoking,
+    seats: req.body.seats,
+    availability: req.body.availability,
+    leaseterm: req.body.leaseterm,
+    price: req.body.price,
+    listed: req.body.listed,
   };
 
-    const currentProperty = currentUser.properties.find(
-      // Find property that matches propertyName
-      property => property.name === propertyName
-    );
+  const currentProperty = currentUser.properties.find(
+    // Find property that matches propertyName
+    property => property.name === propertyName
+  );
 
-    propertyIndex = currentUser.properties.indexOf(currentProperty, 0); // Index of currentProperty within currentUser's properties
+  propertyIndex = currentUser.properties.indexOf(currentProperty, 0); // Index of currentProperty within currentUser's properties
 
-    ownerIndex = obj.Owners.indexOf(currentUser, 0); // Index of currentUser within Owners[]
+  ownerIndex = obj.Owners.indexOf(currentUser, 0); // Index of currentUser within Owners[]
 
-    obj.Owners[ownerIndex].properties[propertyIndex].workspaces.push(workspace);
+  obj.Owners[ownerIndex].properties[propertyIndex].workspaces.push(workspace);
 
-    //Update data.json with the new information
-    fs.writeFile(
-      path.join(__dirname, 'data', 'data.json'),
-      JSON.stringify(obj, null, 2),
-      workspaceCreated
-    );
-    function workspaceCreated() {
-      console.log('New workspace created.');
-      res.send('A new workspace has been created.<br>To return home, click <a href="/owner/workspaces">here</a>.');
-    }
+  //Update data.json with the new information
+  fs.writeFile(
+    path.join(__dirname, 'data', 'data.json'),
+    JSON.stringify(obj, null, 2),
+    workspaceCreated
+  );
+  function workspaceCreated() {
+    console.log('New workspace created.');
+    res.send('A new workspace has been created.<br>To return home, click <a href="/owner/workspaces">here</a>.');
   }
+}
 );
 
 // ROUTE TO "UPDATE WORKSPACE" PAGE
 app.get('/owner/workspaces/update', function (req, res) {
   res.sendFile(__dirname + '/owner/workspaces/update-workspace.html');
-
-  // Return data.json to be used in HTML
-  app.get('/data/data.json', function (req, res) {
-    res.sendFile(__dirname + '/data/data.json');
-  });
-
-  // ROUTE TO "WORKSPACE UPDATED" PAGE
-  app.post('/owner/workspaces/workspace-updated', urlencodedParser, UpdateWorkspace);
-
-  // Get data from "Update Workspace" form and add it to "obj"
-  function UpdateWorkspace(req, res) {
-    var propertyName = req.body.property;
-    var id = req.body.id;
-    
-    var name = req.body.name;
-    var type = req.body.type;
-    var smoking = req.body.smoking;
-    var seats = req.body.seats;
-    var availability = req.body.availability;
-    var leaseterm = req.body.leaseterm;
-    var price = req.body.price;
-    var listed = req.body.listed;
-
-    const currentProperty = currentUser.properties.find(
-      // Find property that matches propertyName
-      property => property.name === propertyName
-    );
-
-    ownerIndex = obj.Owners.indexOf(currentUser, 0); // Index of currentUser within Owners[]
-
-    propertyIndex = currentUser.properties.indexOf(currentProperty, 0); // Index of currentProperty within currentUser's properties
-
-    const workspaceToUpdate = obj.Owners[ownerIndex].properties[propertyIndex].workspaces.find(workspace => workspace.id === id);
-  
-    workspaceToUpdate.name = name;
-    workspaceToUpdate.type = type;
-    workspaceToUpdate.smoking = smoking;
-    workspaceToUpdate.seats = seats;
-    workspaceToUpdate.availability = availability;
-    workspaceToUpdate.leaseterm = leaseterm;
-    workspaceToUpdate.price = price;
-    workspaceToUpdate.listed = listed;
-
-    let data = JSON.stringify(obj, null, 1);
-    fs.writeFile('data/data.json', data, Updated);
-    function Updated() {
-      console.log('Workspace updated.');
-      res.send('Workspace has been updated.<br>To return home, click <a href="/owner/workspaces">here</a>.');
-    }
-  }
 });
+
+// Return data.json to be used in HTML
+app.get('/data', function (req, res) {
+  res.sendFile(__dirname + '/data/data.json');
+});
+
+// ROUTE TO "WORKSPACE UPDATED" PAGE
+app.post('/owner/workspaces/workspace-updated', urlencodedParser, UpdateWorkspace);
+
+// Get data from "Update Workspace" form and add it to "obj"
+function UpdateWorkspace(req, res) {
+  var propertyName = req.body.property;
+  var id = req.body.id;
+
+  var name = req.body.name;
+  var type = req.body.type;
+  var smoking = req.body.smoking;
+  var seats = req.body.seats;
+  var availability = req.body.availability;
+  var leaseterm = req.body.leaseterm;
+  var price = req.body.price;
+  var listed = req.body.listed;
+
+  const currentProperty = currentUser.properties.find(
+    // Find property that matches propertyName
+    property => property.name === propertyName
+  );
+
+  ownerIndex = obj.Owners.indexOf(currentUser, 0); // Index of currentUser within Owners[]
+
+  propertyIndex = currentUser.properties.indexOf(currentProperty, 0); // Index of currentProperty within currentUser's properties
+
+  const workspaceToUpdate = obj.Owners[ownerIndex].properties[propertyIndex].workspaces.find(workspace => workspace.id === id);
+
+  workspaceToUpdate.name = name;
+  workspaceToUpdate.type = type;
+  workspaceToUpdate.smoking = smoking;
+  workspaceToUpdate.seats = seats;
+  workspaceToUpdate.availability = availability;
+  workspaceToUpdate.leaseterm = leaseterm;
+  workspaceToUpdate.price = price;
+  workspaceToUpdate.listed = listed;
+
+  let data = JSON.stringify(obj, null, 1);
+  fs.writeFile('data/data.json', data, Updated);
+  function Updated() {
+    console.log('Workspace updated.');
+    res.send('Workspace has been updated.<br>To return home, click <a href="/owner/workspaces">here</a>.');
+  }
+}
 
 // ROUTE TO "DELETE WORKSPACE" PAGE
 app.get('/owner/workspaces/delete', function (req, res) {

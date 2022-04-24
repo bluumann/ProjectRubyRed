@@ -1,0 +1,283 @@
+<!--
+Name: Final Project
+Course Code: SODV1201
+Program: Software Development Diploma
+Authors:
+Colin From
+Pedro Ferreira
+Peter Kosa
+-->
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title>Coworking Registry</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+    <!--For darkening the page when more info is brought up-->
+    <div id="pageMask"></div>
+
+    <nav>
+        <ul class="navigation">
+            <li><a href="home">Home</a></li>
+            <li><a href="profile">Profile</a></li>
+            <li><a href="workspaces">Workspaces</a></li>
+            <li><a href="/logout">Logout</a></li>
+        </ul>
+    </nav>
+
+    <div class="mainPage">
+        <div id="profilePage">
+            <h1>Available Workspaces</h1>
+
+            <!--Create table with headers to later populate with data-->
+            <table id="workspaceDisplay">
+                <tr>
+                    <th>Workspace</th>
+                    <th>Type</th>
+                    <th>Neighbourhood</th>
+                    <th>Availability</th>
+                    <th>Lease Term</th>
+                    <th>Price</th>
+                    <th></th>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <!--For displaying more information on a workplace-->
+    <div id="moreInfo">
+        <table style="margin: 5vh auto;">
+            <tr>
+                <th colspan="2">Workspace Info</th>
+            </tr>
+            <tr>
+                <td>Workspace: </td>
+                <td id="workspace"></td>
+            </tr>
+            <tr>
+                <td>Type: </td>
+                <td id="type"></td>
+            </tr>
+            <tr>
+                <td>Address: </td>
+                <td id="address"></td>
+            </tr>
+            <tr>
+                <td>Neighbourhood: </td>
+                <td id="neighbourhood"></td>
+            </tr>
+            <tr>
+                <td>Square Footage: </td>
+                <td id="squareFootage"></td>
+            </tr>
+            <tr>
+                <td>Parking: </td>
+                <td id="parking"></td>
+            </tr>
+            <tr>
+                <td>Public Transportation: </td>
+                <td id="publicTransport"></td>
+            </tr>
+            <tr>
+                <td>Seats: </td>
+                <td id="seats"></td>
+            </tr>
+            <tr>
+                <td>Smoking: </td>
+                <td id="smoking"></td>
+            </tr>
+            <tr>
+                <td>Availability: </td>
+                <td id="availability"></td>
+            </tr>
+            <tr>
+                <td>Lease Term: </td>
+                <td id="leaseTerm"></td>
+            </tr>
+            <tr>
+                <td>Price: </td>
+                <td id="price"></td>
+            </tr>
+        </table>
+
+        <!--Contact info for owner of the workplace-->
+        <table style="margin: 5vh auto;">
+            <tr>
+                <th colspan="2">Contact Info</th>
+            </tr>
+            <tr>
+                <td>Name: </td>
+                <td id="owner"></td>
+            </tr>
+            <tr>
+                <td>Phone: </td>
+                <td id="phone"></td>
+            </tr>
+            <tr>
+                <td>Email: </td>
+                <td id="email"></td>
+            </tr>
+        </table>
+
+        <!--To hide more info when done viewing-->
+        <button onclick="hideInfo()" style="margin-bottom: 2.5vh;">Done</button>
+    </div>
+
+    <div class="bottomBar">
+        Webpage by Colin From, Pedro Ferreira and Peter Kosa, for SODV1201 - Final Project. Copyright 2022.
+    </div>
+
+    <script>
+        //Create a variable to store our data
+        var data;
+
+        //Fetch our data and store it to work with it
+        fetch('/data')
+            .then(res => res.json()) //Get json format of the body
+            .then(function (_data) { //Save the data to our variable for later use
+                data = _data;
+            })
+            .then(initializeArray)
+            .then(displayWorkplaces)
+            .catch(err => console.error(err)); //For errors
+
+        //Create an array to store data and help with sorting
+        var workspaces = [];
+
+        //Populate our array with the workplace data as objects and sort them based on name
+        function initializeArray() {
+            for (let i = 0; i < data.Owners.length; i++) { //Go through owners
+                for (let j = 0; j < data.Owners[i].properties.length; j++) { //Go through their properties
+                    for (let k = 0; k < data.Owners[i].properties[j].workspaces.length; k++) { //Go through their workplaces
+                        property = data.Owners[i].properties[j];
+                        workspace = property.workspaces[k]
+
+                        if (workspace.listed == "yes") { //If it is listed show, if it is not keep hidden
+                            //Translate values for workspace type to displayable text format
+                            if (workspace.type == "meeting-room") {
+                                _type = "Meeting Room";
+                            } else if (workspace.type == "private-workspace") {
+                                _type = "Private Office Room";
+                            } else if (workspace.type == "open-desk") {
+                                _type = "Open Desk";
+                            }
+
+                            //Create object with all the info we need properly labled
+                            workspaceInfo = {
+                                workspace: workspace.name,
+                                type: _type,
+                                address: property.address,
+                                neighbourhood: property.neighbourhood,
+                                squareFootage: property.squareFeet,
+                                parking: property.park,
+                                publicTransport: property.transport,
+                                seats: workspace.seats,
+                                smoking: workspace.smoking,
+                                availability: workspace.availability,
+                                leaseTerm: workspace.leaseterm,
+                                price: workspace.price
+                            }
+                            workspaces.push(workspaceInfo) //Push the object into the array
+                        }
+                    }
+                }
+            }
+
+            //Sort the array based on the names of the workspaces
+            workspaces.sort(function (a, b) {
+                var spaceA = a.workspace.toLowerCase();
+                var spaceB = b.workspace.toLowerCase();
+
+                return spaceA.localeCompare(spaceB)
+            })
+        }
+
+        //Add the information to the page
+        function displayWorkplaces() {
+            var table = document.getElementById('workspaceDisplay');
+
+            //Create rows and tables and insert all our values
+            workspaces.forEach(e => {
+                var row = table.insertRow(-1);
+                row.insertCell(-1).innerHTML = e.workspace;
+                row.insertCell(-1).innerHTML = e.type;
+                row.insertCell(-1).innerHTML = e.neighbourhood;
+                row.insertCell(-1).innerHTML = e.availability;
+                row.insertCell(-1).innerHTML = e.leaseTerm;
+                row.insertCell(-1).innerHTML = e.price;
+                //This adds a function with name argument to obtain more info and populate our div based on argument passed
+                row.insertCell(-1).innerHTML = "<a onclick=\"moreInfo(\'" + e.workspace + "\')\">More...</a>";
+            })
+        }
+
+        //Show further info upon request
+        function moreInfo(workspaceName) {
+            //For workspace info
+            workspace = document.getElementById("workspace");
+            type = document.getElementById("type");
+            address = document.getElementById("address");
+            neighbourhood = document.getElementById("neighbourhood");
+            squareFootage = document.getElementById("squareFootage");
+            parking = document.getElementById("parking");
+            publicTransport = document.getElementById("publicTransport");
+            seats = document.getElementById("seats");
+            smoking = document.getElementById("smoking");
+            availability = document.getElementById("availability");
+            leaseTerm = document.getElementById("leaseTerm");
+            price = document.getElementById("price");
+
+            //For owner contact info
+            owner = document.getElementById("owner");
+            phone = document.getElementById("phone");
+            email = document.getElementById("email");
+
+            //Populate the workplace info section
+            workspaces.forEach(e => {
+                if (e.workspace == workspaceName) {
+                    workspace.innerHTML = e.workspace;
+                    type.innerHTML = e.type;
+                    address.innerHTML = e.address;
+                    neighbourhood.innerHTML = e.neighbourhood;
+                    squareFootage.innerHTML = e.squareFootage;
+                    parking.innerHTML = e.parking;
+                    publicTransport.innerHTML = e.publicTransport;
+                    seats.innerHTML = e.seats;
+                    smoking.innerHTML = e.smoking;
+                    availability.innerHTML = e.availability;
+                    leaseTerm.innerHTML = e.leaseTerm;
+                    price.innerHTML = e.price;
+                }
+            });
+
+            //Populate the owner contact info section
+            data.Owners.forEach(o => {
+                o.properties.forEach(p => {
+                    p.workspaces.forEach(ws => {
+                        if (ws.name == workspaceName) {
+                            owner.innerHTML = o.fName + ' ' + o.lName;
+                            phone.innerHTML = o.phoneNumber;
+                            email.innerHTML = o.email;
+                        }
+                    });
+                });
+            });
+
+            //Display the more info div with all appropriate info and darken the background
+            document.getElementById("moreInfo").style.display = "block";
+            document.getElementById("pageMask").style.display = "block";
+        }
+
+        //Hide more info div and restore page colouring
+        function hideInfo() {
+            document.getElementById("moreInfo").style.display = "none";
+            document.getElementById("pageMask").style.display = "none";
+        }
+    </script>
+</body>
+
+</html>
