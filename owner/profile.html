@@ -20,10 +20,10 @@ Peter Kosa
 <body>
   <nav>
     <ul class="navigation">
-      <li><a href="/owner/home">Home</a></li>
-      <li><a href="/owner/profile">Profile</a></li>
-      <li><a href="/owner/properties">My Properties</a></li>
-      <li><a href="/owner/workspaces">My Workspaces</a></li>
+      <li><a href="home">Home</a></li>
+      <li><a href="profile">Profile</a></li>
+      <li><a href="properties">My Properties</a></li>
+      <li><a href="workspaces">My Workspaces</a></li>
       <li><a href="/logout">Logout</a></li>
     </ul>
   </nav>
@@ -32,7 +32,7 @@ Peter Kosa
     <div id="profilePage">
       <h1>Profile Page</h1>
 
-      <form action='/updateUser' method="POST">
+      <form action='/updateOwner' method="POST">
         <table style="width: auto; margin: auto;">
           <tr>
             <td><label for="fName">First Name: </label></td>
@@ -69,7 +69,7 @@ Peter Kosa
         <input type="submit" value="Update" style="display: block; margin: 2.5vh auto;">
       </form>
 
-      <form action='/deleteUser' method="POST">
+      <form action='/deleteOwner' method="POST">
         <input type="submit" value="Delete" style="display: block; margin: 2.5vh auto;">
       </form>
     </div>

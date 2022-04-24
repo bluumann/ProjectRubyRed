@@ -309,6 +309,53 @@ app.post('/deleteUser', function (req, res) {
   }
 });
 
+/*** UPDATE AND DELETE OWNER ***/
+//Update owner info
+app.post('/updateOwner', urlencodedParser, function (req, res) {
+  for (let i = 0; i < obj.Owners.length; i++) {
+    if (obj.Owners[i].email == currentUser.email) {
+      obj.Owners[i].fName = req.body.fName;
+      obj.Owners[i].lName = req.body.lName;
+      obj.Owners[i].idNumber = req.body.idNumber;
+      obj.Owners[i].phoneNumber = req.body.phoneNumber;
+      obj.Owners[i].email = req.body.email;
+      obj.Owners[i].password = req.body.password;
+      break;
+    }
+  }
+
+  //Update the file with the new information
+  fs.writeFile(
+    path.join(__dirname, 'data', 'data.json'),
+    JSON.stringify(obj, null, 2),
+    ownerUpdated
+  );
+  function ownerUpdated() {
+    console.log('Owner updated.');
+    res.redirect('/owner/profile');
+  }
+});
+
+//Delete owner info
+app.post('/deleteOwner', function (req, res) {
+  for (let i = 0; i < obj.Owners.length; i++) {
+    if (obj.Owners[i].email == currentUser.email) {
+      obj.Owners.splice(i, 1);
+      break;
+    }
+  }
+
+  fs.writeFile(
+    path.join(__dirname, 'data', 'data.json'),
+    JSON.stringify(obj, null, 2),
+    ownerDeleted
+  );
+  function ownerDeleted() {
+    console.log('Owner deleted.');
+    res.redirect('/logout');
+  }
+});
+
 //CURRENT USER API
 app.get('/currentUser', function (req, res) {
   res.send(currentUser);
@@ -326,7 +373,11 @@ app.get('/currentproperty', urlencodedParser, function (req, res) {
 
 // ROUTE TO "CREATE PROPERTY" PAGE
 app.get('/owner/properties/create', function (req, res) {
-  res.sendFile(__dirname + '/owner/properties/create-property.html');
+  if (currentUser === null) {
+    res.send("Sorry, you need to login <a href='/'>here</a> first!");
+  } else {
+    res.sendFile(__dirname + '/owner/properties/create-property.html');
+  }
 });
 
 // ROUTE TO "PROPERTY CREATED" PAGE
@@ -378,7 +429,11 @@ app.post(
 
 // ROUTE TO "UPDATE PROPERTY" PAGE
 app.get('/owner/properties/update', function (req, res) {
-  res.sendFile(__dirname + '/owner/properties/update-property.html');
+  if (currentUser === null) {
+    res.send("Sorry, you need to login <a href='/'>here</a> first!");
+  } else {
+    res.sendFile(__dirname + '/owner/properties/update-property.html');
+  }
 });
 
 // ROUTE TO "PROPERTY UPDATED" PAGE
@@ -426,7 +481,11 @@ app.post(
 
 // ROUTE TO "DELETE PROPERTY" PAGE
 app.get('/owner/properties/delete', function (req, res) {
-  res.sendFile(__dirname + '/owner/properties/delete-property.html');
+  if (currentUser === null) {
+    res.send("Sorry, you need to login <a href='/'>here</a> first!");
+  } else {
+    res.sendFile(__dirname + '/owner/properties/delete-property.html');
+  }
 });
 
 // ROUTE TO "PROPERTY DELETED" PAGE
@@ -470,7 +529,11 @@ app.post(
 
 // ROUTE TO "CREATE WORKSPACE" PAGE
 app.get('/owner/workspaces/create', function (req, res) {
-  res.sendFile(__dirname + '/owner/workspaces/create-workspace.html');
+  if (currentUser === null) {
+    res.send("Sorry, you need to login <a href='/'>here</a> first!");
+  } else {
+    res.sendFile(__dirname + '/owner/workspaces/create-workspace.html');
+  }
 });
 
 // ROUTE TO "WORKSPACE CREATED" PAGE
@@ -514,7 +577,11 @@ app.post('/owner/workspaces/workspace-created', urlencodedParser, function (req,
 
 // ROUTE TO "UPDATE WORKSPACE" PAGE
 app.get('/owner/workspaces/update', function (req, res) {
-  res.sendFile(__dirname + '/owner/workspaces/update-workspace.html');
+  if (currentUser === null) {
+    res.send("Sorry, you need to login <a href='/'>here</a> first!");
+  } else {
+    res.sendFile(__dirname + '/owner/workspaces/update-workspace.html');
+  }
 });
 
 // Return data.json to be used in HTML
@@ -569,7 +636,11 @@ function UpdateWorkspace(req, res) {
 
 // ROUTE TO "DELETE WORKSPACE" PAGE
 app.get('/owner/workspaces/delete', function (req, res) {
-  res.sendFile(__dirname + '/owner/workspaces/delete-workspace.html');
+  if (currentUser === null) {
+    res.send("Sorry, you need to login <a href='/'>here</a> first!");
+  } else {
+    res.sendFile(__dirname + '/owner/workspaces/delete-workspace.html');
+  }
 });
 
 // ROUTE TO "WORKSPACE DELETED" PAGE
