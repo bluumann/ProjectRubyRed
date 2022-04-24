@@ -69,20 +69,25 @@ app.post('/login', function (req, res) {
   //Get login details
   var accountInfo = {
     email: req.body.email,
-    password: req.body.password
+    password: req.body.password,
   };
 
   var flag = false; //Create a flag for if/when we find the user
 
   //Go through users to find matching username and password
   for (let i = 0; i < obj.Users.length; i++) {
-    if (obj.Users[i].email == accountInfo.email && obj.Users[i].password == accountInfo.password) {
+    if (
+      obj.Users[i].email == accountInfo.email &&
+      obj.Users[i].password == accountInfo.password
+    ) {
       flag = true;
       req.session.loggedin = true;
       req.session.name = obj.Users[i].fName;
       currentUser = obj.Users[i];
       console.log(currentUser);
-      console.log('Successful user login occurred of account ' + req.session.name);
+      console.log(
+        'Successful user login occurred of account ' + req.session.name
+      );
       res.redirect('/user/home');
       break;
     }
@@ -91,13 +96,18 @@ app.post('/login', function (req, res) {
   //Go through owners to find matching username and password if not found in users
   if (!flag) {
     for (let i = 0; i < obj.Owners.length; i++) {
-      if (obj.Owners[i].email == accountInfo.email && obj.Owners[i].password == accountInfo.password) {
+      if (
+        obj.Owners[i].email == accountInfo.email &&
+        obj.Owners[i].password == accountInfo.password
+      ) {
         flag = true;
         req.session.loggedin = true;
         req.session.name = obj.Owners[i].fName;
         currentUser = obj.Owners[i];
         console.log(currentUser);
-        console.log('Successful owner login occurred of account ' + req.session.name);
+        console.log(
+          'Successful owner login occurred of account ' + req.session.name
+        );
         res.redirect('/owner/home');
         break;
       }
@@ -172,35 +182,34 @@ app.post('/SignUp', urlencodedParser, function (req, res) {
 /*** LOGOUT ***/
 app.get('/logout', function (req, res) {
   currentUser = null;
-  res.redirect('/')
+  res.redirect('/');
 });
-
 
 /*** USER PAGE ***/
 // Route to user's home page (when logged in as a user)
 app.get('/user/home', function (req, res) {
   if (currentUser === null) {
-    res.send("Sorry, you need to login <a href='/'>here</a> first!")
+    res.send("Sorry, you need to login <a href='/'>here</a> first!");
   } else {
-    res.sendFile(path.join(__dirname, '/user/home.html'))
+    res.sendFile(path.join(__dirname, '/user/home.html'));
   }
 });
 
 app.get('/user/profile', function (req, res) {
-  if (currentUser === null) { 
-    res.send("Sorry, you need to login <a href='/'>here</a> first!")
+  if (currentUser === null) {
+    res.send("Sorry, you need to login <a href='/'>here</a> first!");
   } else {
-    res.sendFile(path.join(__dirname, '/user/profile.html'))
+    res.sendFile(path.join(__dirname, '/user/profile.html'));
   }
-  console.log(currentUser)
+  console.log(currentUser);
 });
 
 // Route to user's rentals page (when logged in as a user)
 app.get('/user/rentals', function (req, res) {
   if (currentUser === null) {
-    res.send("Sorry, you need to login <a href='/'>here</a> first!")
+    res.send("Sorry, you need to login <a href='/'>here</a> first!");
   } else {
-    res.sendFile(path.join(__dirname, '/user/rentals.html'))
+    res.sendFile(path.join(__dirname, '/user/rentals.html'));
   }
 });
 
@@ -208,36 +217,36 @@ app.get('/user/rentals', function (req, res) {
 // Route to owner's home page (when logged in as an owner)
 app.get('/owner/home', function (req, res) {
   if (currentUser === null) {
-    res.send("Sorry, you need to login <a href='/'>here</a> first!")
+    res.send("Sorry, you need to login <a href='/'>here</a> first!");
   } else {
-    res.sendFile(path.join(__dirname, '/owner/home.html'))
+    res.sendFile(path.join(__dirname, '/owner/home.html'));
   }
 });
 
 // Route to owner's profile page (when logged in as an owner)
 app.get('/owner/profile', function (req, res) {
   if (currentUser === null) {
-    res.send("Sorry, you need to login <a href='/'>here</a> first!")
+    res.send("Sorry, you need to login <a href='/'>here</a> first!");
   } else {
-    res.sendFile(path.join(__dirname, '/owner/profile.html'))
+    res.sendFile(path.join(__dirname, '/owner/profile.html'));
   }
 });
 
 // Route to owner's properties page (when logged in as an owner)
 app.get('/owner/properties', function (req, res) {
   if (currentUser === null) {
-    res.send("Sorry, you need to login <a href='/'>here</a> first!")
+    res.send("Sorry, you need to login <a href='/'>here</a> first!");
   } else {
-    res.sendFile(path.join(__dirname, '/owner/properties.html'))
+    res.sendFile(path.join(__dirname, '/owner/properties.html'));
   }
 });
 
 // Route to owner's workspaces page (when logged in as an owner)
 app.get('/owner/workspaces', function (req, res) {
   if (currentUser === null) {
-    res.send("Sorry, you need to login <a href='/'>here</a> first!")
+    res.send("Sorry, you need to login <a href='/'>here</a> first!");
   } else {
-    res.sendFile(path.join(__dirname, '/owner/workspaces.html'))
+    res.sendFile(path.join(__dirname, '/owner/workspaces.html'));
   }
 });
 
@@ -246,18 +255,22 @@ app.get('/owner/workspaces', function (req, res) {
 app.post('/updateUser', urlencodedParser, function (req, res) {
   for (let i = 0; i < obj.Users.length; i++) {
     if (obj.Users[i].email == currentUser.email) {
-      obj.Users[i].fName = req.body.fName
-      obj.Users[i].lName = req.body.lName
-      obj.Users[i].idNumber = req.body.idNumber
-      obj.Users[i].phoneNumber = req.body.phoneNumber
-      obj.Users[i].email = req.body.email
-      obj.Users[i].password = req.body.password
+      obj.Users[i].fName = req.body.fName;
+      obj.Users[i].lName = req.body.lName;
+      obj.Users[i].idNumber = req.body.idNumber;
+      obj.Users[i].phoneNumber = req.body.phoneNumber;
+      obj.Users[i].email = req.body.email;
+      obj.Users[i].password = req.body.password;
       break;
     }
   }
 
   //Update the file with the new information
-  fs.writeFile(path.join(__dirname, 'data', 'data.json'), JSON.stringify(obj, null, 2), userUpdated);
+  fs.writeFile(
+    path.join(__dirname, 'data', 'data.json'),
+    JSON.stringify(obj, null, 2),
+    userUpdated
+  );
   function userUpdated() {
     console.log('User updated.');
     res.redirect('/user/profile');
@@ -273,13 +286,16 @@ app.post('/deleteUser', function (req, res) {
     }
   }
 
-  fs.writeFile(path.join(__dirname, 'data', 'data.json'), JSON.stringify(obj, null, 2), userDeleted);
+  fs.writeFile(
+    path.join(__dirname, 'data', 'data.json'),
+    JSON.stringify(obj, null, 2),
+    userDeleted
+  );
   function userDeleted() {
     console.log('User deleted.');
     res.redirect('/logout');
   }
-})
-
+});
 
 //CURRENT USER API
 app.get('/currentUser', function (req, res) {
@@ -302,37 +318,43 @@ app.get('/owner/properties/create', function (req, res) {
 });
 
 // ROUTE TO "PROPERTY CREATED" PAGE
-app.post('/owner/properties/property-created', urlencodedParser, function (req, res) {
-  var property = {
-    name: req.body.name,
-    address: req.body.address,
-    type: req.body.type,
-    park: req.body.park,
-    transport: req.body.transport,
-    smoking: req.body.smoking,
-    seats: req.body.individuals,
-    availabilityFrom: req.body.availabilityFrom,
-    availabilityTo: req.body.availabilityTo,
-    leaseterm: req.body.leaseterm,
-    price: req.body.price,
-    workspaces: [],
-  };
-  //console.log("Test"); //debug
-  currentUser.properties.push(property);
-  console.log(currentUser); //debug
+app.post(
+  '/owner/properties/property-created',
+  urlencodedParser,
+  function (req, res) {
+    var property = {
+      name: req.body.name,
+      address: req.body.address,
+      type: req.body.type,
+      park: req.body.park,
+      transport: req.body.transport,
+      smoking: req.body.smoking,
+      seats: req.body.individuals,
+      availabilityFrom: req.body.availabilityFrom,
+      availabilityTo: req.body.availabilityTo,
+      leaseterm: req.body.leaseterm,
+      price: req.body.price,
+      workspaces: [],
+    };
+    //console.log("Test"); //debug
+    currentUser.properties.push(property);
+    console.log(currentUser); //debug
 
-  //Update the file with the new information
-  fs.writeFile(
-    path.join(__dirname, 'data', 'data.json'),
-    JSON.stringify(obj, null, 2),
-    propertyAdded
-  );
-  function propertyAdded() {
-    console.log('New property added.');
-    //res.redirect('/propertyIn'); //placeholder
-    res.send('A new workspace has been created.<br>To return home, click <a href="/owner/properties/create">here</a>.');
+    //Update the file with the new information
+    fs.writeFile(
+      path.join(__dirname, 'data', 'data.json'),
+      JSON.stringify(obj, null, 2),
+      propertyAdded
+    );
+    function propertyAdded() {
+      console.log('New property added.');
+      //res.redirect('/propertyIn'); //placeholder
+      res.send(
+        'A new workspace has been created.<br>To return home, click <a href="/owner/properties/create">here</a>.'
+      );
+    }
   }
-});
+);
 
 // ROUTE TO "UPDATE PROPERTY" PAGE
 app.get('/owner/properties/update', function (req, res) {
@@ -350,38 +372,40 @@ app.get('/owner/workspaces/create', function (req, res) {
 app.post('/owner/workspaces/workspace-created', urlencodedParser, function (req, res) {
   var propertyName = req.body.property;
   var workspace = {
-    id: shortid.generate(), // Auto-generate ID
-    name: req.body.name,
-    type: req.body.type,
-    smoking: req.body.smoking,
-    seats: req.body.seats,
-    availability: req.body.availability,
-    leaseterm: req.body.leaseterm,
-    price: req.body.price,
-    listed: req.body.listed,
+  id: shortid.generate(), // Auto-generate ID
+  name: req.body.name,
+  type: req.body.type,
+  smoking: req.body.smoking,
+  seats: req.body.seats,
+  availability: req.body.availability,
+  leaseterm: req.body.leaseterm,
+  price: req.body.price,
+  listed: req.body.listed,
   };
 
-  const currentProperty = currentUser.properties.find( // Find property that matches propertyName
-    property => property.name === propertyName 
-  );
+    const currentProperty = currentUser.properties.find(
+      // Find property that matches propertyName
+      property => property.name === propertyName
+    );
 
-  propertyIndex = currentUser.properties.indexOf(currentProperty, 0); // Index of currentProperty within currentUser's properties
+    propertyIndex = currentUser.properties.indexOf(currentProperty, 0); // Index of currentProperty within currentUser's properties
 
-  ownerIndex = obj.Owners.indexOf(currentUser, 0); // Index of currentUser within Owners[]
+    ownerIndex = obj.Owners.indexOf(currentUser, 0); // Index of currentUser within Owners[]
 
-  obj.Owners[ownerIndex].properties[propertyIndex].workspaces.push(workspace);
+    obj.Owners[ownerIndex].properties[propertyIndex].workspaces.push(workspace);
 
-  //Update data.json with the new information
-  fs.writeFile(
-    path.join(__dirname, 'data', 'data.json'),
-    JSON.stringify(obj, null, 2),
-    workspaceCreated
-  );
-  function workspaceCreated() {
-    console.log('New workspace created.');
-    res.send('A new workspace has been created.<br>To return home, click <a href="/owner/workspaces">here</a>.');
+    //Update data.json with the new information
+    fs.writeFile(
+      path.join(__dirname, 'data', 'data.json'),
+      JSON.stringify(obj, null, 2),
+      workspaceCreated
+    );
+    function workspaceCreated() {
+      console.log('New workspace created.');
+      res.send('A new workspace has been created.<br>To return home, click <a href="/owner/workspaces">here</a>.');
+    }
   }
-});
+);
 
 // ROUTE TO "UPDATE WORKSPACE" PAGE
 app.get('/owner/workspaces/update', function (req, res) {
@@ -397,7 +421,9 @@ app.get('/owner/workspaces/update', function (req, res) {
 
   // Get data from "Update Workspace" form and add it to "obj"
   function UpdateWorkspace(req, res) {
+    var propertyName = req.body.property;
     var id = req.body.id;
+    
     var name = req.body.name;
     var type = req.body.type;
     var smoking = req.body.smoking;
@@ -407,10 +433,17 @@ app.get('/owner/workspaces/update', function (req, res) {
     var price = req.body.price;
     var listed = req.body.listed;
 
-    const workspaceToUpdate = obj.Workspaces.find(
-      workspace => workspace.id === id
+    const currentProperty = currentUser.properties.find(
+      // Find property that matches propertyName
+      property => property.name === propertyName
     );
 
+    ownerIndex = obj.Owners.indexOf(currentUser, 0); // Index of currentUser within Owners[]
+
+    propertyIndex = currentUser.properties.indexOf(currentProperty, 0); // Index of currentProperty within currentUser's properties
+
+    const workspaceToUpdate = obj.Owners[ownerIndex].properties[propertyIndex].workspaces.find(workspace => workspace.id === id);
+  
     workspaceToUpdate.name = name;
     workspaceToUpdate.type = type;
     workspaceToUpdate.smoking = smoking;
@@ -424,7 +457,7 @@ app.get('/owner/workspaces/update', function (req, res) {
     fs.writeFile('data/data.json', data, Updated);
     function Updated() {
       console.log('Workspace updated.');
-      res.send('Workspace has been updated.');
+      res.send('Workspace has been updated.<br>To return home, click <a href="/owner/workspaces">here</a>.');
     }
   }
 });
@@ -441,19 +474,27 @@ app.post('/owner/workspaces/workspace-deleted', urlencodedParser, DeleteWorkspac
 function DeleteWorkspace(req, res) {
   // Select workspace dropdown
   var selectedWorkspace = req.body.types;
+  var workspaceToDelete;
+  var newWorkspacesArray;
 
-  var json = fs.readFileSync('data/data.json');
-  var array = JSON.parse(json);
-  var Workspace = array.Workspaces;
-  array.Workspaces = Workspace.filter(workspaceObject => {
-    return workspaceObject.name !== selectedWorkspace;
-  });
-  fs.writeFileSync('data/data.json', JSON.stringify(array, null, 2));
+  for (let i = 0; i < currentUser.properties.length; i++) {
+    currentUser.properties[i].workspaces.forEach(element => {
+      if (element.name == selectedWorkspace) {
+        workspaceToDelete = element;
+      }
+    })
+  }
 
+  for (let i = 0; i < currentUser.properties.length; i++) {
+    currentUser.properties[i].workspaces.forEach(element => {
+      newWorkspacesArray = currentUser.properties[i].workspaces.filter(element => { return element !== workspaceToDelete });
+      currentUser.properties[i].workspaces = newWorkspacesArray;
+    })
+  }
+
+  fs.writeFileSync('data/data.json', JSON.stringify(obj, null, 2));
   console.log('Workspace deleted.');
-  res.send(
-    'The workspace called *' + selectedWorkspace + '* was successfully deleted!'
-  );
+  res.send('The workspace called *' + selectedWorkspace + '* was successfully deleted!<br>To return home, click <a href="/owner/workspaces">here</a>.');
 }
 
 // API - retrieve all workspaces

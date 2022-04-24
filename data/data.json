@@ -110,14 +110,14 @@
           "price": "500",
           "workspaces": [
             {
-              "id": "3vL6-81-a",
-              "name": "Los Angeles",
+              "id": "UHcFFMRQ9",
+              "name": "San Francisco",
               "type": "open-desk",
-              "smoking": "no",
-              "seats": "1",
-              "availability": "",
-              "leaseterm": "day",
-              "price": "",
+              "smoking": "yes",
+              "seats": "5",
+              "availability": "2022-04-24",
+              "leaseterm": "month",
+              "price": "66.9",
               "listed": "yes"
             }
           ]
@@ -140,11 +140,11 @@
               "name": "Dallas",
               "type": "private-workspace",
               "smoking": "no",
-              "seats": "1",
-              "availability": "",
-              "leaseterm": "day",
-              "price": "",
-              "listed": "yes"
+              "seats": "7",
+              "availability": "2022-04-30",
+              "leaseterm": "week",
+              "price": "1003",
+              "listed": "no"
             }
           ]
         }

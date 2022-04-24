@@ -12,10 +12,10 @@
     <nav>
         <ul class="navigation">
             <!-- no href needed since it's working hiding/showing divs. -->
+            <li><a href="/owner/workspaces" id="" onclick="">Home</a></li>
             <li><a href="create" id="" onclick="">Create</a></li>
             <li><a href="update" id="" onclick="">Update</a></li>
             <li><a href="delete" id="" onclick="">Delete</a></li>
-            <li><a href="api" id="" onclick="">List All</a></li>
         </ul>
     </nav>
 
@@ -30,11 +30,11 @@
                 </select><br><br>
 
                 <label for="types">Select workspace:</label>
-                <select name="types" id="types" onchange="updateFee()">
+                <select name="types" id="types" onchange="displayWorkspaceInfo()">
                     <option>Choose a workspace</option>
                 </select><br><br>
 
-                <input type="text" id="id" name="id"><br><br>
+                <input type="text" id="id" name="id" style="display: none">
 
                 <label for="name">Name of the workspace:</label>
                 <input type="text" id="name" name="name"><br><br>
@@ -107,36 +107,12 @@
                         option.textContent = element.name;
                         propertySelect.appendChild(option);
                     })
-
-
-
-                    // const currentProperty = data.properties.find( // Find property that matches propertyName
-                    //     property => property.name === propertyName
-                    // );
-
                 })
                 .catch(err => alert("I got an error on the API."))
         }
 
 
-
-        // $("#types").change(function () {
-        //     var selectWorkspace = $("#types option:selected");
-        //     //console.log(selectWorkspace.text());
-        // })
-
-        // $.getJSON("/data/data.json", function (json) {
-        //     //console.log(json);
-        //     json.Workspaces.forEach(element => {
-        //         var option = document.createElement('option');
-        //         option.value = element.name;
-        //         option.textContent = element.name;
-        //         select.appendChild(option);
-        //     });
-        // })
-
-
-        function updateFee() {
+        function displayWorkspaceInfo() {
 
             const selectWorkspaceElement = document.getElementById('types');
             const idElement = document.getElementById('id');
@@ -154,46 +130,57 @@
             const listedYesElement = document.getElementById('listed');
             const listedNoElement = document.getElementById('not-listed');
 
-            var name = selectWorkspaceElement.value;
 
-            $.getJSON("/data/data.json", function (json) {
-                var selectedWorkspace = json.Workspaces.find(workspace => workspace.name === name);
+            fetch('/currentUser')
+                .then(res => res.json())
+                .then(function (data) {
 
-                idElement.value = selectedWorkspace.id;
-                nameElement.value = selectedWorkspace.name;
-                typeElement.value = selectedWorkspace.type;
-                seatsElement.value = selectedWorkspace.seats;
-                seatsOutputElement.value = selectedWorkspace.seats;
-                priceElement.value = selectedWorkspace.price;
-                availabilityElement.value = selectedWorkspace.availability;
+                    for (let i = 0; i < data.properties.length; i++) {
+                        if (data.properties[i].name == propertySelect.value) {
+                            data.properties[i].workspaces.forEach(element => {
+                                if (element.name == workspaceSelect.value) {
 
-                // Smoking radio buttons
-                if (selectedWorkspace.smoking == 'no') {
-                    smokingNoElement.checked = true;
-                }
-                else if (selectedWorkspace.smoking == 'yes') {
-                    smokingYesElement.checked = true;
-                }
+                                    idElement.value = element.id;
+                                    nameElement.value = element.name;
+                                    typeElement.value = element.type;
+                                    priceElement.value = element.price;
+                                    availabilityElement.value = element.availability;
+                                    seatsElement.value = element.seats;
+                                    seatsOutputElement.value = element.seats;
 
-                // Lease term radio buttons
-                if (selectedWorkspace.leaseterm == 'day') {
-                    leasetermDayElement.checked = true;
-                }
-                else if (selectedWorkspace.leaseterm == 'week') {
-                    leasetermWeekElement.checked = true;
-                }
-                else if (selectedWorkspace.leaseterm == 'month') {
-                    leasetermMonthElement.checked = true;
-                }
+                                    // Smoking radio buttons
+                                    if (element.smoking == 'no') {
+                                        smokingNoElement.checked = true;
+                                    }
+                                    else if (element.smoking == 'yes') {
+                                        smokingYesElement.checked = true;
+                                    }
+                                    // Lease term radio buttons
+                                    if (element.leaseterm == 'day') {
+                                        leasetermDayElement.checked = true;
+                                    }
+                                    else if (element.leaseterm == 'week') {
+                                        leasetermWeekElement.checked = true;
+                                    }
+                                    else if (element.leaseterm == 'month') {
+                                        leasetermMonthElement.checked = true;
+                                    }
 
-                // Listed radio buttons
-                if (selectedWorkspace.listed == 'yes') {
-                    listedYesElement.checked = true;
-                }
-                else if (selectedWorkspace.listed == 'no') {
-                    listedNoElement.checked = true;
-                }
-            })
+                                    // Listed radio buttons
+                                    if (element.listed == 'yes') {
+                                        listedYesElement.checked = true;
+                                    }
+                                    else if (element.listed == 'no') {
+                                        listedNoElement.checked = true;
+                                    }
+                                }
+                            })
+                        }
+                    }
+
+                })
+                .catch(err => alert("I got an error on the API."))
+
         }
 
         function updateWorkspaces() {

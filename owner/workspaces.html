@@ -18,7 +18,7 @@ Peter Kosa
   <link rel="stylesheet" href="/css/styles.css">
 </head>
 
-<body>
+<body onload="createWorkspaceList()">
   <nav>
     <ul class="navigation">
       <li><a href="/owner/home">Home</a></li>
@@ -31,20 +31,47 @@ Peter Kosa
 
   <div class="mainPage">
     <div id="profilePage">
-      <h1>Owner Properties Page</h1>
-      <ul>
-          <li>Workspace 1</li>
-          <li>Workspace 2</li>
-          <li>Workspace 3</li>
+      <h1>Owner Workspaces Page</h1>
+      <ul id="workspace-list">
       </ul>
       <a href="workspaces/create">Create New Workspace</a><br>
       <a href="workspaces/update">Edit Workspace</a><br>
       <a href="workspaces/delete">Delete Workspace</a>
     </div>
-  </div>    
+  </div>
 
   <div class="bottomBar">
     Webpage by Colin From, Frank Berrocal, Pedro Ferreira and Peter Kosa, for SODV1201 - Final Project. Copyright 2022.
   </div>
+
+  <script>
+    const list = document.getElementById('workspace-list');
+
+    function createWorkspaceList() {
+      fetch('/currentUser')
+        .then(res => res.json())
+        .then(function (data) {
+
+          for (let i = 0; i < data.properties.length; i++) {
+
+            var li = document.createElement('li');
+            li.value = data.properties[i].name;
+            li.textContent = data.properties[i].name;
+            list.appendChild(li);
+
+            data.properties[i].workspaces.forEach(element => {
+              var ul = document.createElement('ul');
+              var li = document.createElement('li');
+              list.appendChild(ul);
+              li.value = element.name;
+              li.textContent = element.name;
+              ul.appendChild(li);
+            })
+          }
+        })
+        .catch(err => alert("I got an error on the API."))
+    }
+  </script>
 </body>
+
 </html>
