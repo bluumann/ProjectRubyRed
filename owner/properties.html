@@ -18,7 +18,7 @@ Peter Kosa
   <link rel="stylesheet" href="/css/styles.css">
 </head>
 
-<body>
+<body onload="listProperties()">
   <nav>
     <ul class="navigation">
       <li><a href="/owner/home">Home</a></li>
@@ -30,21 +30,38 @@ Peter Kosa
   </nav>
 
   <div class="mainPage">
-    <div id="profilePage">
+    <div id="">
       <h1>Owner Properties Page</h1>
-      <ul>
-          <li>Property 1</li>
-          <li>Property 2</li>
-          <li>Property 3</li>
+      <ul id="property-list">
       </ul>
-      <a href="properties/create">Create New Property</a><br>
-      <a href="properties/update">Edit Property</a><br>
-      <a href="properties/delete">Delete Property</a>
+      <a href="properties/create">Create New Workspace</a><br>
+      <a href="properties/update">Edit Workspace</a><br>
+      <a href="properties/delete">Delete Workspace</a>
     </div>
-  </div>    
+  </div>  
 
   <div class="bottomBar">
     Webpage by Colin From, Frank Berrocal, Pedro Ferreira and Peter Kosa, for SODV1201 - Final Project. Copyright 2022.
   </div>
+<script>
+  const list = document.getElementById('property-list');
+
+function listProperties() {
+  fetch('/currentUser')
+    .then(res => res.json())
+    .then(function (data) {
+
+      for (let i = 0; i < data.properties.length; i++) {
+
+        var li = document.createElement('li');
+        li.value = data.properties[i].name;
+        li.textContent = data.properties[i].name;
+        list.appendChild(li);
+      }
+    })
+    .catch(err => alert("I got an error on the API."))
+}
+</script>
+
 </body>
 </html>
