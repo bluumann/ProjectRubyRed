@@ -1,3 +1,13 @@
+<!--
+Name: Final Project
+Course Code: SODV1201
+Program: Software Development Diploma
+Authors:
+Colin From
+Pedro Ferreira
+Peter Kosa
+-->
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,10 +22,10 @@
     <nav>
         <ul class="navigation">
             <!-- no href needed since it's working hiding/showing divs. -->
+            <li><a href="/owner/properties" id="" onclick="">Home</a></li>
             <li><a href="create" id="" onclick="">Create</a></li>
             <li><a href="update" id="" onclick="">Update</a></li>
             <li><a href="delete" id="" onclick="">Delete</a></li>
-            <li><a href="api" id="" onclick="">List All</a></li>
         </ul>
     </nav>
 
@@ -29,30 +39,24 @@
                     <option>Choose a Property</option>
                 </select><br><br>
 
-                <label for="adress">Address:</label>
+                <label for="address">Address:</label>
                 <input type="text" id="address" name="address"><br><br>
+
+                <label for="neigh">Neighbourhood:</label>
+                <input type="text" id="neigh" name="neigh"><br><br>
+
+                <label for="size">Size in Square ft:</label>
+                <input type="number" id="size" name="size"><br><br>
 
                 <input type="radio" id="no-parking" name="park" value="no" checked="checked">
                 <label for="no-parking">No Parking</label>
                 <input type="radio" id="parking" name="park" value="yes">
                 <label for="parking">Parking Available</label><br><br>
 
-
                 <input type="radio" id="no-public" name="transport" value="no" checked="checked">
                 <label for="no-public">No Public Transportation</label>
                 <input type="radio" id="public" name="transport" value="yes">
                 <label for="public">Public Transportation</label><br><br>
-
-                <input type="radio" id="no-smoking" name="smoking" value="no" checked="checked">
-                <label for="no-smoking">Non-smoking</label>
-                <input type="radio" id="smoking" name="smoking" value="yes">
-                <label for="smoking">Smoking</label><br><br>
-
-                <label for="availability">Available from:</label>
-                <input type="date" id="availabilityFrom" name="availabilityFrom"><br><br>
-
-                <label for="availability">Available To:</label>
-                <input type="date" id="availabilityTo" name="availabilityTo"><br><br>
 
                 <input type="submit" value="Update">
             </form>
@@ -60,7 +64,7 @@
     </div>
 
     <div class="bottomBar">
-        Webpage by Colin From, Frank Berrocal, Pedro Ferreira and Peter Kosa, for SODV1201 - Final Project.
+        Webpage by Colin From, Pedro Ferreira and Peter Kosa, for SODV1201 - Final Project.
         Copyright
         2022.
     </div>
@@ -80,7 +84,7 @@
                     })
                 }
                 )
-                .catch(err => alert("I got an error on the API."))
+                .catch(err => alert("I got an error on the API #1."))
         }
 
         function UpdateFields() {
@@ -91,16 +95,17 @@
                         if (element.name == document.getElementById("name").value) {
 
                             document.getElementById('address').value = element.address;
+                            document.getElementById('neigh').value = element.neigh;
+                            document.getElementById('size').value = element.size;
 
                             if (element.park == 'no') {
-                                document.getElementById('smoking').checked = false;
-                                document.getElementById('no-smoking').checked = true;
+                                document.getElementById('parking').checked = false;
+                                document.getElementById('no-parking').checked = true;
                             }
                             if (element.park == 'yes') {
                                 document.getElementById('parking').checked = true;
                                 document.getElementById('no-parking').checked = false;
                             }
-
                             if (element.transport == 'no') {
                                 document.getElementById('public').checked = false;
                                 document.getElementById('no-public').checked = true;
@@ -109,24 +114,12 @@
                                 document.getElementById('public').checked = true;
                                 document.getElementById('no-public').checked = false;
                             }
-
-                            if (element.smoking == 'no') {
-                                document.getElementById('smoking').checked = false;
-                                document.getElementById('no-smoking').checked = true;
-                            }
-                            if (element.smoking == 'yes') {
-                                document.getElementById('smoking').checked = true;
-                                document.getElementById('no-smoking').checked = false;
-                            }
-
-                            document.getElementById('availabilityFrom').value = element.availabilityFrom;
-                            document.getElementById('availabilityTo').value = element.availabilityTo;
                         }
                     })
 
                 }
                 )
-                .catch(err => alert("I got an error on the API."))
+                .catch(err => alert("I got an error on the API #2."))
         }
 
 

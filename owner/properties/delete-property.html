@@ -1,3 +1,13 @@
+<!--
+Name: Final Project
+Course Code: SODV1201
+Program: Software Development Diploma
+Authors:
+Colin From
+Pedro Ferreira
+Peter Kosa
+-->
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,17 +22,17 @@
     <nav>
         <ul class="navigation">
             <!-- no href needed since it's working hiding/showing divs. -->
+            <li><a href="/owner/properties" id="" onclick="">Home</a></li>
             <li><a href="create" id="" onclick="">Create</a></li>
             <li><a href="update" id="" onclick="">Update</a></li>
             <li><a href="delete" id="" onclick="">Delete</a></li>
-            <li><a href="api" id="" onclick="">List All</a></li>
         </ul>
     </nav>
 
     <div class="mainPage">
         <div id="profilePage">
 
-            <h1>Delete Workspace</h1>
+            <h1>Delete Property</h1>
             <form action="http://localhost:1007/owner/properties/property-deleted" method="POST">
                 <label for="name">Select property:</label>
                 <select name="name" id="name">
@@ -38,7 +48,7 @@
     </div>
 
     <div class="bottomBar">
-        Webpage by Colin From, Frank Berrocal, Pedro Ferreira and Peter Kosa, for SODV1201 - Final Project.
+        Webpage by Colin From, Pedro Ferreira and Peter Kosa, for SODV1201 - Final Project.
         Copyright
         2022.
     </div>

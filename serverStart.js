@@ -329,7 +329,7 @@ app.post(
     if (check){
       console.log("Property with this name exists already."); //debug
       res.send(
-        'A with this name already exists.<br>To return, click <a href="/owner/properties/create">here</a>.'
+        'A property this name already exists.<br>To return, click <a href="/owner/properties/create">here</a>.'
       )
     }
     else{ //if check is false, it means property name is unique.
@@ -338,9 +338,8 @@ app.post(
       address: req.body.address,
       park: req.body.park,
       transport: req.body.transport,
-      smoking: req.body.smoking,
-      availabilityFrom: req.body.availabilityFrom,
-      availabilityTo: req.body.availabilityTo,
+      neigh: req.body.neigh,
+      size: req.body.size,
       workspaces: [],
       };
       //console.log("Test"); //debug
@@ -357,7 +356,7 @@ app.post(
         console.log('New property added.');
         //res.redirect('/propertyIn'); //placeholder
         res.send(
-          'A new workspace has been created.<br>To return, click <a href="/owner/properties/create">here</a>.'
+          'A new property has been created.<br>To return, click <a href="/owner/properties/create">here</a>.'
         );
       }
     }
@@ -390,10 +389,9 @@ app.post(
         if (req.body.name == element.name) {
           element.address = req.body.address;
           element.park = req.body.park;
+          element.neigh = req.body.neigh;
+          element.size = req.body.size;
           element.transport = req.body.transport;
-          element.smoking = req.body.smoking;
-          element.availabilityFrom = req.body.availabilityFrom;
-          element.availabilityTo = req.body.availabilityTo;
           console.log("Property " + element.name + "has been updated."); //debug
 
           fs.writeFile(
@@ -431,7 +429,7 @@ app.post(
     if (!check){ //if for any reason the user manages to change the name (which should be impossible).
       console.log("Property with this name doesn't exist."); //debug
       res.send(
-        'A property with this name does not exists.<br>To return, click <a href="/owner/properties/update">here</a>.'
+        'A property with this name does not exists.<br>To return, click <a href="/owner/properties/delete">here</a>.'
       )
     }
     else{ //if check is false, it means property name is unique.

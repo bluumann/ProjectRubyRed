@@ -4,7 +4,6 @@ Course Code: SODV1201
 Program: Software Development Diploma
 Authors:
 Colin From
-Frank Berrocal
 Pedro Ferreira
 Peter Kosa
 -->
@@ -34,14 +33,14 @@ Peter Kosa
       <h1>Owner Properties Page</h1>
       <ul id="property-list">
       </ul>
-      <a href="properties/create">Create New Workspace</a><br>
-      <a href="properties/update">Edit Workspace</a><br>
-      <a href="properties/delete">Delete Workspace</a>
+      <a href="properties/create">Create New Property</a><br>
+      <a href="properties/update">Edit Property</a><br>
+      <a href="properties/delete">Delete Property</a>
     </div>
   </div>  
 
   <div class="bottomBar">
-    Webpage by Colin From, Frank Berrocal, Pedro Ferreira and Peter Kosa, for SODV1201 - Final Project. Copyright 2022.
+    Webpage by Colin From, Pedro Ferreira and Peter Kosa, for SODV1201 - Final Project. Copyright 2022.
   </div>
 <script>
   const list = document.getElementById('property-list');
@@ -50,14 +49,21 @@ function listProperties() {
   fetch('/currentUser')
     .then(res => res.json())
     .then(function (data) {
-
-      for (let i = 0; i < data.properties.length; i++) {
-
+      var li = document.createElement('li');
+      if (data.properties.length == 0){
+        li.value = "No-Prop";
+        li.textContent = "You current have no properties.";
+        list.appendChild(li);
+      }
+      else{
+        for (let i = 0; i < data.properties.length; i++) {
         var li = document.createElement('li');
         li.value = data.properties[i].name;
         li.textContent = data.properties[i].name;
         list.appendChild(li);
+        }
       }
+
     })
     .catch(err => alert("I got an error on the API."))
 }
