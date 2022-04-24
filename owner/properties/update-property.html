@@ -39,10 +39,10 @@ Peter Kosa
                 </select><br><br>
 
                 <label for="address">Address:</label>
-                <input type="text" id="address" name="address" required><br><br>
+                <input type="text" id="address" name="address" placeholder = "Insert address." required><br><br>
 
                 <label for="neigh">Neighbourhood:</label>
-                <input type="text" id="neigh" name="neigh" required><br><br>
+                <input type="text" id="neigh" name="neigh" placeholder = "Insert neighbourhood." required><br><br>
 
                 <label for="size">Size in Square ft:</label>
                 <input type="number" id="size" name="size" required><br><br>
@@ -113,6 +113,15 @@ Peter Kosa
                                 document.getElementById('public').checked = true;
                                 document.getElementById('no-public').checked = false;
                             }
+                        }
+                        else {
+                            document.getElementById('address').value = "";
+                            document.getElementById('neigh').value = "";
+                            document.getElementById('size').value = 0;
+                            document.getElementById('parking').checked = false;
+                            document.getElementById('no-parking').checked = true;
+                            document.getElementById('public').checked = false;
+                            document.getElementById('no-public').checked = true;
                         }
                     })
 

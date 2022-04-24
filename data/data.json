@@ -69,7 +69,17 @@
       "email": "dumbledore@hogwarts.com",
       "password": "1234",
       "rating": 5,
-      "properties": []
+      "properties": [
+        {
+          "name": "Hogwarts",
+          "address": "Over there.",
+          "park": "yes",
+          "transport": "yes",
+          "neigh": "Here.",
+          "size": "1000",
+          "workspaces": []
+        }
+      ]
     },
     {
       "fName": "Minerva",
