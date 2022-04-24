@@ -322,37 +322,46 @@ app.post(
   '/owner/properties/property-created',
   urlencodedParser,
   function (req, res) {
-    var property = {
+    var check = false;
+    currentUser.properties.forEach (element => {
+      if (req.body.name == element.name) check = true;
+    })
+    if (check){
+      console.log("Property with this name exists already."); //debug
+      res.send(
+        'A with this name already exists.<br>To return, click <a href="/owner/properties/create">here</a>.'
+      )
+    }
+    else{ //if check is false, it means property name is unique.
+      var property = {
       name: req.body.name,
       address: req.body.address,
-      type: req.body.type,
       park: req.body.park,
       transport: req.body.transport,
       smoking: req.body.smoking,
-      seats: req.body.individuals,
       availabilityFrom: req.body.availabilityFrom,
       availabilityTo: req.body.availabilityTo,
-      leaseterm: req.body.leaseterm,
-      price: req.body.price,
       workspaces: [],
-    };
-    //console.log("Test"); //debug
-    currentUser.properties.push(property);
-    console.log(currentUser); //debug
+      };
+      //console.log("Test"); //debug
+      currentUser.properties.push(property);
+      console.log(currentUser); //debug
 
-    //Update the file with the new information
-    fs.writeFile(
-      path.join(__dirname, 'data', 'data.json'),
-      JSON.stringify(obj, null, 2),
-      propertyAdded
-    );
-    function propertyAdded() {
-      console.log('New property added.');
-      //res.redirect('/propertyIn'); //placeholder
-      res.send(
-        'A new workspace has been created.<br>To return home, click <a href="/owner/properties/create">here</a>.'
+      //Update the file with the new information
+      fs.writeFile(
+        path.join(__dirname, 'data', 'data.json'),
+        JSON.stringify(obj, null, 2),
+        propertyAdded
       );
+      function propertyAdded() {
+        console.log('New property added.');
+        //res.redirect('/propertyIn'); //placeholder
+        res.send(
+          'A new workspace has been created.<br>To return, click <a href="/owner/properties/create">here</a>.'
+        );
+      }
     }
+    
   }
 );
 
@@ -360,6 +369,92 @@ app.post(
 app.get('/owner/properties/update', function (req, res) {
   res.sendFile(__dirname + '/owner/properties/update-property.html');
 });
+
+// ROUTE TO "PROPERTY UPDATED" PAGE
+app.post(
+  '/owner/properties/property-updated',
+  urlencodedParser,
+  function (req, res) {
+    var check = false;
+    currentUser.properties.forEach (element => {
+      if (req.body.name == element.name) check = true;
+    })
+    if (!check){ //if for any reason the user manages to change the name (which should be impossible).
+      console.log("Property with this name doesn't exist."); //debug
+      res.send(
+        'A property with this name does not exists.<br>To return, click <a href="/owner/properties/update">here</a>.'
+      )
+    }
+    else{ //if check is false, it means property name is unique.
+      currentUser.properties.forEach (element => {
+        if (req.body.name == element.name) {
+          element.address = req.body.address;
+          element.park = req.body.park;
+          element.transport = req.body.transport;
+          element.smoking = req.body.smoking;
+          element.availabilityFrom = req.body.availabilityFrom;
+          element.availabilityTo = req.body.availabilityTo;
+          console.log("Property " + element.name + "has been updated."); //debug
+
+          fs.writeFile(
+            path.join(__dirname, 'data', 'data.json'),
+            JSON.stringify(obj, null, 2),
+            propertyUpdated
+          );
+          function propertyUpdated() {
+            console.log('Updated property.');
+            res.send(
+             'The property was updated.<br>To return, click <a href="/owner/properties/update">here</a>.'
+            )
+          }
+
+        };
+      })
+    }
+  }
+);
+
+// ROUTE TO "DELETE PROPERTY" PAGE
+app.get('/owner/properties/delete', function (req, res) {
+  res.sendFile(__dirname + '/owner/properties/delete-property.html');
+});
+
+// ROUTE TO "PROPERTY DELETED" PAGE
+app.post(
+  '/owner/properties/property-deleted',
+  urlencodedParser,
+  function (req, res) {
+    var check = false;
+    currentUser.properties.forEach (element => {
+      if (req.body.name == element.name) check = true;
+    })
+    if (!check){ //if for any reason the user manages to change the name (which should be impossible).
+      console.log("Property with this name doesn't exist."); //debug
+      res.send(
+        'A property with this name does not exists.<br>To return, click <a href="/owner/properties/update">here</a>.'
+      )
+    }
+    else{ //if check is false, it means property name is unique.
+      for (var i = 0; i < currentUser.properties.length; i++) {
+        if (req.body.name == currentUser.properties[i].name) {
+          currentUser.properties.splice(i, 1);
+          fs.writeFile(
+            path.join(__dirname, 'data', 'data.json'),
+            JSON.stringify(obj, null, 2),
+            propertyDeleted
+          );
+          function propertyDeleted() {
+            console.log('Deleted property.');
+            res.send(
+             'The property was deleted.<br>To return, click <a href="/owner/properties/update">here</a>.'
+            )
+          }
+        };
+      }
+    }
+  }
+);
+
 
 /*** WORKSPACE PAGES ***/
 

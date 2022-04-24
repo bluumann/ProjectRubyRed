@@ -74,6 +74,20 @@
           "leaseterm": "week",
           "price": "111",
           "workspaces": []
+        },
+        {
+          "name": "Hogwartss",
+          "address": "1",
+          "type": "????",
+          "park": "no",
+          "transport": "yes",
+          "smoking": "no",
+          "seats": "4",
+          "availabilityFrom": "0001-01-01",
+          "availabilityTo": "0002-02-03",
+          "leaseterm": "day",
+          "price": "1",
+          "workspaces": []
         }
       ]
     },

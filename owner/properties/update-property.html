@@ -23,7 +23,7 @@
         <div id="profilePage">
 
             <h1>Update Workspace</h1>
-            <form action="http://localhost:1007/owner/property/property-updated" method="POST">
+            <form action="http://localhost:1007/owner/properties/property-updated" method="POST">
                 <label for="name">Select Property:</label>
                 <select name="name" id="name" onchange="UpdateFields()">
                     <option>Choose a Property</option>
@@ -31,14 +31,6 @@
 
                 <label for="adress">Address:</label>
                 <input type="text" id="address" name="address"><br><br>
-
-                <label for="type">Select Property type:</label>
-                <select name="type" id="type">
-                    <option value="????">????</option>
-                    <option value="????">????</option>
-                    <option value="???">????</option>
-                </select><br><br>
-
 
                 <input type="radio" id="no-parking" name="park" value="no" checked="checked">
                 <label for="no-parking">No Parking</label>
@@ -56,27 +48,11 @@
                 <input type="radio" id="smoking" name="smoking" value="yes">
                 <label for="smoking">Smoking</label><br><br>
 
-                <label for="seats">Number of Individuals:</label>
-                <input type="range" name="individuals" min="1" max="100" step="1" value="1"
-                    oninput="num.value = this.value">
-                <output id="num">1</output><br><br>
-
                 <label for="availability">Available from:</label>
                 <input type="date" id="availabilityFrom" name="availabilityFrom"><br><br>
 
                 <label for="availability">Available To:</label>
                 <input type="date" id="availabilityTo" name="availabilityTo"><br><br>
-
-                <label for="leaseterm">Lease term:</label>
-                <input type="radio" id="ltday" name="leaseterm" value="day" checked="checked">
-                <label for="leaseterm">Day</label>
-                <input type="radio" id="ltdweek" name="leaseterm" value="week">
-                <label for="leaseterm">Week</label>
-                <input type="radio" id="ltdmonth" name="leaseterm" value="month">
-                <label for="leaseterm">Month</label><br><br>
-
-                <label for="price">Price:</label>
-                <input type="text" id="price" name="price"><br><br>
 
                 <input type="submit" value="Update">
             </form>
@@ -93,11 +69,9 @@
         const select = document.getElementById('name');
 
         function checkProperties() {
-            alert("I am running.")
             fetch('/currentUser')
                 .then(res => res.json())
                 .then(function (data) {
-                    alert(data.fName)
                     data.properties.forEach(element => {
                         var option = document.createElement('option');
                         option.value = element.name;
@@ -109,7 +83,6 @@
                 .catch(err => alert("I got an error on the API."))
         }
 
-
         function UpdateFields() {
             fetch('/currentUser')
                 .then(res => res.json())
@@ -118,9 +91,6 @@
                         if (element.name == document.getElementById("name").value) {
 
                             document.getElementById('address').value = element.address;
-                            document.getElementById('type').value = element.type;
-                            document.getElementById('price').value = element.price;
-                            document.getElementById('num').value = element.seats;
 
                             if (element.park == 'no') {
                                 document.getElementById('smoking').checked = false;
@@ -140,7 +110,6 @@
                                 document.getElementById('no-public').checked = false;
                             }
 
-
                             if (element.smoking == 'no') {
                                 document.getElementById('smoking').checked = false;
                                 document.getElementById('no-smoking').checked = true;
@@ -152,22 +121,6 @@
 
                             document.getElementById('availabilityFrom').value = element.availabilityFrom;
                             document.getElementById('availabilityTo').value = element.availabilityTo;
-
-                            if (element.leaseterm == 'day') {
-                                document.getElementById('ltday').checked = true;
-                                document.getElementById('ltdweek').checked = false;
-                                document.getElementById('ltdmonth').checked = false;
-                            }
-                            if (element.leaseterm == 'week') {
-                                document.getElementById('ltday').checked = false;
-                                document.getElementById('ltdweek').checked = true;
-                                document.getElementById('ltdmonth').checked = false;
-                            }
-                            if (element.leaseterm == 'month') {
-                                document.getElementById('ltday').checked = false;
-                                document.getElementById('ltdweek').checked = false;
-                                document.getElementById('ltdmonth').checked = true;
-                            }
                         }
                     })
 

@@ -29,20 +29,11 @@
                 <label for="address">Address:</label>
                 <input type="text" id="address" name="address"><br><br>
 
-                <label for="type">Select Property type:</label>
-                <select name="type" id="type">
-                    <option value="????">????</option>
-                    <option value="????">????</option>
-                    <option value="???">????</option>
-                </select><br><br>
-
-
                 <input type="radio" id="no-parking" name="park" value="no" checked="checked">
                 <label for="no-parking">No Parking</label>
                 <input type="radio" id="parking" name="park" value="yes">
                 <label for="parking">Parking Available</label><br><br>
 
-                
                 <input type="radio" id="no-public" name="transport" value="no" checked="checked">
                 <label for="no-public">No Public Transportation</label>
                 <input type="radio" id="public" name="transport" value="yes">
@@ -53,26 +44,11 @@
                 <input type="radio" id="smoking" name="smoking" value="yes">
                 <label for="smoking">Smoking</label><br><br>
 
-                <label for="seats">Number of Individuals:</label>
-                <input type="range" name="individuals" min="1" max="100" step="1" value="1" oninput="num.value = this.value">
-                <output id="num">1</output><br><br>
-
                 <label for="availability">Available from:</label>
                 <input type="date" id="availabilityFrom" name="availabilityFrom"><br><br>
 
                 <label for="availability">Available To:</label>
                 <input type="date" id="availabilityTo" name="availabilityTo"><br><br>
-
-                <label for="leaseterm">Lease term:</label>
-                <input type="radio" id="ltday" name="leaseterm" value="day" checked="checked">
-                <label for="leaseterm">Day</label>
-                <input type="radio" id="ltdweek" name="leaseterm" value="week">
-                <label for="leaseterm">Week</label>
-                <input type="radio" id="ltdmonth" name="leaseterm" value="month">
-                <label for="leaseterm">Month</label><br><br>
-
-                <label for="price">Price:</label>
-                <input type="text" id="price" name="price"><br><br>
 
                 <input type="submit" value="Create">
             </form>

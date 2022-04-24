@@ -8,7 +8,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 
-<body onload="SignedIn()">
+<body onload="checkProperties()">
     <nav>
         <ul class="navigation">
             <!-- no href needed since it's working hiding/showing divs. -->
@@ -23,9 +23,9 @@
         <div id="profilePage">
 
             <h1>Delete Workspace</h1>
-            <form action="http://localhost:1007/owner/property/property-deleted" method="POST">
-                <label for="types">Select property:</label>
-                <select name="types" id="types">
+            <form action="http://localhost:1007/owner/properties/property-deleted" method="POST">
+                <label for="name">Select property:</label>
+                <select name="name" id="name">
                 </select><br><br>
 
                 <label for="deletecheck">Are you sure you want to delete this property?</label>
@@ -44,22 +44,22 @@
     </div>
 
     <script>
-        const select = document.getElementById('types');
+        const select = document.getElementById('name');
 
-        $("#types").change(function () {
-            var selectProperty = $("#types option:selected");
-            //console.log(selectWorkspace.text());
-        })
-
-        $.getJSON("/data/data.json", function (json) {
-            //console.log(json);
-            json.Workspaces.forEach(element => {
-                var option = document.createElement('option');
-                option.value = element.name;
-                option.textContent = element.name;
-                select.appendChild(option);
-            });
-        })
+        function checkProperties() {
+            fetch('/currentUser')
+                .then(res => res.json())
+                .then(function (data) {
+                    data.properties.forEach(element => {
+                        var option = document.createElement('option');
+                        option.value = element.name;
+                        option.textContent = element.name;
+                        select.appendChild(option);
+                    })
+                }
+                )
+                .catch(err => alert("I got an error on the API."))
+        }
     </script>
 </body>
 
