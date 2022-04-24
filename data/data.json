@@ -38,6 +38,24 @@
       "email": "CB@email.com",
       "password": "1234",
       "rented": []
+    },
+    {
+      "fName": "Harry",
+      "lName": "Potter",
+      "idNumber": "1111",
+      "phoneNumber": "111 111 1111",
+      "email": "HP@hogwarts.ca",
+      "password": "1234",
+      "rented": []
+    },
+    {
+      "fName": "Test",
+      "lName": "Test",
+      "idNumber": "2222",
+      "phoneNumber": "222 222 2222",
+      "email": "test@test.com",
+      "password": "test",
+      "rented": []
     }
   ],
   "Owners": [
@@ -69,7 +87,17 @@
       "email": "dumbledore@hogwarts.com",
       "password": "1234",
       "rating": 5,
-      "properties": []
+      "properties": [
+        {
+          "name": "Hogwarts",
+          "address": "Over there.",
+          "park": "yes",
+          "transport": "yes",
+          "neigh": "Here.",
+          "size": "1000",
+          "workspaces": []
+        }
+      ]
     },
     {
       "fName": "Minerva",
