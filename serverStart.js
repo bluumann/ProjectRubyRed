@@ -44,9 +44,7 @@ if (exists) {
 } else {
   obj = { //Fill the obj with appropriate keys and empty arrays
     Users: [],
-    Owners: [],
-    Properties: [],
-    Workspaces: [],
+    Owners: []
   };
 
   //Write data to the file and notify via console
@@ -811,9 +809,6 @@ var server = app.listen(1007, function () {
 });
 
 app.post('/user/workspace-rated', urlencodedParser, function (req, res) {
-  console.log(req.body.email);
-  console.log(req.body.workspace);
-  console.log(req.body.propname);
   var wsOwner = req.body.email;
   var wsName = req.body.workspace;
   var wsProp = req.body.propname;

@@ -111,6 +111,14 @@ a {
 
 /*FOR USER WORKSPACES PAGE*/
 /*For the table used to display workspaces to users*/
+#search {
+  width: 60vw;
+}
+
+#search td {
+  padding: .25vh .25vw;
+}
+
 #workspaceDisplay {
   font-size: .85em;
   text-align: center;
