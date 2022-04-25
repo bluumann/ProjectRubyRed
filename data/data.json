@@ -98,15 +98,6 @@
       "email": "GeorgeW@hogwarts.ca",
       "password": "1234",
       "rented": []
-    },
-    {
-      "fName": "Jean-Luc",
-      "lName": "Picard",
-      "idNumber": "1701",
-      "phoneNumber": "111 222 3333",
-      "email": "JLP@federation.ca",
-      "password": "1234",
-      "rented": []
     }
   ],
   "Owners": [
@@ -223,16 +214,8 @@
               "leaseterm": "week",
               "price": "88",
               "listed": "yes",
-              "reviews": [
-                {
-                  "username": "Draco Malfoy",
-                  "useremail": "DM@hogwarts.ca",
-                  "rating": "5",
-                  "review": "BEST TEACHER EVER.",
-                  "date": "25/31/2022"
-                }
-              ],
-              "rating": "5.00"
+              "reviews": [],
+              "rating": 0
             }
           ]
         }
@@ -276,44 +259,8 @@
               "leaseterm": "week",
               "price": "1000",
               "listed": "yes",
-              "reviews": [
-                {
-                  "username": "Draco Malfoy",
-                  "useremail": "DM@hogwarts.ca",
-                  "rating": "1",
-                  "review": "This place is awful, my father will hear about this.",
-                  "date": "25/31/2022"
-                },
-                {
-                  "username": "Hermione Granger",
-                  "useremail": "HG@hogwarts.ca",
-                  "rating": "5",
-                  "review": "Excellent place, excellent teacher/owner. However, there isn't enough room to put my essay about this place here.",
-                  "date": "25/31/2022"
-                },
-                {
-                  "username": "Neville Longbottom",
-                  "useremail": "NL@hogwarts.ca",
-                  "rating": "5",
-                  "review": "Great place, learned a lot!",
-                  "date": "25/31/2022"
-                },
-                {
-                  "username": "Luna Lovegood",
-                  "useremail": "LL@hogwarts.ca",
-                  "rating": "5",
-                  "review": "Good place and all, but you have to get rid of the nargles.",
-                  "date": "25/31/2022"
-                },
-                {
-                  "username": "Jean-Luc Picard",
-                  "useremail": "JLP@federation.ca",
-                  "rating": "5",
-                  "review": "The place was cozy and reminded me of Darmok and Jalad at Tanagra.",
-                  "date": "25/31/2022"
-                }
-              ],
-              "rating": "4.20"
+              "reviews": [],
+              "rating": 0
             },
             {
               "id": "fmy2d-Fsu",
@@ -386,37 +333,8 @@
               "leaseterm": "week",
               "price": "1000",
               "listed": "yes",
-              "reviews": [
-                {
-                  "username": "Ron Weasley",
-                  "useremail": "RW@hogwarts.ca",
-                  "rating": "5",
-                  "review": "bEsT OwNeR iN tHe wEbSiTe",
-                  "date": "25/31/2022"
-                },
-                {
-                  "username": "Ron Weasley",
-                  "useremail": "RW@hogwarts.ca",
-                  "rating": "3",
-                  "review": "Sorry, my rat gave that previous review.",
-                  "date": "25/31/2022"
-                },
-                {
-                  "username": "Draco Malfoy",
-                  "useremail": "DM@hogwarts.ca",
-                  "rating": "1",
-                  "review": "Awful place, my father will hear about this!",
-                  "date": "25/31/2022"
-                },
-                {
-                  "username": "Luna Lovegood",
-                  "useremail": "LL@hogwarts.ca",
-                  "rating": "1",
-                  "review": "A lot of weird looking horses no one could see. ",
-                  "date": "25/31/2022"
-                }
-              ],
-              "rating": "2.50"
+              "reviews": [],
+              "rating": 0
             },
             {
               "id": "fmyDd-1su",
@@ -428,16 +346,8 @@
               "leaseterm": "week",
               "price": "2000",
               "listed": "yes",
-              "reviews": [
-                {
-                  "username": "Draco Malfoy",
-                  "useremail": "DM@hogwarts.ca",
-                  "rating": "1",
-                  "review": "Awful place, my father will hear about this!",
-                  "date": "25/31/2022"
-                }
-              ],
-              "rating": "1.00"
+              "reviews": [],
+              "rating": 0
             },
             {
               "id": "fmyDd-3su",
@@ -449,16 +359,8 @@
               "leaseterm": "week",
               "price": "2200",
               "listed": "yes",
-              "reviews": [
-                {
-                  "username": "Draco Malfoy",
-                  "useremail": "DM@hogwarts.ca",
-                  "rating": "1",
-                  "review": "Awful place, my father will hear about this!",
-                  "date": "25/31/2022"
-                }
-              ],
-              "rating": "5.00"
+              "reviews": [],
+              "rating": 0
             },
             {
               "id": "fmyDd-2su",
@@ -470,16 +372,8 @@
               "leaseterm": "month",
               "price": "3000",
               "listed": "yes",
-              "reviews": [
-                {
-                  "username": "Draco Malfoy",
-                  "useremail": "DM@hogwarts.ca",
-                  "rating": "1",
-                  "review": "Awful place, my father will hear about this!",
-                  "date": "25/31/2022"
-                }
-              ],
-              "rating": "1.00"
+              "reviews": [],
+              "rating": 0
             }
           ]
         }
@@ -536,16 +430,8 @@
               "leaseterm": "week",
               "price": "1847",
               "listed": "yes",
-              "reviews": [
-                {
-                  "username": "Ron Weasley",
-                  "useremail": "RW@hogwarts.ca",
-                  "rating": "1",
-                  "review": "Worst place on earth.",
-                  "date": "25/31/2022"
-                }
-              ],
-              "rating": "1.00"
+              "reviews": [],
+              "rating": 0
             },
             {
               "id": "qU2X1qWXd",
@@ -557,37 +443,8 @@
               "leaseterm": "day",
               "price": "1",
               "listed": "yes",
-              "reviews": [
-                {
-                  "username": "Harry Potter",
-                  "useremail": "HP@hogwarts.ca",
-                  "rating": "1",
-                  "review": "I must not tell lies.",
-                  "date": "25/31/2022"
-                },
-                {
-                  "username": "Hermione Granger",
-                  "useremail": "HG@hogwarts.ca",
-                  "rating": "2",
-                  "review": "Sorry professor, but the place could honesty use some improvements.",
-                  "date": "25/31/2022"
-                },
-                {
-                  "username": "Ron Weasley",
-                  "useremail": "RW@hogwarts.ca",
-                  "rating": "3",
-                  "review": "Wicked!",
-                  "date": "25/31/2022"
-                },
-                {
-                  "username": "Jean-Luc Picard",
-                  "useremail": "JLP@federation.ca",
-                  "rating": "1",
-                  "review": "I had to leave this place at maximum warp. Engage.",
-                  "date": "25/31/2022"
-                }
-              ],
-              "rating": "1.75"
+              "reviews": [],
+              "rating": 0
             }
           ]
         }
@@ -621,23 +478,8 @@
               "leaseterm": "month",
               "price": "131",
               "listed": "yes",
-              "reviews": [
-                {
-                  "username": "Harry Potter",
-                  "useremail": "HP@hogwarts.ca",
-                  "rating": "5",
-                  "review": "Excellent place, clean and cozy. I lost a very important locket and the owner actually helped me find it.",
-                  "date": "25/31/2022"
-                },
-                {
-                  "username": "Luna Lovegood",
-                  "useremail": "LL@hogwarts.ca",
-                  "rating": "2",
-                  "review": "Lovely owner.",
-                  "date": "25/31/2022"
-                }
-              ],
-              "rating": "3.50"
+              "reviews": [],
+              "rating": 0
             },
             {
               "id": "tRIeYvUL-",
@@ -684,16 +526,8 @@
               "leaseterm": "week",
               "price": "1",
               "listed": "yes",
-              "reviews": [
-                {
-                  "username": "Ron Weasley",
-                  "useremail": "RW@hogwarts.ca",
-                  "rating": "5",
-                  "review": "Bloody hell!",
-                  "date": "25/31/2022"
-                }
-              ],
-              "rating": "4.00"
+              "reviews": [],
+              "rating": 0
             },
             {
               "id": "fayDd-Fsu",
@@ -731,30 +565,8 @@
               "leaseterm": "day",
               "price": "3000",
               "listed": "yes",
-              "reviews": [
-                {
-                  "username": "Harry Potter",
-                  "useremail": "HP@hogwarts.ca",
-                  "rating": "3",
-                  "review": "Good place and all, but I found a guy who looked like professor moody abandoned there.",
-                  "date": "25/31/2022"
-                },
-                {
-                  "username": "Luna Lovegood",
-                  "useremail": "LL@hogwarts.ca",
-                  "rating": "4",
-                  "review": "Harry, that was the professor you dummy.",
-                  "date": "25/31/2022"
-                },
-                {
-                  "username": "Ginny Weasley",
-                  "useremail": "GW@hogwarts.ca",
-                  "rating": "1",
-                  "review": "That's harry, his head always on the stars. Room was filthy though.",
-                  "date": "25/31/2022"
-                }
-              ],
-              "rating": "2.67"
+              "reviews": [],
+              "rating": 0
             }
           ]
         }
