@@ -369,7 +369,7 @@
               "smoking": "no",
               "seats": "10",
               "availability": "3333-11-22",
-              "leaseterm": "year",
+              "leaseterm": "month",
               "price": "3000",
               "listed": "yes",
               "reviews": [],

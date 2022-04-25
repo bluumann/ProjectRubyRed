@@ -809,32 +809,31 @@ var server = app.listen(1007, function () {
 });
 
 app.post('/user/workspace-rated', urlencodedParser, function (req, res) {
-  var wsOwner = req.body.email;
-  var wsName = req.body.workspace;
-  var wsProp = req.body.propname;
+  var wsOwner = req.body.ownerEmail;
+  var wsName = req.body.ownerWorkspace;
+  var wsProp = req.body.ownerProperty;
   const date = new Date()
-  console.log(date);
+
   var rate = {
     username: currentUser.fName + " " + currentUser.lName,
     useremail: currentUser.email,
     rating: req.body.rating, //placeholder variable
     review: req.body.review, //placeholder variable
-    date: date.getHours() + ":" + date.getMinutes() + ", " + date.getDate() + "/" + date.getMonth()+1 + "/" + date.getFullYear()
-    
+    date: date.getDate() + "/" + date.getMonth()+1 + "/" + date.getFullYear()
   }
-  console.log(rate)
+
   for (var i = 0; i < obj.Owners.length; i++){
-    console.log("Checking " + obj.Owners[i].email + " against " + wsOwner + ".");
     if (obj.Owners[i].email == wsOwner){
       for (var j = 0; j < obj.Owners[i].properties.length; j++){
-        console.log("Property: " + obj.Owners[i],properties[i].name  + " against " + wsProp + ".");
         if (obj.Owners[i].properties[j].name == wsProp){
-          for (var k = 0; i < obj.Owners[i].properties[j].workspaces.length; k++){
-            console.log("On workspace: " + obj.Owners[i],properties[i].workspaces[k].name  + " against " + wsName + "."); //debuging purposes.
+          for (var k = 0; k < obj.Owners[i].properties[j].workspaces.length; k++){
             if (obj.Owners[i].properties[j].workspaces[k].name == wsName){
-              console.log("Found!");
               obj.Owners[i].properties[j].workspaces[k].reviews.push(rate);
-              console.log(obj.Owners[i].properties[j].workspaces[k].reviews);
+              var sum = 0;
+              for (let x = 0; x < obj.Owners[i].properties[j].workspaces[k].reviews.length; x++) {
+                sum += parseInt(obj.Owners[i].properties[j].workspaces[k].reviews[x].rating);
+              }
+              obj.Owners[i].properties[j].workspaces[k].rating = (sum / obj.Owners[i].properties[j].workspaces[k].reviews.length).toFixed(2);
               break;
             }
           }

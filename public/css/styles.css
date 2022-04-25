@@ -172,7 +172,7 @@ a {
 }
 .rate:not(:checked) > input {
   position:absolute;
-  top:-9999px;
+  left:-9999px;
 }
 .rate:not(:checked) > label {
   float:right;
@@ -203,4 +203,9 @@ a {
 
 ul * li {
   font-weight: 600;
+}
+
+/*REVIEWS SECTION STYLING*/
+#reviews td{
+  width: 50vw;
 }

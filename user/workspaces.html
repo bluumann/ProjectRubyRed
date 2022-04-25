@@ -74,9 +74,9 @@ Peter Kosa
                             </td>
                             <td><label for="seats">Min number of seats:</label></td>
                             <td>
-                                <input type="range" name="seats" min="1" max="10" step="1" value="10"
+                                <input type="range" name="seats" min="1" max="10" step="1" value="1"
                                     oninput="num.value = this.value">
-                                <output id="num">10</output>
+                                <output id="num">1</output>
                             </td>
                         </tr>
                         <tr>
@@ -93,9 +93,9 @@ Peter Kosa
                             <td><input type="date" id="availabilitySearch" name="availability"></td>
                             <td><label for="priceSearch">Price Max: </label></td>
                             <td>
-                                <input type="range" name="priceSearch" min="100" max="1000" step="100" value="1000"
-                                    oninput="price.value = this.value">
-                                <output id="priceSearch">1000</output>
+                                <input type="range" name="priceSearch" min="100" max="3000" step="100" value="3000"
+                                    oninput="priceSearch.value = this.value">
+                                <output id="priceSearch">3000</output>
                             </td>
                         </tr>
                         <tr>
@@ -128,7 +128,7 @@ Peter Kosa
             <!--Create table with headers to later populate with data-->
             <h3 style="text-align: center; text-decoration: underline;">Available Workspaces</h3>
             <br>
-            <table id="workspaceDisplay">
+            <table id="workspaceDisplay" style="margin-bottom: 2.5vh;">
                 <thead>
                     <tr>
                         <td><button onclick="workplaceNameSort()">Sort</button></td>
@@ -249,36 +249,17 @@ Peter Kosa
             <thead>
                 <th>Current Reviews</th>
             </thead>
-            <tbody>
-                <tr>
-                    <td>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quae accusamus natus nihil tenetur
-                        excepturi mollitia quis, adipisci dolorem aliquid quisquam facere laboriosam necessitatibus
-                        voluptatibus eaque earum nobis fugiat dolores maxime?</td>
-                </tr>
-                <tr>
-                    <td>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quae accusamus natus nihil tenetur
-                        excepturi mollitia quis, adipisci dolorem aliquid quisquam facere laboriosam necessitatibus
-                        voluptatibus eaque earum nobis fugiat dolores maxime?</td>
-                </tr>
-                <tr>
-                    <td>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quae accusamus natus nihil tenetur
-                        excepturi mollitia quis, adipisci dolorem aliquid quisquam facere laboriosam necessitatibus
-                        voluptatibus eaque earum nobis fugiat dolores maxime?</td>
-                </tr>
-                <tr>
-                    <td>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quae accusamus natus nihil tenetur
-                        excepturi mollitia quis, adipisci dolorem aliquid quisquam facere laboriosam necessitatibus
-                        voluptatibus eaque earum nobis fugiat dolores maxime?</td>
-                </tr>
-                <tr>
-                    <td>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quae accusamus natus nihil tenetur
-                        excepturi mollitia quis, adipisci dolorem aliquid quisquam facere laboriosam necessitatibus
-                        voluptatibus eaque earum nobis fugiat dolores maxime?</td>
-                </tr>
+            <tbody id="reviews" style="text-align: left;">
+                <!--To be filled later-->
             </tbody>
         </table>
 
-        <form action="http://localhost:1007/owner/user/workspace-rated" method="POST"></form>
+        <form action="http://localhost:1007/user/workspace-rated" method="POST">
+        <div id="ownerInfo" style="display: none;">
+            <input type="text" name="ownerEmail" id="ownerEmail">
+            <input type="text" name="ownerProperty" id="ownerProperty">
+            <input type="text" name="ownerWorkspace" id="ownerWorkspace">
+        </div>
         <table style="margin: 5vh auto;">
             <tr>
                 <th colspan="2">Leave A Review</th>
@@ -289,7 +270,7 @@ Peter Kosa
             <tr>
                 <td>
                     <div class="rate">
-                        <input type="radio" id="star5" name="rating" value="5" />
+                        <input type="radio" id="star5" name="rating" value="5" checked />
                         <label for="star5" title="text">5 stars</label>
                         <input type="radio" id="star4" name="rating" value="4" />
                         <label for="star4" title="text">4 stars</label>
@@ -314,7 +295,6 @@ Peter Kosa
             <tr>
                 <td>
                     <input type="submit" value="Send" style="margin-top: 1vh;">
-                    <!-- <button id="save-button" onclick="saveRating()">Save</button> -->
                 </td>
             </tr>
         </table>
@@ -523,10 +503,10 @@ Peter Kosa
             clickWorkspace = 0;
             workplaceNameSort();
             if (clickRating == 0) {
-                workspaces.sort((a, b) => a.rating - b.rating);
+                workspaces.sort((a, b) => b.rating - a.rating);
                 clickRating = 1;
             } else {
-                workspaces.sort((a, b) => b.rating - a.rating);
+                workspaces.sort((a, b) => a.rating - b.rating);
                 clickRating = 0;
             }
             displayWorkplaces();
@@ -554,21 +534,22 @@ Peter Kosa
             if (addressSearch.value.trim == "" || !addressSearch.value) {
                 //Do not filter anything
             } else {
-                workspaces = workspaces.filter(e => e.address.includes(addressSearch.value))
+                workspaces = workspaces.filter(e => e.address.toLowerCase().includes(addressSearch.value.toLowerCase()))
             }
 
             //Filter the neighbourhood if a value is given
             if (neighbourhoodSearch.value.trim == "" || !neighbourhoodSearch.value) {
                 //Do not filter anything
             } else {
-                workspaces = workspaces.filter(e => e.neighbourhood.includes(neighbourhoodSearch.value))
+                workspaces = workspaces.filter(e => e.neighbourhood.toLowerCase().includes(neighbourhoodSearch.value.toLowerCase()))
             }
 
             //Filter the square footage if a value is given
             if (squareFootageSearch.value.trim == "" || !squareFootageSearch.value) {
                 //Do not filter anything
             } else {
-                workspaces = workspaces.filter(e => e.squareFootage.includes(squareFootageSearch.value))
+                workspaces = workspaces.filter(e => parseInt(e.squareFootage) >= squareFootageSearch.value)
+                console.log(squareFootageSearch.value)
             }
 
             //Filter the parking if a value is given
@@ -612,11 +593,11 @@ Peter Kosa
             if (availabilitySearch.value.trim == "" || !availabilitySearch.value) {
                 //Do not filter anything
             } else {
-                workspaces = workspaces.filter(e => e.availability >= availabilitySearch.value)
+                workspaces = workspaces.filter(e => e.availability <= availabilitySearch.value)
             }
 
             //Filter the price if a value is given
-            workspaces = workspaces.filter(e => e.price <= priceSearch.value)
+            workspaces = workspaces.filter(e => parseInt(e.price) <= priceSearch.value)
 
 
             //Filter the lease term if a value is given
@@ -638,7 +619,7 @@ Peter Kosa
 
         /*RESET FUNCTION*/
         function reset() {
-            location.reload()
+            window.location = "http://localhost:1007/user/workspaces"
         }
 
 
@@ -666,6 +647,11 @@ Peter Kosa
             phone = document.getElementById("phone");
             email = document.getElementById("email");
 
+            //For hidden div for post request
+            ownerEmail = document.getElementById("ownerEmail");
+            ownerProperty = document.getElementById("ownerProperty");
+            ownerWorkspace = document.getElementById("ownerWorkspace");
+
             //Populate the workplace info section
             workspaces.forEach(e => {
                 if (e.id == workspaceID) {
@@ -683,6 +669,10 @@ Peter Kosa
                     leaseTerm.innerHTML = e.leaseTerm;
                     price.innerHTML = e.price;
                     rating.innerHTML = e.rating;
+
+                    //For hidden div for reviews
+                    ownerProperty.value = e.property
+                    ownerWorkspace.value = e.workspace
                 }
             });
 
@@ -694,6 +684,30 @@ Peter Kosa
                             owner.innerHTML = o.fName + ' ' + o.lName;
                             phone.innerHTML = o.phoneNumber;
                             email.innerHTML = o.email;
+
+                            //For hidden div for reviews
+                            ownerEmail.value = o.email;
+
+                            //Clear the table before adding the elements that need to be added
+                            $("#reviews tr").remove()
+                            
+                            //Populating with reviews
+                            ws.reviews.forEach(review => {
+                                var table = document.getElementById('reviews')
+
+                                var newHeader = table.insertRow(-1)
+                                var newDate = table.insertRow(-1)
+                                var newRating = table.insertRow(-1)
+                                var newReview = table.insertRow(-1)
+
+                                newHeader.insertCell(-1).innerHTML = review.username + "(" + review.useremail + ")";
+                                newHeader.style = "font-weight: bold"
+                                newDate.insertCell(-1).innerHTML = "Date: " + review.date;
+                                newRating.insertCell(-1).innerHTML = "Rating: " + review.rating;
+                                newRating.style = "text-decoration: underline;"
+                                newReview.insertCell(-1).innerHTML = review.review;
+                                newReview.cells[0].style = "padding: 0.5vh 0 2.5vh 2vw;"
+                            });
                         }
                     });
                 });
@@ -708,17 +722,6 @@ Peter Kosa
         function hideInfo() {
             document.getElementById("moreInfo").style.display = "none";
             document.getElementById("pageMask").style.display = "none";
-        }
-
-
-        // User workspaces page - rating logic
-        function saveRating() {
-            //var currentRating = parseInt(rating.innerHTML);
-            var ratingValue = parseInt($("input[name='rating']:checked").val());
-            var reviewText = document.getElementById("review-box").value;
-
-            // console.log('chosen rating: ' + ratingValue);
-            // console.log('Review text: ' + reviewText);
         }
     </script>
 </body>
