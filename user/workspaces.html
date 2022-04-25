@@ -163,30 +163,43 @@ Peter Kosa
             </tbody>
         </table>
 
-        <table style="margin: 5vh auto;">
-            <tr>
-                <th colspan="2">My Rating</th>
-            </tr>
-            <tr>
-                <td>
-                    <div class="rate">
-                        <input type="radio" id="star5" name="rate" value="5" />
-                        <label for="star5" title="text">5 stars</label>
-                        <input type="radio" id="star4" name="rate" value="4" />
-                        <label for="star4" title="text">4 stars</label>
-                        <input type="radio" id="star3" name="rate" value="3" />
-                        <label for="star3" title="text">3 stars</label>
-                        <input type="radio" id="star2" name="rate" value="2" />
-                        <label for="star2" title="text">2 stars</label>
-                        <input type="radio" id="star1" name="rate" value="1" />
-                        <label for="star1" title="text">1 star</label>
-                    </div>
-                </td>
-                <td>
-                    <button id="rate-button" onclick="saveRating()">Rate</button>
-                </td>
-            </tr>
-        </table>
+        <form action="http://localhost:1007/owner/user/workspace-rated" method="POST"></form>
+            <table style="margin: 5vh auto;">
+                <tr>
+                    <th colspan="2">My Rating</th>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="rate">
+                            <input type="radio" id="star5" name="rating" value="5" />
+                            <label for="star5" title="text">5 stars</label>
+                            <input type="radio" id="star4" name="rating" value="4" />
+                            <label for="star4" title="text">4 stars</label>
+                            <input type="radio" id="star3" name="rating" value="3" />
+                            <label for="star3" title="text">3 stars</label>
+                            <input type="radio" id="star2" name="rating" value="2" />
+                            <label for="star2" title="text">2 stars</label>
+                            <input type="radio" id="star1" name="rating" value="1" />
+                            <label for="star1" title="text">1 star</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="review">
+                            <textarea id="review-box" name="review" rows="5" cols="50" maxlength="150" placeholder="Type your review here"></textarea>
+                        </div>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td>
+                        <input type="submit" value="Save">
+                        <!-- <button id="save-button" onclick="saveRating()">Save</button> -->
+                    </td>
+                </tr>
+            </table>
+        </form>
     </div>
 
     <div class="bottomBar">
@@ -457,14 +470,12 @@ Peter Kosa
 
         // User workspaces page - rating logic
         function saveRating() {
-            var currentRating = parseInt(rating.innerHTML);
-            var ratingValue = parseInt($("input[name='rate']:checked").val());
-            var updatedRating = 0;
+            //var currentRating = parseInt(rating.innerHTML);
+            var ratingValue = parseInt($("input[name='rating']:checked").val());
+            var reviewText = document.getElementById("review-box").value;
 
-            console.log('current rating: ' + currentRating);
-            console.log('rating value: ' + ratingValue);
-            updatedRating = (currentRating + ratingValue) / 2;
-            console.log('updated: ' + updatedRating);
+            // console.log('chosen rating: ' + ratingValue);
+            // console.log('Review text: ' + reviewText);
         }
     </script>
 </body>
