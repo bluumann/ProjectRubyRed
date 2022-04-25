@@ -809,9 +809,6 @@ var server = app.listen(1007, function () {
 });
 
 app.post('/user/workspace-rated', urlencodedParser, function (req, res) {
-  console.log(req.body.email);
-  console.log(req.body.workspace);
-  console.log(req.body.propname);
   var wsOwner = req.body.email;
   var wsName = req.body.workspace;
   var wsProp = req.body.propname;

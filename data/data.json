@@ -144,7 +144,82 @@
       "email": "SS@hogwarts.ca",
       "password": "1234",
       "ratings": [],
-      "properties": []
+      "properties": [
+        {
+          "name": "Hogwarts Dungeon",
+          "listed": "Yes",
+          "address": "Underneath the Stairs, 3",
+          "park": "no",
+          "transport": "yes",
+          "neigh": "Hogwarts",
+          "size": "100",
+          "workspaces": [
+            {
+              "id": "50beW0KG4",
+              "name": "Potions Room #1",
+              "type": "meeting-room",
+              "smoking": "no",
+              "seats": "10",
+              "availability": "1093-10-09",
+              "leaseterm": "week",
+              "price": "1000",
+              "listed": "yes",
+              "reviews": [],
+              "rating": 0
+            },
+            {
+              "id": "ZXkAa94tw",
+              "name": "Potions Room #2",
+              "type": "meeting-room",
+              "smoking": "no",
+              "seats": "5",
+              "availability": "8787-12-31",
+              "leaseterm": "day",
+              "price": "199",
+              "listed": "yes",
+              "reviews": [],
+              "rating": 0
+            }
+          ]
+        },
+        {
+          "name": "Potion Store",
+          "listed": "Yes",
+          "address": "Hogsmeade Street, 7",
+          "park": "yes",
+          "transport": "no",
+          "neigh": "Hogsmeade",
+          "size": "120",
+          "workspaces": [
+            {
+              "id": "ZD4N-F68F",
+              "name": "Storage Cabinet",
+              "type": "private-workspace",
+              "smoking": "no",
+              "seats": "1",
+              "availability": "1111-11-11",
+              "leaseterm": "month",
+              "price": "777",
+              "listed": "yes",
+              "reviews": [],
+              "rating": 0
+            },
+            {
+              "id": "fz-PfNaVS",
+              "name": "Potion Cauldron",
+              "type": "open-desk",
+              "smoking": "yes",
+              "seats": "1",
+              "availability": "2222-02-02",
+              "leaseterm": "week",
+              "price": "88",
+              "listed": "yes",
+              "reviews": [],
+              "rating": 0
+            }
+          ]
+        }
+      ]
     },
     {
       "fName": "Minerva",
@@ -154,7 +229,81 @@
       "email": "MM@hogwarts.ca",
       "password": "1234",
       "ratings": [],
-      "properties": []
+      "properties": [
+        {
+          "name": "Room of Requirement",
+          "listed": "Yes",
+          "address": "7th Floor, Directly Ahead",
+          "park": "no",
+          "transport": "no",
+          "neigh": "Hogwarts",
+          "size": "9999",
+          "workspaces": []
+        },
+        {
+          "name": "2nd Floor",
+          "listed": "Yes",
+          "address": "2nd Floor",
+          "park": "yes",
+          "transport": "yes",
+          "neigh": "Hogwarts",
+          "size": "1000",
+          "workspaces": [
+            {
+              "id": "fmy1d-Fsu",
+              "name": "Transfiguration Room #1",
+              "type": "meeting-room",
+              "smoking": "no",
+              "seats": "10",
+              "availability": "1111-11-22",
+              "leaseterm": "week",
+              "price": "1000",
+              "listed": "yes",
+              "reviews": [],
+              "rating": 0
+            },
+            {
+              "id": "fmy2d-Fsu",
+              "name": "Transfiguration Room #2",
+              "type": "meeting-room",
+              "smoking": "no",
+              "seats": "10",
+              "availability": "2222-11-22",
+              "leaseterm": "week",
+              "price": "2000",
+              "listed": "yes",
+              "reviews": [],
+              "rating": 0
+            },
+            {
+              "id": "fmy3d-Fsu",
+              "name": "Transfiguration Room #3",
+              "type": "meeting-room",
+              "smoking": "no",
+              "seats": "10",
+              "availability": "2222-11-22",
+              "leaseterm": "week",
+              "price": "2200",
+              "listed": "yes",
+              "reviews": [],
+              "rating": 0
+            },
+            {
+              "id": "fmy4d-Fsu",
+              "name": "Transfiguration Room #4",
+              "type": "meeting-room",
+              "smoking": "no",
+              "seats": "10",
+              "availability": "3333-11-22",
+              "leaseterm": "day",
+              "price": "3000",
+              "listed": "yes",
+              "reviews": [],
+              "rating": 0
+            }
+          ]
+        }
+      ]
     },
     {
       "fName": "Rubeus",
@@ -164,7 +313,71 @@
       "email": "RH@hogwarts.ca",
       "password": "1234",
       "ratings": [],
-      "properties": []
+      "properties": [
+        {
+          "name": "Castle Grounds",
+          "listed": "Yes",
+          "address": "Around Hogwarts",
+          "park": "no",
+          "transport": "no",
+          "neigh": "Hogwarts",
+          "size": "1000",
+          "workspaces": [
+            {
+              "id": "fmyDd-5su",
+              "name": "Field #1",
+              "type": "meeting-room",
+              "smoking": "yes",
+              "seats": "10",
+              "availability": "1111-11-22",
+              "leaseterm": "week",
+              "price": "1000",
+              "listed": "yes",
+              "reviews": [],
+              "rating": 0
+            },
+            {
+              "id": "fmyDd-1su",
+              "name": "Field #2",
+              "type": "meeting-room",
+              "smoking": "no",
+              "seats": "10",
+              "availability": "2222-11-22",
+              "leaseterm": "week",
+              "price": "2000",
+              "listed": "yes",
+              "reviews": [],
+              "rating": 0
+            },
+            {
+              "id": "fmyDd-3su",
+              "name": "Field #3",
+              "type": "meeting-room",
+              "smoking": "no",
+              "seats": "10",
+              "availability": "2222-11-22",
+              "leaseterm": "week",
+              "price": "2200",
+              "listed": "yes",
+              "reviews": [],
+              "rating": 0
+            },
+            {
+              "id": "fmyDd-2su",
+              "name": "Field #4",
+              "type": "meeting-room",
+              "smoking": "no",
+              "seats": "10",
+              "availability": "3333-11-22",
+              "leaseterm": "year",
+              "price": "3000",
+              "listed": "yes",
+              "reviews": [],
+              "rating": 0
+            }
+          ]
+        }
+      ]
     },
     {
       "fName": "Filius",
@@ -184,7 +397,58 @@
       "email": "DU@hogwarts.ca",
       "password": "1234",
       "ratings": [],
-      "properties": []
+      "properties": [
+        {
+          "name": "6th Floor",
+          "listed": "Yes",
+          "address": "MInistry of Magic, 77 - London",
+          "park": "yes",
+          "transport": "yes",
+          "neigh": "London",
+          "size": "10000",
+          "workspaces": [
+            {
+              "id": "vk2VjjMzm",
+              "name": "Office #1",
+              "type": "private-workspace",
+              "smoking": "yes",
+              "seats": "3",
+              "availability": "1876-02-03",
+              "leaseterm": "week",
+              "price": "1294",
+              "listed": "yes",
+              "reviews": [],
+              "rating": 0
+            },
+            {
+              "id": "yPezRBzi7",
+              "name": "Office #2",
+              "type": "meeting-room",
+              "smoking": "yes",
+              "seats": "3",
+              "availability": "1700-08-02",
+              "leaseterm": "week",
+              "price": "1847",
+              "listed": "yes",
+              "reviews": [],
+              "rating": 0
+            },
+            {
+              "id": "qU2X1qWXd",
+              "name": "Cat's Retreat",
+              "type": "open-desk",
+              "smoking": "no",
+              "seats": "1",
+              "availability": "1111-11-22",
+              "leaseterm": "day",
+              "price": "1",
+              "listed": "yes",
+              "reviews": [],
+              "rating": 0
+            }
+          ]
+        }
+      ]
     },
     {
       "fName": "Remus",
@@ -194,7 +458,45 @@
       "email": "RL@hogwarts.ca",
       "password": "1234",
       "ratings": [],
-      "properties": []
+      "properties": [
+        {
+          "name": "Grimauld Place",
+          "listed": "Yes",
+          "address": "Grimauld Place, 12",
+          "park": "yes",
+          "transport": "yes",
+          "neigh": "London",
+          "size": "1874",
+          "workspaces": [
+            {
+              "id": "bs3ZzaxIw",
+              "name": "Kreacher's Cabinet",
+              "type": "private-workspace",
+              "smoking": "yes",
+              "seats": "1",
+              "availability": "9813-12-22",
+              "leaseterm": "month",
+              "price": "131",
+              "listed": "yes",
+              "reviews": [],
+              "rating": 0
+            },
+            {
+              "id": "tRIeYvUL-",
+              "name": "Office #1",
+              "type": "meeting-room",
+              "smoking": "yes",
+              "seats": "3",
+              "availability": "1111-11-22",
+              "leaseterm": "month",
+              "price": "100",
+              "listed": "yes",
+              "reviews": [],
+              "rating": 0
+            }
+          ]
+        }
+      ]
     },
     {
       "fName": "Alastor",
@@ -204,7 +506,71 @@
       "email": "AM@hogwarts.ca",
       "password": "1234",
       "ratings": [],
-      "properties": []
+      "properties": [
+        {
+          "name": "Big Old Chest",
+          "listed": "Yes",
+          "address": "7th Floor, Office #19",
+          "park": "no",
+          "transport": "yes",
+          "neigh": "Hogwarts",
+          "size": "1720",
+          "workspaces": [
+            {
+              "id": "fmyDd-Fxu",
+              "name": "Chest #1",
+              "type": "meeting-room",
+              "smoking": "yes",
+              "seats": "10",
+              "availability": "1111-11-22",
+              "leaseterm": "week",
+              "price": "1",
+              "listed": "yes",
+              "reviews": [],
+              "rating": 0
+            },
+            {
+              "id": "fayDd-Fsu",
+              "name": "Chest #2",
+              "type": "meeting-room",
+              "smoking": "no",
+              "seats": "10",
+              "availability": "2222-11-22",
+              "leaseterm": "week",
+              "price": "2000",
+              "listed": "yes",
+              "reviews": [],
+              "rating": 0
+            },
+            {
+              "id": "f3yDd-Fsu",
+              "name": "Chest #3",
+              "type": "meeting-room",
+              "smoking": "no",
+              "seats": "1",
+              "availability": "2222-12-23",
+              "leaseterm": "week",
+              "price": "2518700",
+              "listed": "yes",
+              "reviews": [],
+              "rating": 0
+            },
+            {
+              "id": "f8yDd-Fsu",
+              "name": "Chest #4",
+              "type": "meeting-room",
+              "smoking": "no",
+              "seats": "5",
+              "availability": "3313-11-22",
+              "leaseterm": "day",
+              "price": "3000",
+              "listed": "yes",
+              "reviews": [],
+              "rating": 0
+            }
+          ]
+        }
+      ]
     },
     {
       "fName": "Pomona",
