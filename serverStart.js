@@ -802,12 +802,6 @@ app.get('/owner/workspaces/api', function (req, res) {
   res.send(allWorkspaces);
 });
 
-var server = app.listen(1007, function () {
-  var host = server.address().address;
-  var port = server.address().port;
-  console.log(`Server is running on http://localhost:${port}`);
-});
-
 app.post('/user/workspace-rated', urlencodedParser, function (req, res) {
   var wsOwner = req.body.ownerEmail;
   var wsName = req.body.ownerWorkspace;
@@ -855,3 +849,15 @@ app.post('/user/workspace-rated', urlencodedParser, function (req, res) {
   }
 }
 );
+
+app.use('/*', function (req, res) {
+  res.send("Page does not exist.. <a href='/'>HOME</a>")
+})
+
+
+//Server startup
+var server = app.listen(1007, function () {
+  var host = server.address().address;
+  var port = server.address().port;
+  console.log(`Server is running on http://localhost:${port}`);
+});

@@ -101,13 +101,13 @@ Peter Kosa
                         <tr>
                             <td><label for="leaseterm">Lease term:</label></td>
                             <td colspan="2">
-                                <input type="radio" id="ltAny" name="leaseterm" value="any" checked="checked">
+                                <input type="radio" id="ltAny" name="leaseTerm" value="any" checked="checked">
                                 <label for="ltAny">Any</label>
-                                <input type="radio" id="ltDay" name="leaseterm" value="day">
+                                <input type="radio" id="ltDay" name="leaseTerm" value="day">
                                 <label for="ltDay">Day</label>
-                                <input type="radio" id="ltWeek" name="leaseterm" value="week">
+                                <input type="radio" id="ltWeek" name="leaseTerm" value="week">
                                 <label for="ltWeek">Week</label>
-                                <input type="radio" id="ltMonth" name="leaseterm" value="month">
+                                <input type="radio" id="ltMonth" name="leaseTerm" value="month">
                                 <label for="ltMonth">Month</label>
                             </td>
                         </tr>
@@ -575,7 +575,7 @@ Peter Kosa
             }
 
             //Filter the seats if a value is given
-            workspaces = workspaces.filter(e => e.seats >= seatsSearch.value)
+            workspaces = workspaces.filter(e => parseInt(e.seats) >= seatsSearch.value)
 
 
             //Filter the smoking if a value is given
@@ -596,6 +596,7 @@ Peter Kosa
                 workspaces = workspaces.filter(e => e.availability <= availabilitySearch.value)
             }
 
+            
             //Filter the price if a value is given
             workspaces = workspaces.filter(e => parseInt(e.price) <= priceSearch.value)
 
