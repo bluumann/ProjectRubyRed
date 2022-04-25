@@ -493,6 +493,7 @@ app.post('/owner/properties/property-created', urlencodedParser, function (req, 
     else { //if check is false, it means property name is unique.
       var property = {
         name: req.body.name,
+        listed: req.body.listed,
         address: req.body.address,
         park: req.body.park,
         transport: req.body.transport,
@@ -549,6 +550,7 @@ app.post(
       currentUser.properties.forEach(element => {
         if (req.body.name == element.name) {
           element.address = req.body.address;
+          element.listed = req.body.listed;
           element.park = req.body.park;
           element.neigh = req.body.neigh;
           element.size = req.body.size;
@@ -807,8 +809,43 @@ var server = app.listen(1007, function () {
   console.log(`Server is running on http://localhost:${port}`);
 });
 
-function getOption() {
-  selectElement = document.querySelector('#update');
-  output = selectElement.value;
-  document.querySelector('.output').textContent = output;
+app.post('/owner/user/workspace-rated', urlencodedParser, function (req, res) {
+  var wsOwner = red.body.email;
+  var wsName = red.body.workspace;
+  var wsProp = req.body.propname;
+  var rate = {
+    username: currentUser.fName + " " + currentUser.lName,
+    useremail: currentUser.email,
+    rating: req.body.rating, //placeholder variable
+    review: req.body.review, //placeholder variable
+    date: getHours() + ":" + getMinutes() + ", " + getDate() + "/" + getMonth()+1 + "/" + getFullYear()
+  }
+  for (var i = 0; i < obj.Owners.length; i++){
+    if (obj.Owner[i].email == wsOwner){
+      for (var j = 0; j < obj.Owners[i].properties.length; j++){
+        if (obj.Owner[i].properties[j].name == wsProp){
+          for (var k = 0; i < obj.Owner[i].properties[j].workspaces.length; k++){
+            if (obj.Owner[i].properties[j].workspace[k].name == wsName){
+              obj.Owner[i].properties[j].workspace[k].reviews.push(rate);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  fs.writeFile(
+    path.join(__dirname, 'data', 'data.json'),
+    JSON.stringify(obj, null, 2),
+    reviewAdded
+  )
+
+  function reviewAdded() {
+    console.log('Review added/updated.');
+    //res.redirect('/propertyIn'); //placeholder
+    res.send(
+      'Thank you for rating this workspace.<br>To return, click <a href="/user/workspaces.html">here</a>.'
+    );
+  }
 }
+);
