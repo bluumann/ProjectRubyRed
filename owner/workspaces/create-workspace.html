@@ -33,9 +33,11 @@ Peter Kosa
             <h1>Create Workspace</h1>
             <form action="http://localhost:1007/owner/workspaces/workspace-created" method="POST">
                 <label for="property">Select Property:</label>
-                <select name="property" id="property">
+                <select name="property" id="property" onchange="enableButton()">
                     <option>Choose a Property</option>
-                </select><br><br>
+                </select>
+
+                <span id="warning" style="color: red;"></span><br><br>
 
                 <label for="name">Name of the workspace:</label>
                 <input type="text" id="name" name="name" required><br><br>
@@ -76,7 +78,7 @@ Peter Kosa
                 <input type="radio" id="not-listed" name="listed" value="no">
                 <label for="listed">No</label><br><br>
 
-                <input type="submit" value="Create">
+                <input type="submit" value="Create" id="submit-button" onclick="checkPropertySelection()">
             </form>
 
 
@@ -88,8 +90,11 @@ Peter Kosa
         2022.
     </div>
 
+
     <script>
         const select = document.getElementById('property');
+        const button = document.getElementById('submit-button');
+        const warning = document.getElementById('warning');
 
         function checkProperties() {
             fetch('/currentUser')
@@ -103,6 +108,21 @@ Peter Kosa
                     })
                 })
                 .catch(err => alert("I got an error on the API."))
+        }
+
+        function checkPropertySelection() {
+            if (select.value == 'Choose a Property') {
+                button.disabled = true;
+                warning.innerHTML = 'You have to select a property first!';
+            }
+            else if (select.value != 'Choose a Property') {
+                button.disabled = false;  
+            }
+        }
+
+        function enableButton() {
+            button.disabled = false;
+            warning.innerHTML = '';
         }
     </script>
 </body>

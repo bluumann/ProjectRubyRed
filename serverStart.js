@@ -704,21 +704,21 @@ app.post('/owner/workspaces/workspace-updated', urlencodedParser, UpdateWorkspac
 // Get data from "Update Workspace" form and add it to "obj"
 function UpdateWorkspace(req, res) {
 
-  var check = false;
-  for (let i = 0; i < currentUser.properties.length; i++) {
-    if (currentUser.properties[i].name == req.body.property) {
-      currentUser.properties[i].workspaces.forEach(element => {
-        if (req.body.name == element.name) {
-          check = true;
-        }
-    })}
-  }
+  // var check = false;
+  // for (let i = 0; i < currentUser.properties.length; i++) {
+  //   if (currentUser.properties[i].name == req.body.property) {
+  //     currentUser.properties[i].workspaces.forEach(element => {
+  //       if (req.body.name == element.name) {
+  //         check = true;
+  //       }
+  //   })}
+  // }
 
-  if (check) {
-    // console.log("A workspace with this name exists already."); //debug
-    res.send('A workspace with this name already exists.<br>To return, click <a href="/owner/workspaces/create">here</a>.')
-  }
-  else {
+  // if (check) {
+  //   // console.log("A workspace with this name exists already."); //debug
+  //   res.send('A workspace with this name already exists.<br>To return, click <a href="/owner/workspaces/create">here</a>.')
+  // }
+  
   var propertyName = req.body.property;
   var id = req.body.id;
 
@@ -756,7 +756,7 @@ function UpdateWorkspace(req, res) {
   function Updated() {
     console.log('Workspace updated.');
     res.send('Workspace has been updated.<br>To return home, click <a href="/owner/workspaces">here</a>.');
-  }}
+  }
 }
 
 // ROUTE TO "DELETE WORKSPACE" PAGE
@@ -857,9 +857,7 @@ app.post('/user/workspace-rated', urlencodedParser, function (req, res) {
   function reviewAdded() {
     console.log('Review added/updated.');
     //res.redirect('/propertyIn'); //placeholder
-    res.send(
-      'Thank you for rating this workspace.<br>To return, click <a href="/user/workspaces">here</a>.'
-    );
+    res.send('Thank you for rating this workspace.<br>To return, click <a href="/user/workspaces">here</a>.');
   }
 }
 );

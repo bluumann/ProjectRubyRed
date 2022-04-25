@@ -39,12 +39,13 @@ Peter Kosa
                     <option>Choose a workspace</option>
                 </select>
 
+                <span id="warning" style="color: red;"></span>
                 <span id="parentElement-property"></span><br><br>
 
                 <label for="deletecheck">Are you sure you want to delete this workspace?</label>
                 <input type="checkbox" id="deletecheck" name="deletecheck" value="positive" required><br><br>
 
-                <input type="submit" value="Delete">
+                <input type="submit" value="Delete" id="submit-button" onclick="checkWorkspaceSelection()">
             </form>
 
         </div>
@@ -58,6 +59,8 @@ Peter Kosa
 
     <script>
         const select = document.getElementById('types');
+        const button = document.getElementById('submit-button');
+        const warning = document.getElementById('warning');
         const parentElement = document.getElementById('parentElement-property');
         var parentName;
 
@@ -78,6 +81,9 @@ Peter Kosa
         }
 
         function displayparentElement() {
+            button.disabled = false;
+            warning.innerHTML = '';
+
             var currentValue = select.value;
 
             fetch('/currentUser')
@@ -97,6 +103,15 @@ Peter Kosa
                 .catch(err => alert("I got an error on the API."))
         }
         
+        function checkWorkspaceSelection() {
+            if (select.value == 'Choose a workspace') {
+                button.disabled = true;
+                warning.innerHTML = 'You have to select a workspace first!';
+            }
+            else if (select.value != 'Choose a Property') {
+                button.disabled = false;  
+            }
+        }
     </script>
 </body>
 

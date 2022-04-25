@@ -31,12 +31,14 @@ Peter Kosa
     <div class="mainPage">
         <div id="profilePage">
 
-            <h1>Update Workspace</h1>
+            <h1>Update Property</h1>
             <form action="http://localhost:1007/owner/properties/property-updated" method="POST">
                 <label for="name">Select Property:</label>
                 <select name="name" id="name" onchange="UpdateFields()">
                     <option>Choose a Property</option>
-                </select><br><br>
+                </select>
+
+                <span id="warning" style="color: red;"></span><br><br>
 
                 <label for="name">Should it be listed:</label>
                 <select name="listed" id="listed">
@@ -63,7 +65,7 @@ Peter Kosa
                 <input type="radio" id="public" name="transport" value="yes">
                 <label for="public">Public Transportation</label><br><br>
 
-                <input type="submit" value="Update">
+                <input type="submit" value="Update" id="submit-button" onclick="checkPropertySelection()">
             </form>
         </div>
     </div>
@@ -76,6 +78,8 @@ Peter Kosa
 
     <script>
         const select = document.getElementById('name');
+        const button = document.getElementById('submit-button');
+        const warning = document.getElementById('warning');
 
         function checkProperties() {
             fetch('/currentUser')
@@ -93,6 +97,9 @@ Peter Kosa
         }
 
         function UpdateFields() {
+            button.disabled = false;
+            warning.innerHTML = '';
+
             fetch('/currentUser')
                 .then(res => res.json())
                 .then(function (data) {
@@ -136,7 +143,15 @@ Peter Kosa
                 .catch(err => alert("I got an error on the API #2."))
         }
 
-
+        function checkPropertySelection() {
+            if (select.value == 'Choose a Property') {
+                button.disabled = true;
+                warning.innerHTML = 'You have to select a property first!';
+            }
+            else if (select.value != 'Choose a Property') {
+                button.disabled = false;  
+            }
+        }
     </script>
 </body>
 

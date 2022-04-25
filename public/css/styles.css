@@ -192,3 +192,7 @@ a {
 .rate > label:hover ~ input:checked ~ label {
   color: #c59b08;
 }
+
+ul * li {
+  font-weight: 600;
+}

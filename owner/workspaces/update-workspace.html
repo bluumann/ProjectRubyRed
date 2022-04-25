@@ -36,12 +36,16 @@ Peter Kosa
                 <label for="property">Select Property:</label>
                 <select name="property" id="property" onchange="updateWorkspaces()">
                     <option>Choose a Property</option>
-                </select><br><br>
+                </select>
+
+                <span id="warning-property" style="color: red;"></span><br><br>
 
                 <label for="types">Select workspace:</label>
                 <select name="types" id="types" onchange="displayWorkspaceInfo()">
                     <option>Choose a workspace</option>
-                </select><br><br>
+                </select>
+
+                <span id="warning-workspace" style="color: red;"></span><br><br>
 
                 <input type="text" id="id" name="id" style="display: none">
 
@@ -85,7 +89,7 @@ Peter Kosa
                 <input type="radio" id="not-listed" name="listed" value="no">
                 <label for="listed">No</label><br><br>
 
-                <input type="submit" value="Update">
+                <input type="submit" value="Update" id="submit-button" onclick="checkSelection()">
             </form>
         </div>
     </div>
@@ -99,6 +103,9 @@ Peter Kosa
     <script>
         const propertySelect = document.getElementById('property');
         const workspaceSelect = document.getElementById('types');
+        const button = document.getElementById('submit-button');
+        const warningProp = document.getElementById('warning-property');
+        const warningWork = document.getElementById('warning-workspace');
 
         const selectWorkspaceElement = document.getElementById('types');
         const idElement = document.getElementById('id');
@@ -138,6 +145,8 @@ Peter Kosa
 
 
         function displayWorkspaceInfo() {
+            button.disabled = false;
+            warningWork.innerHTML = '';
 
             // Reset fields to default value upon changing dropdown selection
             nameElement.value = "";
@@ -208,6 +217,8 @@ Peter Kosa
         }
 
         function updateWorkspaces() {
+            button.disabled = false;
+            warningProp.innerHTML = '';
 
             // Reset fields to default value upon changing dropdown selection
             nameElement.value = "";
@@ -245,6 +256,23 @@ Peter Kosa
                 .catch(err => alert("I got an error on the API."))
         }
 
+        function checkSelection() {
+            if (propertySelect.value == 'Choose a Property') {
+                button.disabled = true;
+                warningProp.innerHTML = 'You have to select a property first!';
+            }
+            else if (propertySelect.value != 'Choose a Property') {
+                button.disabled = false;  
+            }
+
+            if (workspaceSelect.value == 'Choose a workspace' && propertySelect.value != 'Choose a Property') {
+                button.disabled = true;
+                warningWork.innerHTML = 'You have to select a workspace first!';
+            }
+            else if (workspaceSelect.value != 'Choose a workspace') {
+                button.disabled = false;  
+            }
+        }
     </script>
 </body>
 
