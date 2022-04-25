@@ -1,0 +1,9 @@
+Team: Group 2
+Students:
+Colin From (ID 432822, GitHub: cfrom822 and Madachi)
+Pedro Ferreira (ID 419302, GitHub: DoctorZoe)
+Peter Kosa (ID 427089, GitHub: Bluumann Peter Kosa)
+
+
+https://github.com/FrankBerrocal/ProjectRubyRed
+(Git page was created by Frank)
