@@ -44,9 +44,7 @@ if (exists) {
 } else {
   obj = { //Fill the obj with appropriate keys and empty arrays
     Users: [],
-    Owners: [],
-    Properties: [],
-    Workspaces: [],
+    Owners: []
   };
 
   //Write data to the file and notify via console

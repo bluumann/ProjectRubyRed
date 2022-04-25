@@ -3,235 +3,133 @@
     {
       "fName": "Harry",
       "lName": "Potter",
-      "idNumber": "1111",
-      "phoneNumber": "111 111 1111",
+      "idNumber": "111",
+      "phoneNumber": "202 918 2132",
       "email": "HP@hogwarts.ca",
       "password": "1234",
-      "rating": 5,
       "rented": []
     },
     {
       "fName": "Hermione",
       "lName": "Granger",
-      "idNumber": "2222",
-      "phoneNumber": "222 222 2222",
+      "idNumber": "222",
+      "phoneNumber": "582 222 3430",
       "email": "HG@hogwarts.ca",
       "password": "1234",
-      "rating": 5,
       "rented": []
     },
     {
       "fName": "Ron",
       "lName": "Weasley",
-      "idNumber": "3333",
-      "phoneNumber": "333 333 3333",
+      "idNumber": "333",
+      "phoneNumber": "582 529 8890",
       "email": "RW@hogwarts.ca",
       "password": "1234",
-      "rating": 5,
       "rented": []
     },
     {
-      "fName": "C",
-      "lName": "B",
-      "idNumber": "11",
-      "phoneNumber": "123 456 7890",
-      "email": "CB@email.com",
+      "fName": "Draco",
+      "lName": "Malfoy",
+      "idNumber": "444",
+      "phoneNumber": "507 625 2508",
+      "email": "DM@hogwarts.ca",
       "password": "1234",
       "rented": []
     },
     {
-      "fName": "Harry",
-      "lName": "Potter",
-      "idNumber": "1111",
-      "phoneNumber": "111 111 1111",
-      "email": "HP@hogwarts.ca",
+      "fName": "Neville",
+      "lName": "Longbottom",
+      "idNumber": "555",
+      "phoneNumber": "505 516 1793",
+      "email": "NL@hogwarts.ca",
       "password": "1234",
       "rented": []
     },
     {
-      "fName": "Test",
-      "lName": "Test",
-      "idNumber": "2222",
-      "phoneNumber": "222 222 2222",
-      "email": "test@test.com",
-      "password": "test",
+      "fName": "Luna",
+      "lName": "Lovegood",
+      "idNumber": "666",
+      "phoneNumber": "228 713 9798",
+      "email": "LL@hogwarts.ca",
+      "password": "1234",
+      "rented": []
+    },
+    {
+      "fName": "Ginny",
+      "lName": "Weasley",
+      "idNumber": "777",
+      "phoneNumber": "410 981 4576",
+      "email": "GW@hogwarts.ca",
+      "password": "1234",
+      "rented": []
+    },
+    {
+      "fName": "Vincent",
+      "lName": "Crabbe",
+      "idNumber": "888",
+      "phoneNumber": "582 302 7203",
+      "email": "VC@hogwarts.ca",
+      "password": "1234",
+      "rented": []
+    },
+    {
+      "fName": "Gregory",
+      "lName": "Goyle",
+      "idNumber": "999",
+      "phoneNumber": "315 338 1425",
+      "email": "GG@hogwarts.ca",
+      "password": "1234",
+      "rented": []
+    },
+    {
+      "fName": "Fred",
+      "lName": "Weasley",
+      "idNumber": "000",
+      "phoneNumber": "505 755 0635",
+      "email": "FW@hogwarts.ca",
+      "password": "1234",
+      "rented": []
+    },
+    {
+      "fName": "George",
+      "lName": "Weasley",
+      "idNumber": "001",
+      "phoneNumber": "313 813 4601",
+      "email": "GeorgeW@hogwarts.ca",
+      "password": "1234",
       "rented": []
     }
   ],
   "Owners": [
     {
-      "fName": "Peter",
-      "lName": "Kosa",
-      "idNumber": "8787",
-      "phoneNumber": "300 400 5050",
-      "email": "peter@email.com",
-      "password": "password",
-      "rating": 5,
-      "properties": []
-    },
-    {
-      "fName": "Pedro",
-      "lName": "Ferreira",
-      "idNumber": "9999",
-      "phoneNumber": "300 400 5050",
-      "email": "pedro@here.com",
-      "password": "1234",
-      "rating": 5,
-      "properties": []
-    },
-    {
       "fName": "Albus",
       "lName": "Dumbledore",
-      "idNumber": "77777",
-      "phoneNumber": "555 555 5555",
-      "email": "dumbledore@hogwarts.com",
+      "idNumber": "501",
+      "phoneNumber": "313 729 2261",
+      "email": "AD@hogwarts.ca",
       "password": "1234",
-      "rating": 5,
+      "ratings": [],
       "properties": [
         {
-          "name": "Hogwarts",
-          "address": "Over there.",
-          "park": "yes",
+          "name": "Hogwarts Main Campus",
+          "listed": "Yes",
+          "address": "1 Hogwarts Street",
+          "park": "no",
           "transport": "yes",
-          "neigh": "Here.",
-          "size": "1000",
+          "neigh": "Hogwarts",
+          "size": "10000",
           "workspaces": [
             {
-              "id": "QhkQGzo55",
-              "name": "Colin's Room of Requirement",
-              "type": "meeting-room",
-              "smoking": "no",
-              "seats": "1",
-              "availability": "0001-01-01",
-              "leaseterm": "day",
-              "price": "9999999999",
-              "listed": "yes",
-              "reviews": [],
-              "rating": 0
-            },
-            {
-              "id": "o9z3s98SP",
-              "name": "Lalalaa",
-              "type": "meeting-room",
-              "smoking": "no",
-              "seats": "1",
-              "availability": "0001-01-01",
-              "leaseterm": "day",
-              "price": "199",
-              "listed": "yes",
-              "reviews": [],
-              "rating": 0
-            },
-            {
-              "id": "_fR6A60GX",
-              "name": "Lala's room of Lalation",
-              "type": "meeting-room",
-              "smoking": "no",
-              "seats": "1",
-              "availability": "0001-01-01",
-              "leaseterm": "day",
-              "price": "1",
-              "listed": "yes",
-              "reviews": [],
-              "rating": 0
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "fName": "Minerva",
-      "lName": "McGonagall",
-      "idNumber": "55555",
-      "phoneNumber": "555 555 5555",
-      "email": "minerva@hogwarts.com",
-      "password": "1234",
-      "rating": 5,
-      "properties": []
-    },
-    {
-      "fName": "Elon",
-      "lName": "Musk",
-      "idNumber": "9002",
-      "phoneNumber": "555 555 5555",
-      "email": "elon@tesla.com",
-      "password": "musk",
-      "rating": 5,
-      "properties": [
-        {
-          "name": "Tesla HQ California",
-          "address": "CA, USA",
-          "type": "????",
-          "park": "yes",
-          "transport": "yes",
-          "smoking": "no",
-          "seats": "15",
-          "availabilityFrom": "2022-04-22",
-          "availabilityTo": "",
-          "leaseterm": "day",
-          "price": "500",
-          "workspaces": [
-            {
-              "id": "UHcFFMRQ9",
-              "name": "San Francisco",
-              "type": "open-desk",
-              "smoking": "yes",
-              "seats": "5",
-              "availability": "2022-04-24",
-              "leaseterm": "month",
-              "price": "66.9",
-              "listed": "yes",
-              "rating": 1
-            },
-            {
-              "id": "d3xDbdt7v",
-              "name": "Santa Monica",
+              "id": "By56OjzMR",
+              "name": "Main Office",
               "type": "private-workspace",
               "smoking": "no",
-              "seats": "3",
-              "availability": "2022-04-24",
+              "seats": "1",
+              "availability": "2022-05-01",
               "leaseterm": "day",
-              "price": "777",
+              "price": "200",
               "listed": "yes",
-              "rating": 3
-            }
-          ]
-        },
-        {
-          "name": "Tesla HQ Texas",
-          "address": "CA, USA",
-          "type": "????",
-          "park": "yes",
-          "transport": "yes",
-          "smoking": "no",
-          "seats": "15",
-          "availabilityFrom": "2022-04-22",
-          "availabilityTo": "",
-          "leaseterm": "day",
-          "price": "500",
-          "workspaces": [
-            {
-              "id": "BySr3EDbh",
-              "name": "Dallas",
-              "type": "private-workspace",
-              "smoking": "no",
-              "seats": "5",
-              "availability": "2022-04-30",
-              "leaseterm": "month",
-              "price": "1003",
-              "listed": "no",
-              "rating": 0
-            },
-            {
-              "id": "1JxgN99TR",
-              "name": "Houston",
-              "type": "open-desk",
-              "smoking": "yes",
-              "seats": "7",
-              "availability": "2022-04-30",
-              "leaseterm": "week",
-              "price": "741",
-              "listed": "yes",
+              "reviews": [],
               "rating": 0
             }
           ]
@@ -241,129 +139,92 @@
     {
       "fName": "Severus",
       "lName": "Snape",
-      "idNumber": "2222",
-      "phoneNumber": "222 222 2222",
+      "idNumber": "502",
+      "phoneNumber": "582 777 1875",
       "email": "SS@hogwarts.ca",
       "password": "1234",
-      "rating": 5,
-      "properties": [
-        {
-          "name": "This is a test",
-          "address": "123 Fake Ave",
-          "type": "????",
-          "park": "yes",
-          "transport": "yes",
-          "smoking": "no",
-          "seats": "20",
-          "availabilityFrom": "2022-04-23",
-          "availabilityTo": "2022-04-30",
-          "leaseterm": "week",
-          "price": "300",
-          "workspaces": [
-            {
-              "id": "ShL7prSrS",
-              "name": "Yet another test",
-              "type": "meeting-room",
-              "smoking": "no",
-              "seats": "4",
-              "availability": "2022-04-23",
-              "leaseterm": "week",
-              "price": "800",
-              "listed": "yes"
-            },
-            {
-              "id": "ILs4UBRAH",
-              "name": "Blah blah",
-              "type": "meeting-room",
-              "smoking": "yes",
-              "seats": "8",
-              "availability": "2022-04-02",
-              "leaseterm": "month",
-              "price": "900",
-              "listed": "yes"
-            }
-          ]
-        },
-        {
-          "name": "Another test",
-          "address": "123 Fake Ave",
-          "type": "????",
-          "park": "no",
-          "transport": "no",
-          "smoking": "no",
-          "seats": "32",
-          "availabilityFrom": "2022-04-09",
-          "availabilityTo": "2022-04-30",
-          "leaseterm": "month",
-          "price": "600",
-          "workspaces": []
-        },
-        {
-          "name": "Another test",
-          "address": "123 Fake Ave",
-          "type": "????",
-          "park": "no",
-          "transport": "no",
-          "smoking": "no",
-          "seats": "39",
-          "availabilityFrom": "2022-04-02",
-          "availabilityTo": "2022-04-30",
-          "leaseterm": "month",
-          "price": "321",
-          "workspaces": []
-        },
-        {
-          "name": "final test",
-          "address": "123 Fake Ave",
-          "type": "????",
-          "park": "no",
-          "transport": "no",
-          "smoking": "no",
-          "seats": "1",
-          "availabilityFrom": "",
-          "availabilityTo": "",
-          "leaseterm": "day",
-          "price": "322",
-          "workspaces": []
-        }
-      ]
+      "ratings": [],
+      "properties": []
     },
     {
-      "fName": "Jane",
-      "lName": "Doe",
-      "idNumber": "8888",
-      "phoneNumber": "888 888 8888",
-      "email": "JDoe@email.com",
+      "fName": "Minerva",
+      "lName": "McGonagall",
+      "idNumber": "503",
+      "phoneNumber": "220 337 2218",
+      "email": "MM@hogwarts.ca",
       "password": "1234",
-      "rating": 5,
-      "properties": [
-        {
-          "name": "This is a test",
-          "address": "123 Fake Ave",
-          "type": "????",
-          "park": "no",
-          "transport": "no",
-          "smoking": "no",
-          "seats": "1",
-          "availabilityFrom": "",
-          "availabilityTo": "",
-          "leaseterm": "day",
-          "price": "600",
-          "workspaces": [
-            {
-              "id": "TbBBwd4AQ",
-              "name": "Yet another test",
-              "type": "meeting-room",
-              "smoking": "no",
-              "seats": "1",
-              "availability": "",
-              "leaseterm": "day",
-              "price": "900",
-              "listed": "yes"
-            }
-          ]
-        }
-      ]
+      "ratings": [],
+      "properties": []
+    },
+    {
+      "fName": "Rubeus",
+      "lName": "Hagrid",
+      "idNumber": "504",
+      "phoneNumber": "260 324 7420",
+      "email": "RH@hogwarts.ca",
+      "password": "1234",
+      "ratings": [],
+      "properties": []
+    },
+    {
+      "fName": "Filius",
+      "lName": "Flitwick",
+      "idNumber": "505",
+      "phoneNumber": "582 444 1412",
+      "email": "FF@hogwarts.ca",
+      "password": "1234",
+      "ratings": [],
+      "properties": []
+    },
+    {
+      "fName": "Dolores",
+      "lName": "Umbridge",
+      "idNumber": "506",
+      "phoneNumber": "203 291 2633",
+      "email": "DU@hogwarts.ca",
+      "password": "1234",
+      "ratings": [],
+      "properties": []
+    },
+    {
+      "fName": "Remus",
+      "lName": "Lupin",
+      "idNumber": "507",
+      "phoneNumber": "582 583 5735",
+      "email": "RL@hogwarts.ca",
+      "password": "1234",
+      "ratings": [],
+      "properties": []
+    },
+    {
+      "fName": "Alastor",
+      "lName": "Moody",
+      "idNumber": "508",
+      "phoneNumber": "325 661 4478",
+      "email": "AM@hogwarts.ca",
+      "password": "1234",
+      "ratings": [],
+      "properties": []
+    },
+    {
+      "fName": "Pomona",
+      "lName": "Sprout",
+      "idNumber": "509",
+      "phoneNumber": "317 947 4458",
+      "email": "PS@hogwarts.ca",
+      "password": "1234",
+      "ratings": [],
+      "properties": []
+    },
+    {
+      "fName": "Rolanda",
+      "lName": "Hooch",
+      "idNumber": "510",
+      "phoneNumber": "303 555 4931",
+      "email": "RoHo@hogwarts.ca",
+      "password": "1234",
+      "ratings": [],
+      "properties": []
     }
   ]
 }

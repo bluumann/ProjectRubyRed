@@ -35,11 +35,99 @@ Peter Kosa
         <div id="profilePage">
             <h1>Available Workspaces</h1>
 
-            <div id="search">
+            <div id="search" style="text-align: center;">
+                <table style="margin: 5vh auto;">
+                    <thead>
+                        <tr>
+                            <th colspan="6">Search:</th>
+                        </tr>
+                    </thead>
 
+                    <tbody style="text-align: left;">
+                        <tr>
+                            <td><label for="addressSearch">Address: </label></td>
+                            <td><input type="text" name="addressSearch" id="addressSearch"></td>
+                            <td><label for="neighbourhoodSearch">Neighbourhood: </label></td>
+                            <td><input type="text" name="neighbourhoodSearch" id="neighbourhoodSearch"></td>
+                            <td><label for="squareFootSearch">Square Footage: </label></td>
+                            <td><input type="number" name="squareFootSearch" id="squareFootSearch"></td>
+                        </tr>
+                        <tr>
+                            <td><label for="parkingSearch">Parking: </label></td>
+                            <td>
+                                <input type="radio" id="any-parkingSearch" name="parking" value="any" checked="checked">
+                                <label for="any-parkingSearch">Any</label>
+                                <input type="radio" id="parkingSearch" name="parking" value="yes">
+                                <label for="parkingSearch">Yes</label>
+                                <input type="radio" id="no-parkingSearch" name="parking" value="no">
+                                <label for="no-parkingSearch">No</label>
+                            </td>
+                            <td><label for="publicTransportSearch">Public Transportation: </label></td>
+                            <td>
+                                <input type="radio" id="any-publicTransportSearch" name="publicTransport" value="any"
+                                    checked="checked">
+                                <label for="any-publicTransportSearch">Any</label>
+                                <input type="radio" id="publicTransportSearch" name="publicTransport" value="yes">
+                                <label for="publicTransportSearch">Yes</label>
+                                <input type="radio" id="no-publicTransportSearch" name="publicTransport" value="no">
+                                <label for="no-publicTransportSearch">No</label>
+                            </td>
+                            <td><label for="seats">Min number of seats:</label></td>
+                            <td>
+                                <input type="range" name="seats" min="1" max="10" step="1" value="10"
+                                    oninput="num.value = this.value">
+                                <output id="num">10</output>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><label for="smokingSearch">Smoking: </label></td>
+                            <td>
+                                <input type="radio" id="any-smokingSearch" name="smoking" value="any" checked="checked">
+                                <label for="any-smokingSearch">Any</label>
+                                <input type="radio" id="smokingSearch" name="smoking" value="yes">
+                                <label for="smokingSearch">Yes</label>
+                                <input type="radio" id="no-smokingSearch" name="smoking" value="no">
+                                <label for="no-smokingSearch">No</label>
+                            </td>
+                            <td><label for="availabilitySearch">Available from:</label></td>
+                            <td><input type="date" id="availabilitySearch" name="availability"></td>
+                            <td><label for="priceSearch">Price Max: </label></td>
+                            <td>
+                                <input type="range" name="priceSearch" min="100" max="1000" step="100" value="1000"
+                                    oninput="price.value = this.value">
+                                <output id="priceSearch">1000</output>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><label for="leaseterm">Lease term:</label></td>
+                            <td colspan="2">
+                                <input type="radio" id="ltAny" name="leaseterm" value="any" checked="checked">
+                                <label for="ltAny">Any</label>
+                                <input type="radio" id="ltDay" name="leaseterm" value="day">
+                                <label for="ltDay">Day</label>
+                                <input type="radio" id="ltWeek" name="leaseterm" value="week">
+                                <label for="ltWeek">Week</label>
+                                <input type="radio" id="ltMonth" name="leaseterm" value="month">
+                                <label for="ltMonth">Month</label>
+                            </td>
+                        </tr>
+                        <tr style="text-align: center;">
+                            <td></td>
+                            <td></td>
+                            <td style="padding-top: 5vh;"><button onclick="searchWorkspaces()">Search</button></td>
+                            <td style="padding-top: 5vh;"><button onclick="reset()">Reset</button></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <hr>
+                <br>
             </div>
 
             <!--Create table with headers to later populate with data-->
+            <h3 style="text-align: center; text-decoration: underline;">Available Workspaces</h3>
+            <br>
             <table id="workspaceDisplay">
                 <thead>
                     <tr>
@@ -52,14 +140,16 @@ Peter Kosa
                         <td><button onclick="workplaceRatingSort()">Sort</button></td>
                         <td></td>
                     </tr>
-                    <th>Workspace</th>
-                    <th>Type</th>
-                    <th>Neighbourhood</th>
-                    <th>Availability</th>
-                    <th>Lease Term</th>
-                    <th>Price</th>
-                    <th>Rating</th>
-                    <th></th>
+                    <tr>
+                        <th>Workspace</th>
+                        <th>Type</th>
+                        <th>Neighbourhood</th>
+                        <th>Availability</th>
+                        <th>Lease Term</th>
+                        <th>Price</th>
+                        <th>Rating</th>
+                        <th></th>
+                    </tr>
                 </thead>
                 <tbody id="workspaceDisplayBody">
                     <!--To be filled by functions-->
@@ -71,7 +161,8 @@ Peter Kosa
     <!--For displaying more information on a workplace-->
     <div id="moreInfo">
         <!--To hide more info when done viewing-->
-        <button onclick="hideInfo()" style="margin-bottom: 2.5vh; display: block; position: inherit; top: 12.5vh; right: 22.5vw;">Exit</button>
+        <button onclick="hideInfo()"
+            style="margin-bottom: 2.5vh; display: block; position: inherit; top: 12.5vh; right: 22.5vw;">Exit</button>
 
         <table style="margin: 5vh auto;">
             <tr>
@@ -80,6 +171,10 @@ Peter Kosa
             <tr>
                 <td>Workspace: </td>
                 <td id="workspace"></td>
+            </tr>
+            <tr>
+                <td>Property: </td>
+                <td id="propName"></td>
             </tr>
             <tr>
                 <td>Type: </td>
@@ -152,53 +247,77 @@ Peter Kosa
 
         <table style="margin: 5vh auto;">
             <thead>
-                <th>Leave a review</th>
+                <th>Current Reviews</th>
             </thead>
             <tbody>
-                <tr><td>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quae accusamus natus nihil tenetur excepturi mollitia quis, adipisci dolorem aliquid quisquam facere laboriosam necessitatibus voluptatibus eaque earum nobis fugiat dolores maxime?</td></tr>
-                <tr><td>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quae accusamus natus nihil tenetur excepturi mollitia quis, adipisci dolorem aliquid quisquam facere laboriosam necessitatibus voluptatibus eaque earum nobis fugiat dolores maxime?</td></tr>
-                <tr><td>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quae accusamus natus nihil tenetur excepturi mollitia quis, adipisci dolorem aliquid quisquam facere laboriosam necessitatibus voluptatibus eaque earum nobis fugiat dolores maxime?</td></tr>
-                <tr><td>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quae accusamus natus nihil tenetur excepturi mollitia quis, adipisci dolorem aliquid quisquam facere laboriosam necessitatibus voluptatibus eaque earum nobis fugiat dolores maxime?</td></tr>
-                <tr><td>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quae accusamus natus nihil tenetur excepturi mollitia quis, adipisci dolorem aliquid quisquam facere laboriosam necessitatibus voluptatibus eaque earum nobis fugiat dolores maxime?</td></tr>
+                <tr>
+                    <td>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quae accusamus natus nihil tenetur
+                        excepturi mollitia quis, adipisci dolorem aliquid quisquam facere laboriosam necessitatibus
+                        voluptatibus eaque earum nobis fugiat dolores maxime?</td>
+                </tr>
+                <tr>
+                    <td>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quae accusamus natus nihil tenetur
+                        excepturi mollitia quis, adipisci dolorem aliquid quisquam facere laboriosam necessitatibus
+                        voluptatibus eaque earum nobis fugiat dolores maxime?</td>
+                </tr>
+                <tr>
+                    <td>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quae accusamus natus nihil tenetur
+                        excepturi mollitia quis, adipisci dolorem aliquid quisquam facere laboriosam necessitatibus
+                        voluptatibus eaque earum nobis fugiat dolores maxime?</td>
+                </tr>
+                <tr>
+                    <td>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quae accusamus natus nihil tenetur
+                        excepturi mollitia quis, adipisci dolorem aliquid quisquam facere laboriosam necessitatibus
+                        voluptatibus eaque earum nobis fugiat dolores maxime?</td>
+                </tr>
+                <tr>
+                    <td>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quae accusamus natus nihil tenetur
+                        excepturi mollitia quis, adipisci dolorem aliquid quisquam facere laboriosam necessitatibus
+                        voluptatibus eaque earum nobis fugiat dolores maxime?</td>
+                </tr>
             </tbody>
         </table>
 
         <form action="http://localhost:1007/owner/user/workspace-rated" method="POST"></form>
-            <table style="margin: 5vh auto;">
-                <tr>
-                    <th colspan="2">My Rating</th>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="rate">
-                            <input type="radio" id="star5" name="rating" value="5" />
-                            <label for="star5" title="text">5 stars</label>
-                            <input type="radio" id="star4" name="rating" value="4" />
-                            <label for="star4" title="text">4 stars</label>
-                            <input type="radio" id="star3" name="rating" value="3" />
-                            <label for="star3" title="text">3 stars</label>
-                            <input type="radio" id="star2" name="rating" value="2" />
-                            <label for="star2" title="text">2 stars</label>
-                            <input type="radio" id="star1" name="rating" value="1" />
-                            <label for="star1" title="text">1 star</label>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="review">
-                            <textarea id="review-box" name="review" rows="5" cols="50" maxlength="150" placeholder="Type your review here"></textarea>
-                        </div>
-                    </td>
+        <table style="margin: 5vh auto;">
+            <tr>
+                <th colspan="2">Leave A Review</th>
+            </tr>
+            <tr>
+                <td>Your Rating:</td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="rate">
+                        <input type="radio" id="star5" name="rating" value="5" />
+                        <label for="star5" title="text">5 stars</label>
+                        <input type="radio" id="star4" name="rating" value="4" />
+                        <label for="star4" title="text">4 stars</label>
+                        <input type="radio" id="star3" name="rating" value="3" />
+                        <label for="star3" title="text">3 stars</label>
+                        <input type="radio" id="star2" name="rating" value="2" />
+                        <label for="star2" title="text">2 stars</label>
+                        <input type="radio" id="star1" name="rating" value="1" />
+                        <label for="star1" title="text">1 star</label>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="review">
+                        <textarea id="review-box" name="review" rows="5" cols="50" maxlength="150"
+                            placeholder="Type your review here"></textarea>
+                    </div>
+                </td>
 
-                </tr>
-                <tr>
-                    <td>
-                        <input type="submit" value="Save">
-                        <!-- <button id="save-button" onclick="saveRating()">Save</button> -->
-                    </td>
-                </tr>
-            </table>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" value="Send" style="margin-top: 1vh;">
+                    <!-- <button id="save-button" onclick="saveRating()">Save</button> -->
+                </td>
+            </tr>
+        </table>
         </form>
     </div>
 
@@ -226,45 +345,53 @@ Peter Kosa
 
         //Populate our array with the workplace data as objects and sort them based on name
         function initializeArray() {
+            workspaces = [];
             for (let i = 0; i < data.Owners.length; i++) { //Go through owners
                 for (let j = 0; j < data.Owners[i].properties.length; j++) { //Go through their properties
                     for (let k = 0; k < data.Owners[i].properties[j].workspaces.length; k++) { //Go through their workplaces
                         property = data.Owners[i].properties[j];
                         workspace = property.workspaces[k]
 
-                        if (workspace.listed == "yes") { //If it is listed show, if it is not keep hidden
-                            //Translate values for workspace type to displayable text format
-                            if (workspace.type == "meeting-room") {
-                                _type = "Meeting Room";
-                            } else if (workspace.type == "private-workspace") {
-                                _type = "Private Office Room";
-                            } else if (workspace.type == "open-desk") {
-                                _type = "Open Desk";
+                        if (property.listed == "Yes") { //If it is listed show, if it is not keep hidden
+
+                            if (workspace.listed == "yes") { //If it is listed show, if it is not keep hidden
+                                //Translate values for workspace type to displayable text format
+                                if (workspace.type == "meeting-room") {
+                                    _type = "Meeting Room";
+                                } else if (workspace.type == "private-workspace") {
+                                    _type = "Private Office Room";
+                                } else if (workspace.type == "open-desk") {
+                                    _type = "Open Desk";
+                                }
+
+                                //Create object with all the info we need properly labled
+                                workspaceInfo = {
+                                    id: workspace.id,
+                                    workspace: workspace.name,
+                                    property: property.name,
+                                    type: _type,
+                                    address: property.address,
+                                    neighbourhood: property.neigh,
+                                    squareFootage: property.size,
+                                    parking: property.park,
+                                    publicTransport: property.transport,
+                                    seats: workspace.seats,
+                                    smoking: workspace.smoking,
+                                    availability: workspace.availability,
+                                    leaseTerm: workspace.leaseterm,
+                                    price: workspace.price,
+                                    rating: workspace.rating
+                                }
+                                workspaces.push(workspaceInfo) //Push the object into the array
                             }
 
-                            //Create object with all the info we need properly labled
-                            workspaceInfo = {
-                                workspace: workspace.name,
-                                type: _type,
-                                address: property.address,
-                                neighbourhood: property.neighbourhood,
-                                squareFootage: property.squareFeet,
-                                parking: property.park,
-                                publicTransport: property.transport,
-                                seats: workspace.seats,
-                                smoking: workspace.smoking,
-                                availability: workspace.availability,
-                                leaseTerm: workspace.leaseterm,
-                                price: workspace.price,
-                                rating: workspace.rating
-                            }
-                            workspaces.push(workspaceInfo) //Push the object into the array
                         }
                     }
                 }
             }
-            //Call the name sort function for workspaces
-            workplaceNameSort()
+            //Sort the array by workspace alphabet
+            workspaces.sort((a, b) => a.workspace.toLowerCase().localeCompare(b.workspace.toLowerCase()));
+            clickWorkspace = 1;
         }
 
         //Add the information to the page
@@ -285,7 +412,7 @@ Peter Kosa
                 row.insertCell(-1).innerHTML = e.price;
                 row.insertCell(-1).innerHTML = e.rating;
                 //This adds a function with name argument to obtain more info and populate our div based on argument passed
-                row.insertCell(-1).innerHTML = "<a onclick=\"moreInfo(\'" + e.workspace + "\')\">More...</a>";
+                row.insertCell(-1).innerHTML = "<a onclick=\"moreInfo(\'" + e.id + "\')\">More...</a>";
             })
         }
 
@@ -323,6 +450,7 @@ Peter Kosa
                 clickType = 0;
             }
             displayWorkplaces();
+            clickWorkspace = 0;
         }
 
         //Sort the array based on the neighbourhood of workspace followed by name
@@ -337,6 +465,7 @@ Peter Kosa
                 clickNeighbourhood = 0;
             }
             displayWorkplaces();
+            clickWorkspace = 0;
         }
 
         //Sort the array based on the neighbourhood of workspace followed by name
@@ -351,6 +480,7 @@ Peter Kosa
                 clickAvailability = 0;
             }
             displayWorkplaces();
+            clickWorkspace = 0;
         }
 
         //Sort the array based on the neighbourhood of workspace followed by name
@@ -370,6 +500,7 @@ Peter Kosa
                 clickLeaseTerm = 0;
             }
             displayWorkplaces();
+            clickWorkspace = 0;
         }
 
         //Sort the array based on the neighbourhood of workspace followed by name
@@ -384,6 +515,7 @@ Peter Kosa
                 clickPrice = 0;
             }
             displayWorkplaces();
+            clickWorkspace = 0;
         }
 
         //Sort the array based on the neighbourhood of workspace followed by name
@@ -398,14 +530,124 @@ Peter Kosa
                 clickRating = 0;
             }
             displayWorkplaces();
+            clickWorkspace = 0;
+        }
+
+
+        /*SEARCH FUNCTION*/
+        function searchWorkspaces() {
+            //Start with full array
+            initializeArray();
+
+            addressSearch = document.getElementById("addressSearch");
+            neighbourhoodSearch = document.getElementById("neighbourhoodSearch");
+            squareFootageSearch = document.getElementById("squareFootSearch");
+            parkingSearch = document.getElementsByName("parking");
+            publicTransportSearch = document.getElementsByName("publicTransport");
+            seatsSearch = document.getElementById("num");
+            smokingSearch = document.getElementsByName("smoking");
+            availabilitySearch = document.getElementById("availabilitySearch");
+            priceSearch = document.getElementById("priceSearch");
+            leaseTermSearch = document.getElementsByName("leaseTerm");
+
+            //Filter the address if a value is given
+            if (addressSearch.value.trim == "" || !addressSearch.value) {
+                //Do not filter anything
+            } else {
+                workspaces = workspaces.filter(e => e.address.includes(addressSearch.value))
+            }
+
+            //Filter the neighbourhood if a value is given
+            if (neighbourhoodSearch.value.trim == "" || !neighbourhoodSearch.value) {
+                //Do not filter anything
+            } else {
+                workspaces = workspaces.filter(e => e.neighbourhood.includes(neighbourhoodSearch.value))
+            }
+
+            //Filter the square footage if a value is given
+            if (squareFootageSearch.value.trim == "" || !squareFootageSearch.value) {
+                //Do not filter anything
+            } else {
+                workspaces = workspaces.filter(e => e.squareFootage.includes(squareFootageSearch.value))
+            }
+
+            //Filter the parking if a value is given
+            for (let i = 0; i < parkingSearch.length; i++) {
+                if (parkingSearch[i].checked) {
+                    if (parkingSearch[i].value == "any") {
+                        //Do not filter anything
+                    } else {
+                        workspaces = workspaces.filter(e => e.parking.includes(parkingSearch[i].value))
+                    }
+                }
+            }
+
+            //Filter the public transport if a value is given
+            for (let i = 0; i < publicTransportSearch.length; i++) {
+                if (publicTransportSearch[i].checked) {
+                    if (publicTransportSearch[i].value == "any") {
+                        //Do not filter anything
+                    } else {
+                        workspaces = workspaces.filter(e => e.publicTransport.includes(publicTransportSearch[i].value))
+                    }
+                }
+            }
+
+            //Filter the seats if a value is given
+            workspaces = workspaces.filter(e => e.seats >= seatsSearch.value)
+
+
+            //Filter the smoking if a value is given
+            for (let i = 0; i < smokingSearch.length; i++) {
+                if (smokingSearch[i].checked) {
+                    if (smokingSearch[i].value == "any") {
+                        //Do not filter anything
+                    } else {
+                        workspaces = workspaces.filter(e => e.smoking.includes(smokingSearch[i].value))
+                    }
+                }
+            }
+
+            //Filter the availability if a value is given
+            if (availabilitySearch.value.trim == "" || !availabilitySearch.value) {
+                //Do not filter anything
+            } else {
+                workspaces = workspaces.filter(e => e.availability >= availabilitySearch.value)
+            }
+
+            //Filter the price if a value is given
+            workspaces = workspaces.filter(e => e.price <= priceSearch.value)
+
+
+            //Filter the lease term if a value is given
+            for (let i = 0; i < leaseTermSearch.length; i++) {
+                if (leaseTermSearch[i].checked) {
+                    if (leaseTermSearch[i].value == "any") {
+                        //Do not filter anything
+                    } else {
+                        workspaces = workspaces.filter(e => e.leaseTerm.includes(leaseTermSearch[i].value))
+                    }
+                }
+            }
+
+
+            displayWorkplaces();
+            clickWorkspace = 0;
+        }
+
+
+        /*RESET FUNCTION*/
+        function reset() {
+            location.reload()
         }
 
 
         /*FOR DIV CONTROL*/
         //Show further info upon request
-        function moreInfo(workspaceName) {
+        function moreInfo(workspaceID) {
             //For workspace info
             workspace = document.getElementById("workspace");
+            propName = document.getElementById("propName");
             type = document.getElementById("type");
             address = document.getElementById("address");
             neighbourhood = document.getElementById("neighbourhood");
@@ -426,8 +668,9 @@ Peter Kosa
 
             //Populate the workplace info section
             workspaces.forEach(e => {
-                if (e.workspace == workspaceName) {
+                if (e.id == workspaceID) {
                     workspace.innerHTML = e.workspace;
+                    propName.innerHTML = e.property;
                     type.innerHTML = e.type;
                     address.innerHTML = e.address;
                     neighbourhood.innerHTML = e.neighbourhood;
@@ -447,7 +690,7 @@ Peter Kosa
             data.Owners.forEach(o => {
                 o.properties.forEach(p => {
                     p.workspaces.forEach(ws => {
-                        if (ws.name == workspaceName) {
+                        if (ws.id == workspaceID) {
                             owner.innerHTML = o.fName + ' ' + o.lName;
                             phone.innerHTML = o.phoneNumber;
                             email.innerHTML = o.email;
