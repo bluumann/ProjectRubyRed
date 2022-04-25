@@ -95,7 +95,47 @@
           "transport": "yes",
           "neigh": "Here.",
           "size": "1000",
-          "workspaces": []
+          "workspaces": [
+            {
+              "id": "QhkQGzo55",
+              "name": "Colin's Room of Requirement",
+              "type": "meeting-room",
+              "smoking": "no",
+              "seats": "1",
+              "availability": "0001-01-01",
+              "leaseterm": "day",
+              "price": "9999999999",
+              "listed": "yes",
+              "reviews": [],
+              "rating": 0
+            },
+            {
+              "id": "o9z3s98SP",
+              "name": "Lalalaa",
+              "type": "meeting-room",
+              "smoking": "no",
+              "seats": "1",
+              "availability": "0001-01-01",
+              "leaseterm": "day",
+              "price": "199",
+              "listed": "yes",
+              "reviews": [],
+              "rating": 0
+            },
+            {
+              "id": "_fR6A60GX",
+              "name": "Lala's room of Lalation",
+              "type": "meeting-room",
+              "smoking": "no",
+              "seats": "1",
+              "availability": "0001-01-01",
+              "leaseterm": "day",
+              "price": "1",
+              "listed": "yes",
+              "reviews": [],
+              "rating": 0
+            }
+          ]
         }
       ]
     },

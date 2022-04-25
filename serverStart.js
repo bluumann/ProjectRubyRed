@@ -661,6 +661,7 @@ app.post('/owner/workspaces/workspace-created', urlencodedParser, function (req,
       leaseterm: req.body.leaseterm,
       price: req.body.price,
       listed: req.body.listed,
+      reviews: [],
       rating: 0
     };
 
@@ -809,24 +810,37 @@ var server = app.listen(1007, function () {
   console.log(`Server is running on http://localhost:${port}`);
 });
 
-app.post('/owner/user/workspace-rated', urlencodedParser, function (req, res) {
-  var wsOwner = red.body.email;
-  var wsName = red.body.workspace;
+app.post('/user/workspace-rated', urlencodedParser, function (req, res) {
+  console.log(req.body.email);
+  console.log(req.body.workspace);
+  console.log(req.body.propname);
+  var wsOwner = req.body.email;
+  var wsName = req.body.workspace;
   var wsProp = req.body.propname;
+  const date = new Date()
+  console.log(date);
   var rate = {
     username: currentUser.fName + " " + currentUser.lName,
     useremail: currentUser.email,
     rating: req.body.rating, //placeholder variable
     review: req.body.review, //placeholder variable
-    date: getHours() + ":" + getMinutes() + ", " + getDate() + "/" + getMonth()+1 + "/" + getFullYear()
+    date: date.getHours() + ":" + date.getMinutes() + ", " + date.getDate() + "/" + date.getMonth()+1 + "/" + date.getFullYear()
+    
   }
+  console.log(rate)
   for (var i = 0; i < obj.Owners.length; i++){
-    if (obj.Owner[i].email == wsOwner){
+    console.log("Checking " + obj.Owners[i].email + " against " + wsOwner + ".");
+    if (obj.Owners[i].email == wsOwner){
       for (var j = 0; j < obj.Owners[i].properties.length; j++){
-        if (obj.Owner[i].properties[j].name == wsProp){
-          for (var k = 0; i < obj.Owner[i].properties[j].workspaces.length; k++){
-            if (obj.Owner[i].properties[j].workspace[k].name == wsName){
-              obj.Owner[i].properties[j].workspace[k].reviews.push(rate);
+        console.log("Property: " + obj.Owners[i],properties[i].name  + " against " + wsProp + ".");
+        if (obj.Owners[i].properties[j].name == wsProp){
+          for (var k = 0; i < obj.Owners[i].properties[j].workspaces.length; k++){
+            console.log("On workspace: " + obj.Owners[i],properties[i].workspaces[k].name  + " against " + wsName + "."); //debuging purposes.
+            if (obj.Owners[i].properties[j].workspaces[k].name == wsName){
+              console.log("Found!");
+              obj.Owners[i].properties[j].workspaces[k].reviews.push(rate);
+              console.log(obj.Owners[i].properties[j].workspaces[k].reviews);
+              break;
             }
           }
         }
@@ -844,7 +858,7 @@ app.post('/owner/user/workspace-rated', urlencodedParser, function (req, res) {
     console.log('Review added/updated.');
     //res.redirect('/propertyIn'); //placeholder
     res.send(
-      'Thank you for rating this workspace.<br>To return, click <a href="/user/workspaces.html">here</a>.'
+      'Thank you for rating this workspace.<br>To return, click <a href="/user/workspaces">here</a>.'
     );
   }
 }
